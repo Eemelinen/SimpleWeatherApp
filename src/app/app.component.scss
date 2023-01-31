@@ -1,0 +1,27 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .content {
+    background-color: red;
+    width: 63.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .section-location {
+      background-color: var(--white-2);
+    }
+
+    .section-temp-average {
+    }
+
+    .section-temps-weekly {
+      display: flex;
+    }
+  }
+}
+
