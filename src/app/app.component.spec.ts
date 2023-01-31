@@ -1,11 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {DailyTemperatureCardComponent} from './components/daily-temperature-card/daily-temperature-card.component';
+import {
+  AverageTemperatureCardComponent
+} from './components/average-temperature-card/average-temperature-card.component';
+import {LocationPickerFormComponent} from './components/location-picker-form/location-picker-form.component';
 
 describe('AppComponent', () => {
+
+  // Todo Mock components
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        DailyTemperatureCardComponent,
+        AverageTemperatureCardComponent,
+        LocationPickerFormComponent,
       ],
     }).compileComponents();
   });
@@ -14,18 +24,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'weather-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('weather-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('weather-app app is running!');
   });
 });
