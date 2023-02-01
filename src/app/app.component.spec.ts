@@ -33,27 +33,27 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a section with class section-location', () => {
-    expect(fixture.nativeElement.querySelector('section.section-location')).toBeTruthy();
+  it('should have a section with class location-selection', () => {
+    expect(fixture.nativeElement.querySelector('section.location-selection')).toBeTruthy();
   });
 
-  it('Should NOT show section-temp-average if no weather data is available', () => {
-    expect(fixture.nativeElement.querySelector('section.section-temp-average')).toEqual(null);
+  it('Should NOT show average-temperature if no weather data is available', () => {
+    expect(fixture.nativeElement.querySelector('section.average-temperature')).toEqual(null);
   });
 
-  it('should have a section with class section-temp-average if weather data is available', () => {
+  it('should have a section with class average-temperature if weather data is available', () => {
     component.weatherData = ['testdata'];
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('section.section-temp-average')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
   });
 
-  it('Should NOT show section-temps-weekly if no weather data is available', () => {
-    expect(fixture.nativeElement.querySelector('section.section-temps-weekly')).toEqual(null);
+  it('Should NOT show next-week-temperatures if no weather data is available', () => {
+    expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toEqual(null);
   });
 
-  it('should have a section with class section-temps-weekly if weather data is available', () => {
+  it('should have a section with class next-week-temperatures if weather data is available', () => {
     component.weatherData = ['testdata'];
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('section.section-temps-weekly')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toBeTruthy();
   });
 });

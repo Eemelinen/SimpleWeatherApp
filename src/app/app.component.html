@@ -2,16 +2,16 @@
 
   <div class="content">
 
-    <section class="section-location">
+    <section class="location-selection">
       <app-location-picker-form></app-location-picker-form>
     </section>
 
     <ng-container *ngIf="weatherData.length">
-      <section class="section-temp-average">
+      <section class="average-temperature">
         <app-average-temperature-card></app-average-temperature-card>
       </section>
 
-      <section class="section-temps-weekly">
+      <section class="next-week-temperatures">
         <app-daily-temperature-card></app-daily-temperature-card>
         <app-daily-temperature-card></app-daily-temperature-card>
         <app-daily-temperature-card></app-daily-temperature-card>

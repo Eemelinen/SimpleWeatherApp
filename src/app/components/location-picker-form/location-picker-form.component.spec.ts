@@ -57,7 +57,7 @@ describe('LocationPickerFormComponent', () => {
 
   it('should contain an image with class weather-icon', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('img.weather-icon')).toBeTruthy();
+    expect(compiled.querySelector('img.location__weather-icon')).toBeTruthy();
   });
 
   it('Should call weather api when city is selected', () => {
