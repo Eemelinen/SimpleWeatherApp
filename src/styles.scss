@@ -55,3 +55,19 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+input {
+  font-family: "Poppins", "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+select {
+  font-family: "Poppins", "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.opaque {
+  opacity: 0.5;
+}

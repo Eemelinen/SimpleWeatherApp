@@ -21,7 +21,10 @@
         placeholder="Please enter your location...">
 
       <span class="search-icon-container">
-        <img class="icon" src="../../../assets/images/search.svg" alt="search">
+        <img
+          class="icon"
+          [ngClass]="{ opaque: !city?.value }"
+          src="../../../assets/images/search.svg" alt="search">
       </span>
     </div>
 

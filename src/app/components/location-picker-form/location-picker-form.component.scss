@@ -44,6 +44,18 @@
       .input-city {
         width: 100%;
         margin-right: -4rem;
+
+        &:focus {
+          outline: 2px solid #B5C7FF;
+        }
+
+        &:active {
+          //outline: none;
+        }
+
+        &:hover {
+          //transform: translateY(2px);
+        }
       }
 
       .search-icon-container {

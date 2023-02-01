@@ -31,6 +31,10 @@ export class LocationPickerFormComponent implements OnInit, OnDestroy {
     this.onChanges();
   }
 
+  get city() {
+    return this.locationForm.get('city');
+  }
+
   // Todo: create custom async validator for city
   onChanges(): void {
     this.subscriptions.push(this.locationForm.valueChanges.subscribe(val => {
