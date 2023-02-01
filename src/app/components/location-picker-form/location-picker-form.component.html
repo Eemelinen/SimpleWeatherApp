@@ -1,5 +1,20 @@
-<section>
-  <img style="width: 3rem" src="../../../assets/images/cloudy-1.svg" alt="cloudy">
-  <input placeholder="NL">
-  <input placeholder="Utrecht">
-</section>
+<div class="form-container">
+  <img class="weather-icon" style="width: 3rem" src="../../../assets/images/cloudy-1.svg" alt="cloudy">
+
+  <form [formGroup]="locationForm">
+    <select formControlName="country">
+      <option *ngFor="let country of countries" [value]="country.code">
+        {{ country.code }}
+      </option>
+    </select>
+    <input
+      type="text"
+      id="city"
+      formControlName="city"
+      class="city input"
+      name="city"
+      placeholder="Please enter your location..."
+    >
+  </form>
+
+</div>
