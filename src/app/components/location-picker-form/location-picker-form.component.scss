@@ -1,11 +1,12 @@
-.form-container {
+.location-picker-container {
   border-radius: 1.6rem;
   box-shadow: 0 2px 10px rgba(8, 21, 62, 0.15);
   background-color: var(--white-2);
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
+  gap: 1.2rem;
 
   .icon-container {
     display: flex;
@@ -17,7 +18,37 @@
     .weather-icon {
       width: 4.8rem;
     }
+  }
+
+  .location-form {
+    flex: 1;
+    display: flex;
+
+    .form-element {
+      border: 1px solid rgba(8, 21, 62, 0.05);
+      border-radius: 6px;
+      height: 4.8rem;
+    }
+
+    .select-country {
+      width: 9.5rem;
+      padding: .7rem 2rem;
+    }
+
+    .input-city {
+      flex: 1;
+      margin-right: 1.8rem;
+      margin-left: .4rem;
+    }
 
   }
 
+}
+
+.select-flag {
+  background-image: url("../../../assets/images/cloudy-1.svg");
+  //background-position: right 50%;
+  background-repeat: no-repeat;
+  padding-right: 20px;
+  z-index: 1000;
 }

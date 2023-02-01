@@ -1,12 +1,14 @@
-<div class="form-container">
+<div class="location-picker-container">
 
   <div class="icon-container">
     <img class="weather-icon" src="../../../assets/images/cloudy-1.svg" alt="cloudy">
   </div>
 
-  <form [formGroup]="locationForm">
-    <select formControlName="country">
+  <form class="location-form" [formGroup]="locationForm">
+    <select class="form-element select-country" formControlName="country">
       <option *ngFor="let country of countries" [value]="country.code">
+<!--        <img class="weather-icon" src="../../../assets/images/NL.svg" alt="NL">-->
+<!--        <span class="select-flag"></span>-->
         {{ country.code }}
       </option>
     </select>
@@ -14,7 +16,7 @@
       type="text"
       id="city"
       formControlName="city"
-      class="city input"
+      class="form-element input-city"
       name="city"
       placeholder="Please enter your location..."
     >

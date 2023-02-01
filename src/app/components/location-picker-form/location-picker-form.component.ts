@@ -17,7 +17,7 @@ export class LocationPickerFormComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   countries: Country[] = [
     { name: 'NL', code: 'NL' },
-    { name: 'United States', code: 'US' },
+    { name: 'US', code: 'US' },
   ];
 
   constructor() {
