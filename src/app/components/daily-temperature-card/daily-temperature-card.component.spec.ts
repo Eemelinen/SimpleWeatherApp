@@ -20,4 +20,12 @@ describe('DailyTemperatureCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should receive a date range and render it correctly', () => {
+    pending();
+  });
+
+  it('should receive a temperature and render it correctly.', () => {
+    pending();
+  });
 });
