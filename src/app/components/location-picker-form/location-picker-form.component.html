@@ -22,7 +22,7 @@
 
       <img
         class="location__search-icon"
-        [ngClass]="{ opaque: locationForm.get('city')?.value }"
+        [ngClass]="{ opaque: !locationForm.get('city')?.value }"
         src="../../../assets/images/search.svg" alt="search">
     </div>
 
