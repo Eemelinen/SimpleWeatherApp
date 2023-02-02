@@ -1,7 +1,7 @@
 <div class="card">
-  <p class="card__info">May 4 - 10 2020</p>
+  <p class="card__info">{{getDates()}}</p>
   <div class="card__data">
-    <p class="card__temperature">10</p>
+    <p class="card__temperature">{{calculateAverageTemperature(weatherData)}}</p>
     <span class="card__celcius">°C</span>
   </div>
 </div>

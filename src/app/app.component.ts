@@ -9,18 +9,33 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent {
   subscriptions: Subscription[] = [];
-  weatherData: string[] = [];
+  weatherData: WeatherData[] = [];
 
   constructor(private weatherProvider: WeatherProviderService) {
   }
 
-  public getWeatherData(data: LocationPickerOutput) {
-    console.log(data)
+  // getWeatherData(): any {
+  //   this.subscriptions.push(
+  //     this.weatherProvider.weatherData$.subscribe(data => {
+  //       this.weatherData = data;
+  //     })
+  //   );
+  // }
+
+  public updateWeatherData(data: LocationPickerOutput) {
     this.subscriptions.push(
-      this.weatherProvider.fetchWeatherForecast('NL', 'Amsterdam').subscribe(data => {
-        console.log(data)
+      this.weatherProvider.fetchWeatherForecast(data.country, data.city).subscribe((res: any) => {
+        console.log(res)
+        this.weatherData = res.data.map((day: any) => {
+          console.log(day)
+          return {
+            date: day.datetime,
+            temp: day.temp
+          }
+        });
       })
     );
+    console.log(this.weatherData);
   }
 
   ngOnDestroy() {
