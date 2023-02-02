@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import { mockWeatherForecast } from '../../../mocks/mock-weather-forecast';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,11 @@ export class WeatherProviderService {
 
   // constructor(private http: HttpClient) {
   // }
+
+  getWeather(country: string, city: string): Observable<WeatherData[]> {
+    // this.removePreviousData();
+    return this.weatherData$;
+  }
 
   // Make a call to the weather API
   fetchWeatherForecast(country: string, city: string): any {

@@ -15,25 +15,13 @@ export class AverageTemperatureCardComponent {
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
+
   calculateAverageTemperature(data: WeatherData[]) {
     const total = data.reduce((acc, day: WeatherData) => acc + day.temp, 0);
     return Math.round((total / data.length));
   }
 
-  getDateRange(data: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
-    const firstDate = data[0].date;
-    const lastDate = data[data.length - 1].date;
-
-    const [fYear, fMonth, fDay] = firstDate.split("-");
-    const [eYear, eMonth, eDay] = lastDate.split("-");
-
-    const firstDateObj = {year: fYear, month: fMonth, day: fDay};
-    const lastDateObj = {year:eYear, month: eMonth, day: eDay};
-
-    return { firstDateObj, lastDateObj }
-  }
-
-  formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
+  private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
     const firstMonth = this.getMonthName(Number(firstDate.month) - 1);
     const lastMonth = this.getMonthName(Number(lastDate.month) - 1);
 
@@ -48,11 +36,31 @@ export class AverageTemperatureCardComponent {
     return `${firstMonth} ${firstDate.day} - ${lastDate.day} ${lastDate.year}`;
   }
 
-  getMonthName(month: number): string {
+  private getDateRange(data: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+    const firstDate = data[0].date;
+    const lastDate = data[data.length - 1].date;
+
+    const [fYear, fMonth, fDay] = firstDate.split("-");
+    const [eYear, eMonth, eDay] = lastDate.split("-");
+
+    const firstDateObj = {year: fYear, month: fMonth, day: this.removeFirstCharIfZero(fDay)};
+    const lastDateObj = {year:eYear, month: eMonth, day: this.removeFirstCharIfZero(eDay)};
+
+    return { firstDateObj, lastDateObj }
+  }
+
+  private getMonthName(month: number): string {
     const months = [
       'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
     ];
     return months[month];
+  }
+
+  private removeFirstCharIfZero(str: string) {
+    if (str[0] === '0') {
+      return str.slice(1);
+    }
+    return str;
   }
 
 }

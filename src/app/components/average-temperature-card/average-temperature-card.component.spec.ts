@@ -27,11 +27,24 @@ describe('AverageTemperatureCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should receive a day string and render it correctly', () => {
-    pending();
+  it('should calculate the average temperature', () => {
+    expect(component.calculateAverageTemperature(component.forecasts)).toEqual(4);
   });
 
-  it('should receive a temperature and render it correctly.', () => {
-    pending();
+
+  it('getDates should give a correctly formatted result', () => {
+    component.forecasts[0].date = '2023-02-02';
+    expect(component.getDates()).toEqual('FEB 2 - 11 2023');
   });
+
+  it('getDates should give a correctly formatted result when the year changes', () => {
+    component.forecasts[0].date = '2021-02-02';
+    expect(component.getDates()).toEqual('FEB 2, 2021 - FEB 11 2023');
+  });
+
+  it('getDates should give a correctly formatted result when the month changes', () => {
+    component.forecasts[0].date = '2023-01-31';
+    expect(component.getDates()).toEqual('JAN 31 - FEB 11 2023');
+  });
+
 });
