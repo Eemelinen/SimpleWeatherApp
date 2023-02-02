@@ -23,20 +23,8 @@ export class LocationPickerFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onChanges();
-  }
-
-  get city() {
-    return this.locationForm.get('city');
-  }
-
-  get country() {
-    return this.locationForm.get('country');
-  }
-
-  onChanges(): void {
     this.emptyCityOnCountryChange();
-    this.emitIfValid();
+    this.emitIfHasCity();
   }
 
   private emptyCityOnCountryChange() {
@@ -48,7 +36,7 @@ export class LocationPickerFormComponent implements OnInit {
   /*
     * Emit form data if both country and city are filled in
    */
-  private emitIfValid() {
+  private emitIfHasCity() {
     this.locationForm.get('city')?.valueChanges.pipe(
       debounceTime(1000)
     ).subscribe(() => {
