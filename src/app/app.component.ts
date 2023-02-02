@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent {
   subscriptions: Subscription[] = [];
-  weatherData: WeatherData[] = [];
+  forecasts: WeatherData[] = [];
 
   constructor(private weatherProvider: WeatherProviderService) {
   }
@@ -22,12 +22,14 @@ export class AppComponent {
   //   );
   // }
 
+  nextWeekData(): WeatherData[] {
+    return this.forecasts.slice(0, 7);
+  }
+
   public updateWeatherData(data: LocationPickerOutput) {
     this.subscriptions.push(
       this.weatherProvider.fetchWeatherForecast(data.country, data.city).subscribe((res: any) => {
-        console.log(res)
-        this.weatherData = res.data.map((day: any) => {
-          console.log(day)
+        this.forecasts = res.data.map((day: any) => {
           return {
             date: day.datetime,
             temp: day.temp
@@ -35,7 +37,6 @@ export class AppComponent {
         });
       })
     );
-    console.log(this.weatherData);
   }
 
   ngOnDestroy() {

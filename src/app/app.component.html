@@ -5,20 +5,17 @@
     <section class="location-selection">
       <app-location-picker-form (locationEvent)="updateWeatherData($event)"></app-location-picker-form>
     </section>
-    <ng-container *ngIf="weatherData.length">
+
+    <ng-container *ngIf="forecasts.length">
+
       <section class="average-temperature">
-        <app-average-temperature-card [weatherData]="weatherData"></app-average-temperature-card>
+        <app-average-temperature-card [forecasts]="forecasts"></app-average-temperature-card>
       </section>
 
       <section class="next-week-temperatures">
-        <app-daily-temperature-card></app-daily-temperature-card>
-        <app-daily-temperature-card></app-daily-temperature-card>
-        <app-daily-temperature-card></app-daily-temperature-card>
-        <app-daily-temperature-card></app-daily-temperature-card>
-        <app-daily-temperature-card></app-daily-temperature-card>
-        <app-daily-temperature-card></app-daily-temperature-card>
-        <app-daily-temperature-card></app-daily-temperature-card>
+        <app-daily-temperature-card *ngFor="let forecast of nextWeekData()" [forecast]="forecast"></app-daily-temperature-card>
       </section>
+
     </ng-container>
   </div>
 </div>

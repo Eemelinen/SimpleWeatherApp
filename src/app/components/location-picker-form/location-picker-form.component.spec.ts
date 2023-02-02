@@ -1,3 +1,5 @@
+/// <reference path="../../../../types.d.ts" />
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationPickerFormComponent } from './location-picker-form.component';

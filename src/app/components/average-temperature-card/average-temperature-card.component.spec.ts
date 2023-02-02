@@ -1,6 +1,9 @@
+/// <reference path="../../../../types.d.ts" />
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AverageTemperatureCardComponent } from './average-temperature-card.component';
+import {mockForecasts} from '../../../mocks/mock-forecasts';
 
 describe('AverageTemperatureCardComponent', () => {
   let component: AverageTemperatureCardComponent;
@@ -16,6 +19,7 @@ describe('AverageTemperatureCardComponent', () => {
 
     fixture = TestBed.createComponent(AverageTemperatureCardComponent);
     component = fixture.componentInstance;
+    component.forecasts = mockForecasts;
     fixture.detectChanges();
   });
 

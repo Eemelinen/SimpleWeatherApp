@@ -8,10 +8,10 @@ type DateObject = { year: string; month: string; day: string };
   styleUrls: ['./average-temperature-card.component.scss']
 })
 export class AverageTemperatureCardComponent {
-  @Input() weatherData: WeatherData[] = [];
+  @Input() forecasts: WeatherData[] = [];
 
   getDates(): string {
-    const dateRange = this.getDateRange(this.weatherData);
+    const dateRange = this.getDateRange(this.forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
