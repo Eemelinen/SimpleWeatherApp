@@ -28,5 +28,6 @@ describe('AverageTemperatureCardComponent', () => {
   });
 
   it('should receive a temperature and render it correctly.', () => {
+    pending();
   });
 });

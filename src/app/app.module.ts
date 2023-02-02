@@ -6,6 +6,7 @@ import { DailyTemperatureCardComponent } from './components/daily-temperature-ca
 import { LocationPickerFormComponent } from './components/location-picker-form/location-picker-form.component';
 import { BgGradientDirective } from './directives/bg-gradient/bg-gradient.directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     ReactiveFormsModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

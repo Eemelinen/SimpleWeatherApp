@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+#environment variables
+/src/environments/secrets/*.ts
+/src/environments/api-key.ts
+
 # Compiled output
 /dist
 /tmp
