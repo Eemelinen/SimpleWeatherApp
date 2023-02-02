@@ -62,8 +62,4 @@ describe('LocationPickerFormComponent', () => {
     expect(compiled.querySelector('img.location__weather-icon')).toBeTruthy();
   });
 
-  it('Should call weather api when city is selected', () => {
-    pending();
-  });
-
 });

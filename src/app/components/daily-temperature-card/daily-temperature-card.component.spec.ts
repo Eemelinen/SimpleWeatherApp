@@ -17,7 +17,7 @@ describe('DailyTemperatureCardComponent', () => {
 
     fixture = TestBed.createComponent(DailyTemperatureCardComponent);
     component = fixture.componentInstance;
-    component.forecast = mockForecasts[0];
+    component.forecast = JSON.parse(JSON.stringify(mockForecasts[0]));
     fixture.detectChanges();
   });
 
@@ -25,11 +25,12 @@ describe('DailyTemperatureCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should receive a date range and render it correctly', () => {
-    pending();
+  it('should get rounded temperature', () => {
+    expect(component.getTemperature()).toEqual(9);
   });
 
-  it('should receive a temperature and render it correctly.', () => {
-    pending();
+  it('should get day name', () => {
+    expect(component.getDayName()).toEqual('FRIDAY');
   });
+
 });

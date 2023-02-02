@@ -19,7 +19,7 @@ describe('AverageTemperatureCardComponent', () => {
 
     fixture = TestBed.createComponent(AverageTemperatureCardComponent);
     component = fixture.componentInstance;
-    component.forecasts = mockForecasts;
+    component.forecasts = JSON.parse(JSON.stringify(mockForecasts));
     fixture.detectChanges();
   });
 
@@ -46,5 +46,6 @@ describe('AverageTemperatureCardComponent', () => {
     component.forecasts[0].date = '2023-01-31';
     expect(component.getDates()).toEqual('JAN 31 - FEB 11 2023');
   });
+
 
 });
