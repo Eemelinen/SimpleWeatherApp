@@ -4,10 +4,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //background: red;
   font-weight: 600;
 
-  &__dates {
+  &__info {
     line-height: 2.4rem;
     font-size: 1.2rem;
     letter-spacing: 0.06em;
@@ -15,7 +14,7 @@
     margin-bottom: 1.4rem;
   }
 
-  &__average {
+  &__data {
     display: flex;
     color: var(--white-1);
   }
@@ -30,5 +29,4 @@
     font-size: 2.4rem;
     line-height: 3.2rem;
   }
-
 }
