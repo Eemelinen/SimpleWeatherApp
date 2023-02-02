@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AverageTemperatureCardComponent } from './average-temperature-card.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 describe('AverageTemperatureCardComponent', () => {
   let component: AverageTemperatureCardComponent;
@@ -11,8 +10,6 @@ describe('AverageTemperatureCardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AverageTemperatureCardComponent,
-      ],
-      imports: [
       ],
     })
     .compileComponents();
@@ -31,6 +28,5 @@ describe('AverageTemperatureCardComponent', () => {
   });
 
   it('should receive a temperature and render it correctly.', () => {
-    pending();
   });
 });

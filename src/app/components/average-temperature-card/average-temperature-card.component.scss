@@ -1,0 +1,34 @@
+.card {
+  display: flex;
+  margin: 5rem 0 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  //background: red;
+  font-weight: 600;
+
+  &__dates {
+    line-height: 2.4rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    opacity: .6;
+    margin-bottom: 1.4rem;
+  }
+
+  &__average {
+    display: flex;
+    color: var(--white-1);
+  }
+
+  &__temperature {
+    font-size: 12rem;
+    line-height: 12rem;
+    margin-right: -1.4rem;
+  }
+
+  &__celcius {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+  }
+
+}
