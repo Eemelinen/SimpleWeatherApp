@@ -3,7 +3,7 @@
   <div class="content">
 
     <section class="location-selection">
-      <app-location-picker-form></app-location-picker-form>
+      <app-location-picker-form (locationEvent)="getWeatherData($event)"></app-location-picker-form>
     </section>
 
     <ng-container *ngIf="weatherData.length">
