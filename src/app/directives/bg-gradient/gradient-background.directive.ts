@@ -28,7 +28,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    * The tick speed for calling the update of the gradient
    */
   @Input()
-  tickSpeed = 16;
+  private tickSpeed = 16;
 
   /**
    * The multiplier for the gradient speed
@@ -37,16 +37,12 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
   gradientSpeed = 0.0015;
 
   private direction = InterpolationDirection.FORWARD;
-
   private step$ = new BehaviorSubject<number>(0);
-
   private componentDestroyed$ = new Subject<boolean>();
-
   private gradientRunning$ = new BehaviorSubject<boolean>(true);
+  private endColorIndex: number = 6;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
-
-  private endColorIndex: number = 6;
 
   ngOnInit(): void {
     combineLatest([timer(0, this.tickSpeed), this.gradientRunning$])
@@ -114,8 +110,6 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     return this.endColorIndex = index;
   }
 
-
-
   private createColor(index: number, step: number, value1: RGBValue, value2: RGBValue) {
     const red = Math.round(index * value1[0] + step * value2[0]);
     const green = Math.round(index * value1[1] + step * value2[1]);
@@ -123,6 +117,9 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     return `rgb(${red}, ${green}, ${blue})`;
   }
 
+  /**
+    * Get the color index based on given amount of steps down from the end color
+   */
   private getColorIndex(numOfStepsDown: number) {
     const number = this.endColorIndex - numOfStepsDown;
     if (number < 0) {
@@ -131,6 +128,9 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     return number;
   }
 
+  /**
+   * Colors are generated for the gradient animation based on
+   */
   private generateColour(step: number): RGBTransition {
     const stepIndex = 1 - step;
 

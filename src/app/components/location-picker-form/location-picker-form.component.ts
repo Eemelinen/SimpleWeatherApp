@@ -27,7 +27,7 @@ export class LocationPickerFormComponent implements OnInit {
     });
   }
 
-  /*
+  /**
     * Emit form data if both country and city are filled in
    */
   private emitIfHasCity() {
