@@ -13,7 +13,8 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
 
   subscriptions: Subscription[] = [];
-  forecasts$: Observable<WeatherData[]> = of([]);
+  forecasts: WeatherData[] = [];
+  averageTemperature: number = 9999;
 
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
@@ -22,6 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateWeatherData();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   updateForecast(location: LocationData): void {
@@ -33,7 +38,18 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateWeatherData(): void {
-    this.forecasts$ = this.weatherProvider.getWeather();
+    this.subscriptions.push(
+      this.weatherProvider.getWeather().subscribe((forecasts: WeatherData[]) => {
+        this.forecasts = forecasts;
+        if (forecasts.length) {
+          this.setAverageTemperature(forecasts);
+        }
+      }));
+  }
+
+  private setAverageTemperature(forecasts: WeatherData[]) {
+    this.averageTemperature = this.calculateAverageTemperature(forecasts);
+    this.directive.changeEndpointColor(this.averageTemperature);
   }
 
   nextWeekData(forecasts: WeatherData[]): WeatherData[] {
@@ -44,8 +60,8 @@ export class AppComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  // Todo: probably unnecessary since using reactive programming
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  private calculateAverageTemperature(forecasts: WeatherData[]) {
+    const total = forecasts.reduce((acc, day: WeatherData) => acc + day.temp, 0);
+    return Math.round((total / forecasts.length));
   }
 }

@@ -10,7 +10,6 @@ import { MockComponents } from 'ng-mocks';
 import { mockForecasts } from '../mocks/mock-forecasts';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
-import { of } from 'rxjs';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 
@@ -43,7 +42,7 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    component.forecasts$ = of([]);
+    component.forecasts = [];
     fixture.detectChanges();
   });
 
@@ -60,7 +59,7 @@ describe('AppComponent', () => {
   });
 
   it('should have a section with class average-temperature if weather data is available', () => {
-    component.forecasts$ = of(mockForecasts);
+    component.forecasts = mockForecasts;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
   });
@@ -70,7 +69,7 @@ describe('AppComponent', () => {
   });
 
   it('should have a section with class next-week-temperatures if weather data is available', () => {
-    component.forecasts$ = of(mockForecasts);
+    component.forecasts = mockForecasts;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toBeTruthy();
   });

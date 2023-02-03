@@ -93,6 +93,13 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
   }
 
   /**
+   * Change the endpoint color, which defines rest of the gradient
+   */
+  public changeEndpointColor(averageTemperature: number): number {
+    return this.endColorIndex = this.translateTemperatureToColorIndex(averageTemperature);
+  }
+
+  /**
    * Start the directive gradient animation
    */
   public start(): void {
@@ -104,10 +111,6 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    */
   public stop(): void {
     this.gradientRunning$.next(false);
-  }
-
-  public changeEndpointColor(index: number): number {
-    return this.endColorIndex = index;
   }
 
   private createColor(index: number, step: number, value1: RGBValue, value2: RGBValue) {
@@ -154,5 +157,30 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     );
 
     return [color1, color2, color3];
+  }
+
+  private translateTemperatureToColorIndex(averageTemperature: number): number {
+    switch (true) {
+      case averageTemperature < -10:
+        return 0;
+      case averageTemperature < 0:
+        return 1;
+      case averageTemperature < 5:
+        return 2;
+      case averageTemperature < 10:
+        return 3;
+      case averageTemperature < 15:
+        return 4;
+      case averageTemperature < 20:
+        return 5;
+      case averageTemperature < 25:
+        return 6;
+      case averageTemperature < 30:
+        return 7;
+      case averageTemperature >= 35:
+        return 8;
+      default:
+        return 6;
+    }
   }
 }

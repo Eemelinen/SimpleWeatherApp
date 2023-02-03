@@ -4,16 +4,14 @@
       <app-location-picker-form (locationEvent)="updateForecast($event)" [countries]="getAvailableCountries()"></app-location-picker-form>
     </section>
 
-    <ng-container *ngIf="forecasts$ | async as forecasts">
-      <ng-container *ngIf="forecasts.length">
+    <ng-container *ngIf="forecasts.length && averageTemperature !== 9999">
         <section class="average-temperature">
-          <app-average-temperature-card [forecasts]="forecasts"></app-average-temperature-card>
+          <app-average-temperature-card [forecasts]="forecasts" [averageTemperature]="averageTemperature"></app-average-temperature-card>
         </section>
 
         <section class="next-week-temperatures">
           <app-daily-temperature-card *ngFor="let forecast of nextWeekData(forecasts)" [forecast]="forecast"></app-daily-temperature-card>
         </section>
-      </ng-container>
     </ng-container>
   </div>
 </div>

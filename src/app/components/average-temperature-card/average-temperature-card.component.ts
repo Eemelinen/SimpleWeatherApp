@@ -9,15 +9,11 @@ type DateObject = { year: string; month: string; day: string };
 })
 export class AverageTemperatureCardComponent {
   @Input() forecasts: WeatherData[] = [];
+  @Input() averageTemperature: number = 9999;
 
   getDates(): string {
     const dateRange = this.getDateRange(this.forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
-  }
-
-  calculateAverageTemperature() {
-    const total = this.forecasts.reduce((acc, day: WeatherData) => acc + day.temp, 0);
-    return Math.round((total / this.forecasts.length));
   }
 
   private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
