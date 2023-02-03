@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
+import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { AbstractLocationService } from './services/location/abstract-location.s
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
+
   subscriptions: Subscription[] = [];
   forecasts$: Observable<WeatherData[]> = of([]);
 

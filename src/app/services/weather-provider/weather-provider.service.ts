@@ -42,7 +42,7 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     this.http
       .get(`http://api.weatherbit.io/v2.0/forecast/daily?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .subscribe((res: any) => {
-        if (res.data && res.city_name === location.city) {
+        if (res.data && res.city_name.toLowerCase() === location.city.toLowerCase()) {
           this.updateWeather(res);
         } else {
           this.emptyWeatherData();
