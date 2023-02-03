@@ -15,7 +15,7 @@ export enum InterpolationDirection {
 }
 
 @Directive({
-  selector: '[ngxAnimatedGradient]'
+  selector: '[gradientBackground]'
 })
 export class GradientBackgroundDirective implements OnInit, OnDestroy {
   /**
@@ -23,7 +23,6 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    */
   @Input()
   colors: RGBValue[] = [[16, 47, 126], [12, 141, 214], [26, 160, 236], [96, 198, 255], [155, 219, 255], [180, 222, 218], [255, 214, 107], [255, 193, 120], [254, 146, 85]];
-  // colors: RGBValue[] = [[62, 35, 255], [60, 255, 60], [255, 35, 98], [45, 175, 230], [255, 0, 255], [255, 128, 0]];
 
   /**
    * The tick speed for calling the update of the gradient
@@ -35,9 +34,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    * The multiplier for the gradient speed
    */
   @Input()
-  // gradientSpeed = 0.000;
-  gradientSpeed = 0.02;
-  // gradientSpeed = 0.002;
+  gradientSpeed = 0.0015;
 
   private direction = InterpolationDirection.FORWARD;
 
@@ -49,7 +46,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
-  private endColorIndex: number = 7;
+  private endColorIndex: number = 6;
 
   ngOnInit(): void {
     combineLatest([timer(0, this.tickSpeed), this.gradientRunning$])
@@ -77,7 +74,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
      */
     combineLatest([this.step$, this.gradientRunning$])
       .pipe(takeUntil(this.componentDestroyed$))
-      .subscribe(([step, gradientRunning]) => gradientRunning && this.render(this.generateColour(step), step));
+      .subscribe(([step, gradientRunning]) => gradientRunning && this.render(this.generateColour(step)));
   }
 
   ngOnDestroy() {
@@ -87,6 +84,37 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     this.gradientRunning$.complete();
     this.componentDestroyed$.complete();
   }
+
+  /**
+   * Update the gradient animation
+   */
+  public render(renderValue: RGBTransition) {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'background',
+      `linear-gradient(150deg, ${renderValue[0]} 0%, ${renderValue[1]} 50%, ${renderValue[2]} 100%)`
+    );
+  }
+
+  /**
+   * Start the directive gradient animation
+   */
+  public start(): void {
+    this.gradientRunning$.next(true);
+  }
+
+  /**
+   * Stop the directive gradient animation
+   */
+  public stop(): void {
+    this.gradientRunning$.next(false);
+  }
+
+  public changeEndpointColor(index: number): number {
+    return this.endColorIndex = index;
+  }
+
+
 
   private createColor(index: number, step: number, value1: RGBValue, value2: RGBValue) {
     const red = Math.round(index * value1[0] + step * value2[0]);
@@ -126,35 +154,5 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     );
 
     return [color1, color2, color3];
-  }
-
-  /**
-   * Start the directive gradient animation
-   */
-  public start(): void {
-    this.gradientRunning$.next(true);
-  }
-
-  /**
-   * Stop the directive gradient animation
-   */
-  public stop(): void {
-    this.gradientRunning$.next(false);
-  }
-
-  public changeEndpointColor(index: number) {
-    return this.endColorIndex = index;
-  }
-
-  /**
-   * Update the gradient animation
-   */
-  public render(renderValue: RGBTransition, step: number) {
-
-    this.renderer.setStyle(
-      this.el.nativeElement,
-      'background',
-      `linear-gradient(150deg, ${renderValue[0]} 0%, ${renderValue[1]} 50%, ${renderValue[2]} 100%)`
-    );
   }
 }

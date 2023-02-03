@@ -16,18 +16,6 @@
 
   --white-1: #FFFFFF;
   --white-2: #F8F8F8;
-
-  --gradient-1: linear-gradient(150deg,
-    #102F7E 0%,
-    #0C8DD6 12%,
-    #1AA0EC 25%,
-    #60C6FF 37%,
-    #9BDBFF 50%,
-    #B4DEDA 62%,
-    #FFD66B 74%,
-    #FFC178 87%,
-    #FE9255 100%
-  );
 }
 
 * {
@@ -51,7 +39,6 @@ body {
   font-weight: 400;
   letter-spacing: 0.06rem;
   line-height: 2.4;
-  background: var(--gradient-1);
   width: 100vw;
   height: 100vh;
 }
