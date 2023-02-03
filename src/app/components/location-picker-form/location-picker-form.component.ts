@@ -8,7 +8,7 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./location-picker-form.component.scss']
 })
 export class LocationPickerFormComponent implements OnInit {
-  @Output() locationEvent = new EventEmitter<LocationPickerOutput>();
+  @Output() locationEvent = new EventEmitter<LocationData>();
   @Input() countries: string[] = [];
   locationForm: FormGroup = new FormGroup({country: new FormControl(''), city: new FormControl('')});
 
@@ -33,12 +33,7 @@ export class LocationPickerFormComponent implements OnInit {
   private emitIfHasCity() {
     this.locationForm.get('city')?.valueChanges.pipe(
       debounceTime(1000)
-    ).subscribe(() => {
-      const formData = this.locationForm.value;
-      if (formData.country && formData.city) {
-        this.locationEvent.emit(formData);
-      }
-    });
+    ).subscribe(() => this.locationEvent.emit(this.locationForm.value));
   }
 
   private initForm() {

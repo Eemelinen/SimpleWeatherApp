@@ -7,21 +7,22 @@ import { mockForecasts } from '../../../mocks/mock-forecasts';
   providedIn: 'root'
 })
 export class MockWeatherProviderService extends AbstractWeatherProviderService {
-
   private weatherData$$ = new BehaviorSubject<WeatherData[]>([])
-  public weatherData$ = this.weatherData$$.asObservable();
+  private weatherData$ = this.weatherData$$.asObservable();
 
   constructor() {
     super();
   }
 
-  getWeather(country: string, city: string): Observable<WeatherData[]> {
-    // Todo: Handle fetching elsewhere, for example when city service data changes
-    this.fetchWeatherForecast(country, city);
+  getWeather(): Observable<WeatherData[]> {
     return this.weatherData$;
   }
 
-  fetchWeatherForecast(country: string, city: string): any {
-    return this.weatherData$$.next(mockForecasts);
+  updateWeatherForecast(location: LocationData): void {
+    if (location.city && location.country) {
+      this.weatherData$$.next(mockForecasts);
+    } else {
+      this.weatherData$$.next([]);
+    }
   }
 }

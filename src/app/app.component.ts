@@ -8,7 +8,7 @@ import { AbstractLocationService } from './services/location/abstract-location.s
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   forecasts$: Observable<WeatherData[]> = of([]);
 
@@ -17,8 +17,20 @@ export class AppComponent implements OnDestroy {
     private locationService: AbstractLocationService
   ) {}
 
+  ngOnInit(): void {
+    this.updateWeatherData();
+  }
+
+  updateForecast(location: LocationData): void {
+    this.weatherProvider.updateWeatherForecast(location);
+  }
+
   getAvailableCountries(): string[] {
     return this.locationService.getAvailableCountries();
+  }
+
+  updateWeatherData(): void {
+    this.forecasts$ = this.weatherProvider.getWeather();
   }
 
   nextWeekData(forecasts: WeatherData[]): WeatherData[] {
@@ -27,11 +39,6 @@ export class AppComponent implements OnDestroy {
     }
     // Todo: Add snackbar to inform user that there is no data for the next 7 days
     return [];
-  }
-
-  // Todo: Fetching should be handled trough other route
-  updateWeatherData(data: LocationPickerOutput) {
-    this.forecasts$ = this.weatherProvider.getWeather(data.country, data.city);
   }
 
   // Todo: probably unnecessary since using reactive programming

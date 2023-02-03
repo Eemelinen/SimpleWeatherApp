@@ -6,18 +6,9 @@ import { availableCountries } from './countries';
   providedIn: 'root'
 })
 export class LocationService extends AbstractLocationService  {
-  private currentLocation: LocationData = { country: '', city: '' };
 
   constructor() {
     super();
-  }
-
-  getCurrentLocation(): LocationData {
-    return this.currentLocation;
-  }
-
-  setCurrentLocation(location: LocationData) {
-    this.currentLocation = location;
   }
 
   getAvailableCountries(): string[] {

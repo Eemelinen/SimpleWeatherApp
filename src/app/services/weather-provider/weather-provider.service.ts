@@ -11,26 +11,46 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   private weatherData$$ = new BehaviorSubject<WeatherData[]>([])
   private weatherData$ = this.weatherData$$.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+  ) {
     super();
   }
 
-  getWeather(country: string, city: string): Observable<WeatherData[]> {
-    // Todo: Handle fetching elsewhere, for example when city service data changes
-    this.fetchWeatherForecast(country, city);
+  getWeather(): Observable<WeatherData[]> {
     return this.weatherData$;
   }
 
-  fetchWeatherForecast(country: string, city: string): any {
+  updateWeatherForecast(location: LocationData): any {
+      if (location.city && location.country) {
+        this.apiCall(location);
+      } else {
+        this.emptyWeatherData();
+      }
+  }
+
+  private updateWeather(res: any) {
+    this.weatherData$$.next(res.data.map((day: any) => {
+      return {
+        date: day.datetime,
+        temp: day.temp
+      }
+    }));
+  }
+
+  private apiCall(location: LocationData) {
     this.http
-      .get(`http://api.weatherbit.io/v2.0/forecast/daily?city=${city},${country}&key=${environment.WEATHER_API_KEY}&days=10`)
+      .get(`http://api.weatherbit.io/v2.0/forecast/daily?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .subscribe((res: any) => {
-        this.weatherData$$.next(res.data.map((day: any) => {
-          return {
-            date: day.datetime,
-            temp: day.temp
-          }
-        }));
+        if (res.data && res.city_name === location.city) {
+          this.updateWeather(res);
+        } else {
+          this.emptyWeatherData();
+        }
       });
+  }
+
+  private emptyWeatherData() {
+    this.weatherData$$.next([]);
   }
 }

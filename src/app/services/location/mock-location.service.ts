@@ -6,8 +6,6 @@ import { mockAvailableCountries } from '../../../mocks/mock-available-countries'
   providedIn: 'root'
 })
 export class MockLocationService extends AbstractLocationService {
-  private currentLocation: LocationData = { country: '', city: '' };
-
   constructor() {
     super();
   }
@@ -15,9 +13,4 @@ export class MockLocationService extends AbstractLocationService {
   getAvailableCountries(): string[] {
     return mockAvailableCountries;
   }
-
-  getCurrentLocation(): LocationData {
-    return this.currentLocation;
-  }
-
 }
