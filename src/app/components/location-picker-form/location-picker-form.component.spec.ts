@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationPickerFormComponent } from './location-picker-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
 
 describe('LocationPickerFormComponent', () => {
   let component: LocationPickerFormComponent;
@@ -20,6 +21,7 @@ describe('LocationPickerFormComponent', () => {
 
     fixture = TestBed.createComponent(LocationPickerFormComponent);
     component = fixture.componentInstance;
+    component.countries = mockAvailableCountries;
     fixture.detectChanges();
   });
 
@@ -39,7 +41,7 @@ describe('LocationPickerFormComponent', () => {
     expect(component.locationForm.get('city')).toBeTruthy();
   });
 
-  it('should have a form with a country control with first country in countries as default value', () => {
+  it('should have a form with a country control with first country', () => {
     expect(component.locationForm.get('country')?.value).toEqual(component.countries[0]);
   });
 

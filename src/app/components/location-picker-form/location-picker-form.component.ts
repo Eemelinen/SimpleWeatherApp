@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
@@ -9,17 +9,14 @@ import { debounceTime } from 'rxjs';
 })
 export class LocationPickerFormComponent implements OnInit {
   @Output() locationEvent = new EventEmitter<LocationPickerOutput>();
-  locationForm: FormGroup;
-  countries: string[] = ['NL', 'US'];
+  @Input() countries: string[] = [];
+  locationForm: FormGroup = new FormGroup({country: new FormControl(''), city: new FormControl('')});
 
   constructor() {
-    this.locationForm = new FormGroup({
-      country: new FormControl(this.countries[0] || ''),
-      city: new FormControl(''),
-    });
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.emptyCityOnCountryChange();
     this.emitIfHasCity();
   }
@@ -42,5 +39,14 @@ export class LocationPickerFormComponent implements OnInit {
         this.locationEvent.emit(formData);
       }
     });
+  }
+
+  private initForm() {
+    if (this.countries.length > 0) {
+      this.locationForm = new FormGroup({
+        country: new FormControl(this.countries[0] || ''),
+        city: new FormControl(''),
+      });
+    }
   }
 }

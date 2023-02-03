@@ -10,13 +10,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { WeatherProviderService } from './services/weather-provider/weather-provider.service';
 import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
+import { AbstractLocationService } from './services/location/abstract-location.service';
+import { LocationService } from './services/location/location.service';
+import { MockLocationService } from './services/location/mock-location.service';
 
 const production = [
-  { provide: AbstractWeatherProviderService, useClass: WeatherProviderService }
+  { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
+  { provide: AbstractLocationService, useClass: LocationService },
 ];
 
 const test = [
-  { provide: AbstractWeatherProviderService, useClass: MockWeatherProviderService }
+  { provide: AbstractWeatherProviderService, useClass: MockWeatherProviderService },
+  { provide: AbstractLocationService, useClass: MockLocationService },
 ];
 
 @NgModule({

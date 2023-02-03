@@ -1,6 +1,4 @@
-import { Observable } from 'rxjs';
-
 export abstract class AbstractLocationService {
-  abstract getCurrentLocation(): Observable<LocationData>;
+  abstract getCurrentLocation(): LocationData;
   abstract getAvailableCountries(): string[];
 }

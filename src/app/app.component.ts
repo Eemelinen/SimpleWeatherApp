@@ -1,17 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
+import { AbstractLocationService } from './services/location/abstract-location.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   subscriptions: Subscription[] = [];
-  forecastsObs$: Observable<WeatherData[]> = of([]);
+  forecasts$: Observable<WeatherData[]> = of([]);
 
-  constructor(private weatherProvider: AbstractWeatherProviderService) {
+  constructor(
+    private weatherProvider: AbstractWeatherProviderService,
+    private locationService: AbstractLocationService
+  ) {}
+
+  getAvailableCountries(): string[] {
+    return this.locationService.getAvailableCountries();
   }
 
   nextWeekData(forecasts: WeatherData[]): WeatherData[] {
@@ -24,7 +31,7 @@ export class AppComponent {
 
   // Todo: Fetching should be handled trough other route
   updateWeatherData(data: LocationPickerOutput) {
-    this.forecastsObs$ = this.weatherProvider.getWeather(data.country, data.city);
+    this.forecasts$ = this.weatherProvider.getWeather(data.country, data.city);
   }
 
   // Todo: probably unnecessary since using reactive programming

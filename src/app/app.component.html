@@ -1,12 +1,11 @@
 <div class="app">
 
   <div class="content">
-
     <section class="location-selection">
-      <app-location-picker-form (locationEvent)="updateWeatherData($event)"></app-location-picker-form>
+      <app-location-picker-form (locationEvent)="updateWeatherData($event)" [countries]="getAvailableCountries()"></app-location-picker-form>
     </section>
 
-    <ng-container *ngIf="forecastsObs$ | async as forecasts">
+    <ng-container *ngIf="forecasts$ | async as forecasts">
       <ng-container *ngIf="forecasts.length">
         <section class="average-temperature">
           <app-average-temperature-card [forecasts]="forecasts"></app-average-temperature-card>
