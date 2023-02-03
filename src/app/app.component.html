@@ -4,7 +4,7 @@
       <app-location-picker-form (locationEvent)="updateForecast($event)" [countries]="getAvailableCountries()"></app-location-picker-form>
     </section>
 
-    <ng-container *ngIf="forecasts.length && averageTemperature !== 9999">
+    <ng-container *ngIf="forecasts.length">
         <section class="average-temperature">
           <app-average-temperature-card [forecasts]="forecasts" [averageTemperature]="averageTemperature"></app-average-temperature-card>
         </section>

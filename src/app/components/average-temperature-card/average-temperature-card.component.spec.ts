@@ -26,11 +26,6 @@ describe('AverageTemperatureCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should calculate the average temperature', () => {
-    expect(component.calculateAverageTemperature()).toEqual(4);
-  });
-
-
   it('getDates should give a correctly formatted result', () => {
     component.forecasts[0].date = '2023-02-02';
     expect(component.getDates()).toEqual('FEB 2 - 11 2023');
