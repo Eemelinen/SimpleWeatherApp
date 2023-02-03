@@ -1,7 +1,9 @@
-<div class="card">
-  <p class="card__info">{{getDayName()}}</p>
-  <div class="card__data">
-    <p class="card__temperature">{{getTemperature()}}</p>
-    <span class="card__celcius">°C</span>
+<ng-container *ngIf="forecast.date !== 'default'">
+  <div class="card">
+    <p class="card__info">{{getDayName()}}</p>
+    <div class="card__data">
+      <p class="card__temperature">{{getTemperature()}}</p>
+      <span class="card__celcius">°C</span>
+    </div>
   </div>
-</div>
+</ng-container>

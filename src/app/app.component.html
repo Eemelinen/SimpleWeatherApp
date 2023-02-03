@@ -6,16 +6,16 @@
       <app-location-picker-form (locationEvent)="updateWeatherData($event)"></app-location-picker-form>
     </section>
 
-    <ng-container *ngIf="forecasts.length">
+    <ng-container *ngIf="forecastsObs$ | async as forecasts">
+      <ng-container *ngIf="forecasts.length">
+        <section class="average-temperature">
+          <app-average-temperature-card [forecasts]="forecasts"></app-average-temperature-card>
+        </section>
 
-      <section class="average-temperature">
-        <app-average-temperature-card [forecasts]="forecasts"></app-average-temperature-card>
-      </section>
-
-      <section class="next-week-temperatures">
-        <app-daily-temperature-card *ngFor="let forecast of nextWeekData()" [forecast]="forecast"></app-daily-temperature-card>
-      </section>
-
+        <section class="next-week-temperatures">
+          <app-daily-temperature-card *ngFor="let forecast of nextWeekData(forecasts)" [forecast]="forecast"></app-daily-temperature-card>
+        </section>
+      </ng-container>
     </ng-container>
   </div>
 </div>

@@ -1,9 +1,8 @@
 /// <reference path="../../../../types.d.ts" />
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AverageTemperatureCardComponent } from './average-temperature-card.component';
-import {mockForecasts} from '../../../mocks/mock-forecasts';
+import { mockForecasts } from '../../../mocks/mock-forecasts';
 
 describe('AverageTemperatureCardComponent', () => {
   let component: AverageTemperatureCardComponent;
@@ -28,7 +27,7 @@ describe('AverageTemperatureCardComponent', () => {
   });
 
   it('should calculate the average temperature', () => {
-    expect(component.calculateAverageTemperature(component.forecasts)).toEqual(4);
+    expect(component.calculateAverageTemperature()).toEqual(4);
   });
 
 

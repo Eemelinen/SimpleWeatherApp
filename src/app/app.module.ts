@@ -33,8 +33,8 @@ const test = [
     HttpClientModule
   ],
   providers: [
-    // ...test,
-    ...production
+    ...test,
+    // ...production
   ],
   bootstrap: [AppComponent]
 })

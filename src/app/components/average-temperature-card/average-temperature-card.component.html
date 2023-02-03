@@ -1,7 +1,9 @@
-<div class="card">
-  <p class="card__info">{{getDates()}}</p>
-  <div class="card__data">
-    <p class="card__temperature">{{calculateAverageTemperature(forecasts)}}</p>
-    <span class="card__celcius">°C</span>
+<ng-container *ngIf="forecasts.length">
+  <div class="card">
+    <p class="card__info">{{getDates()}}</p>
+    <div class="card__data">
+      <p class="card__temperature">{{calculateAverageTemperature()}}</p>
+      <span class="card__celcius">°C</span>
+    </div>
   </div>
-</div>
+</ng-container>

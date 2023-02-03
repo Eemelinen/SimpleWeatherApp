@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-daily-temperature-card',
@@ -6,7 +6,7 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./daily-temperature-card.component.scss']
 })
 export class DailyTemperatureCardComponent {
-  @Input() forecast: WeatherData = {} as WeatherData;
+  @Input() forecast: WeatherData = { date: 'default', temp: 0 };
 
   getTemperature(): number {
     return Math.round(this.forecast.temp);

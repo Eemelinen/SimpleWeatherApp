@@ -15,10 +15,9 @@ export class AverageTemperatureCardComponent {
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-
-  calculateAverageTemperature(data: WeatherData[]) {
-    const total = data.reduce((acc, day: WeatherData) => acc + day.temp, 0);
-    return Math.round((total / data.length));
+  calculateAverageTemperature() {
+    const total = this.forecasts.reduce((acc, day: WeatherData) => acc + day.temp, 0);
+    return Math.round((total / this.forecasts.length));
   }
 
   private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
