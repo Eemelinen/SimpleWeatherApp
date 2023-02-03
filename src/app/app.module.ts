@@ -7,6 +7,17 @@ import { LocationPickerFormComponent } from './components/location-picker-form/l
 import { BgGradientDirective } from './directives/bg-gradient/bg-gradient.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
+import { WeatherProviderService } from './services/weather-provider/weather-provider.service';
+import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
+
+const production = [
+  { provide: AbstractWeatherProviderService, useClass: WeatherProviderService }
+];
+
+const test = [
+  { provide: AbstractWeatherProviderService, useClass: MockWeatherProviderService }
+];
 
 @NgModule({
   declarations: [
@@ -21,7 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    // ...test,
+    ...production
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

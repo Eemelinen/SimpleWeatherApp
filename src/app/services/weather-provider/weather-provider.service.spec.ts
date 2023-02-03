@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { WeatherProviderService } from './weather-provider.service';
 import { HttpClient } from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('WeatherProviderService', () => {
   let service: WeatherProviderService;
@@ -10,12 +11,15 @@ describe('WeatherProviderService', () => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
     TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: HttpClient,
-          useValue: httpClientSpy
-        }
+      imports: [
+        HttpClientTestingModule
       ],
+      // providers: [
+      //   {
+      //     provide: HttpClient,
+      //     useValue: httpClientSpy
+      //   }
+      // ],
     });
     service = TestBed.inject(WeatherProviderService);
   });

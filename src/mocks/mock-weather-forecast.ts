@@ -1,4 +1,4 @@
 import { delay, of } from 'rxjs';
-import { mockWeatherData } from './mock-weather-data';
+import { mockWeatherApiResponse } from './mock-weather-api-response';
 
-export const mockWeatherForecast = of(mockWeatherData).pipe(delay(1000));
+export const mockWeatherForecast = of(mockWeatherApiResponse).pipe(delay(1000));

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { WeatherProviderService } from './services/weather-provider/weather-provider.service';
 import { Subscription } from 'rxjs';
+import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
   subscriptions: Subscription[] = [];
   forecasts: WeatherData[] = [];
 
-  constructor(private weatherProvider: WeatherProviderService) {
+  constructor(private weatherProvider: AbstractWeatherProviderService) {
   }
 
   // getWeatherData(): any {
@@ -29,6 +29,7 @@ export class AppComponent {
   public updateWeatherData(data: LocationPickerOutput) {
     this.subscriptions.push(
       this.weatherProvider.fetchWeatherForecast(data.country, data.city).subscribe((res: any) => {
+        console.log(res);
         this.forecasts = res.data.map((day: any) => {
           return {
             date: day.datetime,

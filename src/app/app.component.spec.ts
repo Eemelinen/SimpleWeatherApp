@@ -7,15 +7,16 @@ import {
 } from './components/average-temperature-card/average-temperature-card.component';
 import { LocationPickerFormComponent } from './components/location-picker-form/location-picker-form.component';
 import { MockComponents } from 'ng-mocks';
-import {mockWeatherData} from '../mocks/mock-weather-data';
-import {mockWeatherForecast} from '../mocks/mock-weather-forecast';
-import {mockForecasts} from '../mocks/mock-forecasts';
+import { mockForecasts } from '../mocks/mock-forecasts';
+import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
+import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async () => {
+
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent,
@@ -25,6 +26,12 @@ describe('AppComponent', () => {
           LocationPickerFormComponent
         ),
       ],
+      providers: [
+        {
+          provide: AbstractWeatherProviderService,
+          useClass: MockWeatherProviderService
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

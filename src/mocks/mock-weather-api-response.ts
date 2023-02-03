@@ -1,4 +1,4 @@
-export const mockWeatherData = {
+export const mockWeatherApiResponse = {
   "city_name": "Amsterdam",
   "country_code": "NL",
   "data": [

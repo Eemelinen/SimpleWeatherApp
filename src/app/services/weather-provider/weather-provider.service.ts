@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { mockWeatherForecast } from '../../../mocks/mock-weather-forecast';
-import {BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherProviderService {
+export class WeatherProviderService extends AbstractWeatherProviderService {
   private weatherData$$ = new BehaviorSubject<WeatherData[]>([])
   public weatherData$ = this.weatherData$$.asObservable();
 
-  // constructor(private http: HttpClient) {
-  // }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getWeather(country: string, city: string): Observable<WeatherData[]> {
     // this.removePreviousData();
