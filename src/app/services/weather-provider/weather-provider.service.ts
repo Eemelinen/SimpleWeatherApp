@@ -9,7 +9,7 @@ import { AbstractWeatherProviderService } from './abstract-weather-provider.serv
 })
 export class WeatherProviderService extends AbstractWeatherProviderService {
   private weatherData$$ = new BehaviorSubject<WeatherData[]>([])
-  public weatherData$ = this.weatherData$$.asObservable();
+  private weatherData$ = this.weatherData$$.asObservable();
 
   constructor(private http: HttpClient) {
     super();

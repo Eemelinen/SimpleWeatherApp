@@ -40,7 +40,7 @@ describe('LocationPickerFormComponent', () => {
   });
 
   it('should have a form with a country control with first country in countries as default value', () => {
-    expect(component.locationForm.get('country')?.value).toEqual(component.countries[0].code);
+    expect(component.locationForm.get('country')?.value).toEqual(component.countries[0]);
   });
 
   it('should render an input with value of empty string', () => {

@@ -6,8 +6,8 @@
 
   <form class="location__form" [formGroup]="locationForm">
     <select class="location__form-element location__select" formControlName="country">
-      <option *ngFor="let country of countries" [value]="country.code">
-        {{ country.code }}
+      <option *ngFor="let country of countries" [value]="country">
+        {{ country }}
       </option>
     </select>
 

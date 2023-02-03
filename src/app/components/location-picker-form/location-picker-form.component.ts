@@ -10,14 +10,11 @@ import { debounceTime } from 'rxjs';
 export class LocationPickerFormComponent implements OnInit {
   @Output() locationEvent = new EventEmitter<LocationPickerOutput>();
   locationForm: FormGroup;
-  countries: Country[] = [
-    { name: 'NL', code: 'NL' },
-    { name: 'US', code: 'US' },
-  ];
+  countries: string[] = ['NL', 'US'];
 
   constructor() {
     this.locationForm = new FormGroup({
-      country: new FormControl(this.countries[0]?.code || ''),
+      country: new FormControl(this.countries[0] || ''),
       city: new FormControl(''),
     });
   }

@@ -1,0 +1,18 @@
+export const availableCountries: string[] = [
+  "NL",
+  "DE",
+  "FR",
+  "ES",
+  "IT",
+  "PT",
+  "BE",
+  "LU",
+  "AT",
+  "CH",
+  "GB",
+  "IE",
+  "DK",
+  "SE",
+  "NO",
+  "FI",
+]
