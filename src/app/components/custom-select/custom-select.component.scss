@@ -11,7 +11,6 @@ $border-radius: 6px;
   width: $width;
   position: relative;
   margin-right: 8px;
-  //border-radius: $border-radius;
 
   .dropdown-button {
     border-radius: $border-radius;
@@ -26,7 +25,6 @@ $border-radius: 6px;
     width: 100%;
     cursor: pointer;
     align-items: center;
-    //background-image: url("src/assets/svg/chevron.svg");
     background-size: 10px;
     background-position: right 16px bottom 45%;
     background-repeat: no-repeat;
@@ -46,7 +44,15 @@ $border-radius: 6px;
 
   .dropdown-value {
     font-weight: 600;
-    margin-left: 3px;
+    margin-left: 6px;
+    margin-right: 6px;
+    width: 1rem;
+  }
+
+  .flag {
+    width: 2rem;
+    border-radius: 3px;
+    border: 1px solid var(--black-2);
   }
 
   .dropdown-list {
@@ -66,6 +72,7 @@ $border-radius: 6px;
     transform: translateY(100%);
 
     li {
+      border-radius: $border-radius;
       position: relative;
       background: white;
       padding: 2px;
@@ -75,6 +82,7 @@ $border-radius: 6px;
       align-items: center;
       justify-content: center;
       width: 100%;
+
 
       &:hover {
         background: fade_out($accent-color, 0.6);
@@ -87,7 +95,7 @@ $border-radius: 6px;
       width: 67%;
 
       span {
-        margin-left: .5rem;
+        margin-left: 1rem;
       }
 
     }

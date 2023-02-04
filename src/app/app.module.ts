@@ -14,6 +14,7 @@ import { LocationService } from './services/location/location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
 import { CustomSelectComponent } from './components/custom-select/custom-select.component';
+import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -33,6 +34,7 @@ const test = [
     LocationPickerFormComponent,
     GradientBackgroundDirective,
     CustomSelectComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     ReactiveFormsModule,
