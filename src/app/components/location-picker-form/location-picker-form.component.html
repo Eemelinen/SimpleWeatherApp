@@ -5,11 +5,13 @@
   </div>
 
   <form class="location__form" [formGroup]="locationForm">
-    <select class="location__form-element location__select" formControlName="country">
-      <option *ngFor="let country of countries" [value]="country">
-        {{ country }}
-      </option>
-    </select>
+<!--    <select class="location__form-element location__select" formControlName="country">-->
+<!--      <option *ngFor="let country of countries" [value]="country">-->
+<!--        {{ country }}-->
+<!--      </option>-->
+<!--    </select>-->
+
+    <app-custom-select></app-custom-select>
 
     <div class="location__input-container">
       <input

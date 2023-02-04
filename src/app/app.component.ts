@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.updateWeatherData();
+    this.getWeatherData();
   }
 
   ngOnDestroy() {
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.locationService.getAvailableCountries();
   }
 
-  updateWeatherData(): void {
+  getWeatherData(): void {
     this.subscriptions.push(
       this.weatherProvider.getWeather().subscribe((forecasts: WeatherData[]) => {
         this.forecasts = forecasts;

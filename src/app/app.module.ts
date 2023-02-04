@@ -13,6 +13,7 @@ import { AbstractLocationService } from './services/location/abstract-location.s
 import { LocationService } from './services/location/location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
+import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -31,6 +32,7 @@ const test = [
     DailyTemperatureCardComponent,
     LocationPickerFormComponent,
     GradientBackgroundDirective,
+    CustomSelectComponent,
   ],
   imports: [
     ReactiveFormsModule,
