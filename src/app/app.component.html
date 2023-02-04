@@ -1,7 +1,7 @@
 <div class="app" gradientBackground>
   <div class="content">
     <section class="location-selection">
-      <app-location-picker-form (locationEvent)="updateForecast($event)" [countries]="getAvailableCountries()"></app-location-picker-form>
+      <app-location-picker-form (locationEvent)="updateForecast($event)" [countries]="getAvailableCountries()" [loading]="loadingWeatherData"></app-location-picker-form>
     </section>
 
     <ng-container *ngIf="forecasts.length">

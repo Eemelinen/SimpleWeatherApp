@@ -11,10 +11,10 @@ import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-b
 })
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
-
   subscriptions: Subscription[] = [];
   forecasts: WeatherData[] = [];
   averageTemperature: number = 9999;
+  loadingWeatherData: boolean = false;
 
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
@@ -22,11 +22,21 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Todo: Change to reactive version
     this.getWeatherData();
+    this.getLoading();
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  getLoading(): void{
+    this.subscriptions.push(
+      this.weatherProvider.getLoading().subscribe((loading: boolean) => {
+        this.loadingWeatherData = loading;
+      })
+    );
   }
 
   updateForecast(location: LocationData): void {
@@ -44,7 +54,8 @@ export class AppComponent implements OnInit, OnDestroy {
         if (forecasts.length) {
           this.setAverageTemperature(forecasts);
         }
-      }));
+      }),
+    );
   }
 
   private setAverageTemperature(forecasts: WeatherData[]) {

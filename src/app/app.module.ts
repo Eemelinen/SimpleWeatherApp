@@ -5,7 +5,7 @@ import { AverageTemperatureCardComponent } from './components/average-temperatur
 import { DailyTemperatureCardComponent } from './components/daily-temperature-card/daily-temperature-card.component';
 import { LocationPickerFormComponent } from './components/location-picker-form/location-picker-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { WeatherProviderService } from './services/weather-provider/weather-provider.service';
 import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
@@ -15,6 +15,7 @@ import { MockLocationService } from './services/location/mock-location.service';
 import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
 import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
+import { WeatherDataLoadingInterceptor } from './interceptors/weather-data-loading.interceptor';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -42,8 +43,13 @@ const test = [
     HttpClientModule
   ],
   providers: [
-    ...test,
-    // ...production
+    // ...test,
+    ...production,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WeatherDataLoadingInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

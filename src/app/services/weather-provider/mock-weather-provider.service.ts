@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { mockForecasts } from '../../../mocks/mock-forecasts';
 
 @Injectable({
@@ -24,5 +24,9 @@ export class MockWeatherProviderService extends AbstractWeatherProviderService {
     } else {
       this.weatherData$$.next([]);
     }
+  }
+
+  getLoading(): Observable<boolean> {
+    return of(false);
   }
 }

@@ -11,10 +11,17 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   private weatherData$$ = new BehaviorSubject<WeatherData[]>([])
   private weatherData$ = this.weatherData$$.asObservable();
 
+  private loading$$ = new BehaviorSubject<boolean>(false);
+  private loading$ = this.loading$$.asObservable();
+
   constructor(
     private http: HttpClient,
   ) {
     super();
+  }
+
+  getLoading(): Observable<boolean> {
+    return this.loading$;
   }
 
   getWeather(): Observable<WeatherData[]> {
@@ -39,18 +46,45 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   }
 
   private apiCall(location: LocationData) {
+    this.startLoading();
     this.http
-      .get(`http://api.weatherbit.io/v2.0/forecast/daily?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
-      .subscribe((res: any) => {
-        if (res.data && res.city_name.toLowerCase() === location.city.toLowerCase()) {
-          this.updateWeather(res);
-        } else {
-          this.emptyWeatherData();
-        }
+      .get(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
+      .subscribe({
+        next: (res: any) => {
+          this.apiCallSucceeded(res, location);
+        },
+          error: (error) => {
+            this.apiCallFailed();
+          },
+          complete: () => {
+            this.stopLoading();
+          }
       });
+  }
+
+  private apiCallFailed() {
+    // todo: Snacbar for unexpected error
+    this.emptyWeatherData();
+    this.stopLoading();
+  }
+
+  private apiCallSucceeded(res: any, location: LocationData) {
+    if (res && res.data && res.city_name.toLowerCase() === location.city.toLowerCase()) {
+      this.updateWeather(res);
+    } else {
+      this.emptyWeatherData();
+    }
   }
 
   private emptyWeatherData() {
     this.weatherData$$.next([]);
+  }
+
+  startLoading() {
+    this.loading$$.next(true);
+  }
+
+  stopLoading() {
+    this.loading$$.next(false);
   }
 }

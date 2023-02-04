@@ -17,10 +17,13 @@
         name="city"
         placeholder="Please enter your location...">
 
-      <img
+      <img *ngIf="!loading; else loader"
         class="search-icon"
         [ngClass]="{ opaque: !locationForm.get('city')?.value }"
         src="../../../assets/images/search.svg" alt="search">
+        <ng-template #loader>
+          <img class="search-icon rotate" src="assets/images/loading.svg" alt="loader">
+        </ng-template>
     </div>
 
   </form>
