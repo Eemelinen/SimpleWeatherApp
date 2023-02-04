@@ -12,19 +12,16 @@ export class LocationPickerFormComponent implements OnInit {
   @Input() countries: string[] = [];
   locationForm: FormGroup = new FormGroup({country: new FormControl(''), city: new FormControl('')});
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     this.initForm();
-    this.emptyCityOnCountryChange();
     this.emitIfHasCity();
   }
 
-  private emptyCityOnCountryChange() {
-    this.locationForm.get('country')?.valueChanges.subscribe(() => {
-      this.locationForm.get('city')?.setValue('');
-    });
+  setCountry(country: string) {
+    this.locationForm.patchValue({
+      country,
+      city: ''
+    })
   }
 
   /**

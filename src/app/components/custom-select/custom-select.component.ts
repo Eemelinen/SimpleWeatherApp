@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 export type SelectOption = {
   value: string;
@@ -12,9 +12,7 @@ export type SelectOption = {
   styleUrls: ['./custom-select.component.scss']
 })
 export class CustomSelectComponent {
-
   @Input() options: any = [{name: 'Option 1', value: '1'}, {name: 'Option 2', value: '2'}];
-  @Input() title: string = 'Custom select';
   @Output() currentValueChange = new EventEmitter();
 
   public currentValue: any;

@@ -1,29 +1,24 @@
 <div class="location">
 
-  <div class="location__icon-container">
-    <img class="location__weather-icon" src="../../../assets/images/cloudy-1.svg" alt="cloudy">
+  <div class="icon-container">
+    <img class="weather-icon" src="assets/images/cloudy-1.svg" alt="cloudy">
   </div>
 
-  <form class="location__form" [formGroup]="locationForm">
-<!--    <select class="location__form-element location__select" formControlName="country">-->
-<!--      <option *ngFor="let country of countries" [value]="country">-->
-<!--        {{ country }}-->
-<!--      </option>-->
-<!--    </select>-->
+  <form class="form" [formGroup]="locationForm">
 
-    <app-custom-select></app-custom-select>
+    <app-custom-select [options]="countries" (currentValueChange)="setCountry($event)"></app-custom-select>
 
-    <div class="location__input-container">
+    <div class="input-container">
       <input
         type="text"
         id="city"
         formControlName="city"
-        class="location__form-element location__input"
+        class="form-element input"
         name="city"
         placeholder="Please enter your location...">
 
       <img
-        class="location__search-icon"
+        class="search-icon"
         [ngClass]="{ opaque: !locationForm.get('city')?.value }"
         src="../../../assets/images/search.svg" alt="search">
     </div>
