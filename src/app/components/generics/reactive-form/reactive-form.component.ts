@@ -3,18 +3,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'app-simple-form',
-  templateUrl: './simple-form.component.html',
-  styleUrls: ['./simple-form.component.scss']
+  selector: 'app-reactive-form',
+  templateUrl: './reactive-form.component.html',
+  styleUrls: ['./reactive-form.component.scss']
 })
-export class SimpleFormComponent {
+export class ReactiveFormComponent {
   @Input() dropdownImageFolder: string = 'assets/images';
   @Input() dropdownOptions: string[] = [];
   @Input() loading: boolean = false;
   @Input() placeholder: string = '';
   @Output() valuesChanged = new EventEmitter<SimpleFormOutput>();
 
-  simpleForm: FormGroup = new FormGroup({
+  form: FormGroup = new FormGroup({
     dropdownValue: new FormControl(''),
     textInputValue: new FormControl('')
   });
@@ -25,7 +25,7 @@ export class SimpleFormComponent {
   }
 
   setOption(dropdownValue: string) {
-    this.simpleForm.patchValue({
+    this.form.patchValue({
       dropdownValue,
       textInputValue: ''
     })
@@ -35,14 +35,14 @@ export class SimpleFormComponent {
    * Emit form data with small delay if both dropdownValue and textInputValue are filled in
    */
   private emitIfFormHasTextData() {
-    this.simpleForm.get('textInputValue')?.valueChanges.pipe(
+    this.form.get('textInputValue')?.valueChanges.pipe(
       debounceTime(800)
-    ).subscribe(() => this.valuesChanged.emit(this.simpleForm.value));
+    ).subscribe(() => this.valuesChanged.emit(this.form.value));
   }
 
   private initForm() {
     if (this.dropdownOptions.length > 0) {
-      this.simpleForm = new FormGroup({
+      this.form = new FormGroup({
         dropdownValue: new FormControl(this.dropdownOptions[0] || ''),
         textInputValue: new FormControl(''),
       });

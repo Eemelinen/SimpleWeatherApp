@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SimpleFormComponent } from './simple-form.component';
+import { ReactiveFormComponent } from './reactive-form.component';
 import { MockComponents } from 'ng-mocks';
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-describe('SimpleFormComponent', () => {
-  let component: SimpleFormComponent;
-  let fixture: ComponentFixture<SimpleFormComponent>;
+describe('ReactiveFormComponent', () => {
+  let component: ReactiveFormComponent;
+  let fixture: ComponentFixture<ReactiveFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,7 +15,7 @@ describe('SimpleFormComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [
-        SimpleFormComponent,
+        ReactiveFormComponent,
         MockComponents(
           CustomSelectComponent
         )
@@ -23,7 +23,7 @@ describe('SimpleFormComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SimpleFormComponent);
+    fixture = TestBed.createComponent(ReactiveFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -34,7 +34,7 @@ describe('SimpleFormComponent', () => {
 
 
   it('should have a form', () => {
-    expect(component.simpleForm).toBeTruthy();
+    expect(component.form).toBeTruthy();
   });
 
   // it('should have a form with a country control', () => {

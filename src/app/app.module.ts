@@ -17,7 +17,7 @@ import { CustomSelectComponent } from './components/generics/custom-select/custo
 import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { SimpleFormComponent } from './components/generics/simple-form/simple-form.component';
+import { ReactiveFormComponent } from './components/generics/reactive-form/reactive-form.component';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -38,7 +38,7 @@ const test = [
     GradientBackgroundDirective,
     CustomSelectComponent,
     ClickOutsideDirective,
-    SimpleFormComponent,
+    ReactiveFormComponent,
   ],
   imports: [
     ReactiveFormsModule,

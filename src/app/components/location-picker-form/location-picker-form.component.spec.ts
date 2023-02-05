@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
 import {MockComponents} from 'ng-mocks';
 import {CustomSelectComponent} from '../generics/custom-select/custom-select.component';
-import {SimpleFormComponent} from '../generics/simple-form/simple-form.component';
+import {ReactiveFormComponent} from '../generics/reactive-form/reactive-form.component';
 
 describe('LocationPickerFormComponent', () => {
   let component: LocationPickerFormComponent;
@@ -19,7 +19,7 @@ describe('LocationPickerFormComponent', () => {
         LocationPickerFormComponent,
         MockComponents(
           CustomSelectComponent,
-          SimpleFormComponent
+          ReactiveFormComponent
         ),
       ],
       imports: [

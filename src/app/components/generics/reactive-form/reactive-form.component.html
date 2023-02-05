@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="simpleForm">
+<form class="form" [formGroup]="form">
 
   <app-custom-select
     [options]="dropdownOptions"
@@ -18,7 +18,7 @@
     <img
       *ngIf="!loading; else loader"
       class="search-icon"
-      [ngClass]="{ opaque: !simpleForm.get('textInputValue')?.value }"
+      [ngClass]="{ opaque: !form.get('textInputValue')?.value }"
       src="assets/images/search.svg" alt="search">
 
     <ng-template #loader>
