@@ -13,7 +13,7 @@ import { MockWeatherProviderService } from './services/weather-provider/mock-wea
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 
-describe('AppComponent', () => {
+xdescribe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 

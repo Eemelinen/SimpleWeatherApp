@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
