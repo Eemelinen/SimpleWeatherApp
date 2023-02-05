@@ -25,9 +25,8 @@ export class WeatherApiService extends AbstractWeatherApiService {
       .pipe(
         map((res: WeatherApiData) => new WeatherApiDataModel(res.city_name, res.country_code, res.data)),
         catchError(() => this.apiCallFailed())
-      )
+      );
   }
-
 
   private apiCallFailed(): Observable<[]> {
     this.openSnackbar("Sorry. Something unexpected happened.");
@@ -36,7 +35,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
 
   private openSnackbar(message: string): void {
     this.snackbar.open(message, 'Close', {
-      duration: 1000,
+      duration: 2000,
     });
   }
 }

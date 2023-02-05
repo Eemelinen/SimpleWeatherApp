@@ -40,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateForecast(location: LocationData): void {
-    this.weatherProvider.updateWeatherForecast(location);
+    this.weatherProvider.getWeather(location);
   }
 
   getAvailableCountries(): string[] {
@@ -48,14 +48,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getWeatherData(): void {
-    this.subscriptions.push(
-      this.weatherProvider.getWeather().subscribe((forecasts: WeatherData[]) => {
-        this.forecasts = forecasts;
-        if (forecasts.length) {
-          this.setAverageTemperature(forecasts);
-        }
-      }),
-    );
+    // this.subscriptions.push(
+    //   this.weatherProvider.getWeather().subscribe((forecasts: WeatherData[]) => {
+    //     this.forecasts = forecasts;
+    //     if (forecasts.length) {
+    //       this.setAverageTemperature(forecasts);
+    //     }
+    //   }),
+    // );
   }
 
   private setAverageTemperature(forecasts: WeatherData[]) {

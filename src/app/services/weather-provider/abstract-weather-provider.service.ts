@@ -4,9 +4,9 @@ import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-s
 
 export abstract class AbstractWeatherProviderService {
 
-  constructor(protected http: HttpClient, protected weatherData: AbstractWeatherApiService) {}
+  constructor(protected http: HttpClient, protected apiService: AbstractWeatherApiService) {}
 
-  public abstract getWeather(): Observable<WeatherData[]>
+  public abstract getWeather(location: LocationData): Observable<WeatherData[]>
   public abstract updateWeatherForecast(location: LocationData): void;
   public abstract getLoading(): Observable<boolean>;
 }
