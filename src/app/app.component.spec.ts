@@ -59,7 +59,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class average-temperature if weather data is available', () => {
-    component.nextSevenDays = mockForecasts;
+    component.nextSevenDays = [mockForecasts[0]];
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
   });

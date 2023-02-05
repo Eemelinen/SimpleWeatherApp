@@ -37,12 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  private updateBackgroundGradient(data: WeatherCardData) {
-    if (data.title) {
-      this.directive.changeEndpointColor(data.temperatureValue);
-    }
-  }
-
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
@@ -56,5 +50,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getAvailableCountries(): string[] {
     return this.locationService.getAvailableCountries();
+  }
+
+  private updateBackgroundGradient(data: WeatherCardData) {
+    if (data.title) {
+      this.directive.changeEndpointColor(data.temperatureValue);
+    }
   }
 }

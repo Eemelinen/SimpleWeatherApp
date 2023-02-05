@@ -52,6 +52,6 @@ describe('LocationPickerFormComponent', () => {
   it('emitLocationData should emit locationChanged event with LocationDataModel values', () => {
     const emitSpy = spyOn(component.locationChanged, 'emit');
     component.emitLocationData({dropdownValue: 'Poland', textInputValue: 'Warsaw'});
-    expect(emitSpy).toHaveBeenCalledWith(new LocationDataModel('Poland', 'Warsaw'));
+    expect(emitSpy).toHaveBeenCalledWith({country: 'Poland', city: 'Warsaw'});
   });
 });

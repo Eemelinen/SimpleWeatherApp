@@ -8,8 +8,4 @@ import { Component, Input } from '@angular/core';
 export class DailyTemperatureCardComponent {
   @Input() title: string = '';
   @Input() temperature: number = 0;
-
-  constructor() {
-    console.log('DailyTemperatureCardComponent constructor')
-  }
 }

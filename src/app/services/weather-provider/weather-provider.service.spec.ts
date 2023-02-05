@@ -3,11 +3,13 @@ import { WeatherProviderService } from './weather-provider.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AbstractLocationService } from '../location/abstract-location.service';
 import { MockLocationService } from '../location/mock-location.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
+import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
+import { of } from 'rxjs';
 
 describe('WeatherProviderService', () => {
   let service: WeatherProviderService;
-  let httpClientSpy: { get: jasmine.Spy };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,6 +24,12 @@ describe('WeatherProviderService', () => {
           }
         },
         {
+          provide: AbstractWeatherApiService,
+          useValue: {
+            getWeatherData: () => of(mockWeatherApiResponse)
+          }
+        },
+        {
           provide: AbstractLocationService,
           useClass: MockLocationService
         }
@@ -32,10 +40,6 @@ describe('WeatherProviderService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('should return expected weather (HttpClient called once)', () => {
-    pending();
   });
 
 });
