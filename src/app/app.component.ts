@@ -13,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
   subscriptions: Subscription[] = [];
   forecasts: WeatherData[] = [];
-  averageTemperature: number = 9999;
+  averageTemperature: number = 0;
   loadingWeatherData: boolean = false;
 
   constructor(

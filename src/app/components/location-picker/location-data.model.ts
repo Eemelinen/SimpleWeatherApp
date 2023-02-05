@@ -6,5 +6,4 @@ export class LocationDataModel {
     this.country = country;
     this.city = city;
   }
-
 }

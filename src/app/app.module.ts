@@ -18,10 +18,13 @@ import { ClickOutsideDirective } from './directives/clickOutside/click-outside.d
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormComponent } from './components/generics/reactive-form/reactive-form.component';
+import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
+import { WeatherApiService } from './services/weather-api/weather-api.service';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
   { provide: AbstractLocationService, useClass: LocationService },
+  { provide: AbstractWeatherApiService, useClass: WeatherApiService },
 ];
 
 const test = [

@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,14 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   private loading$ = this.loading$$.asObservable();
 
   constructor(
-    private http: HttpClient,
-    private snackbar: MatSnackBar
+    protected override http: HttpClient,
+    // private snackbar: MatSnackBar,
+    protected override weatherData: AbstractWeatherApiService
   ) {
-    super();
+    super(http, weatherData);
+    this.weatherData.getWeatherData({country: "NL", city: "Amsterdam"}).subscribe((res: any) => {
+      this.updateWeather(res);
+    });
   }
 
   getLoading(): Observable<boolean> {
@@ -28,6 +33,7 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
 
   getWeather(): Observable<WeatherData[]> {
     return this.weatherData$;
+
   }
 
   updateWeatherForecast(location: LocationData): any {
@@ -52,32 +58,32 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     this.http
       .get(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .subscribe({
-        next: (res: any) => this.apiCallSucceeded(res, location),
-        error: () => this.apiCallFailed(),
-        complete: () => this.stopLoading()
+        // next: (res: any) => this.apiCallSucceeded(res, location),
+        // error: () => this.apiCallFailed(),
+        // complete: () => this.stopLoading()
       });
   }
-
-  private apiCallFailed() {
-    // todo: Snackbar for unexpected error
-    this.emptyWeatherData();
-    this.stopLoading();
-    this.openSnackbar("Sorry, something unexpected happened!");
-  }
-
-  private apiCallSucceeded(res: any, location: LocationData) {
-    if (res && res.data && res.city_name.toLowerCase() === location.city.toLowerCase()) {
-      this.updateWeather(res);
-    } else {
-      this.emptyWeatherData();
-    }
-  }
-
-  private openSnackbar(message: string): void {
-    this.snackbar.open(message, 'Close', {
-      duration: 1000,
-    });
-  }
+  //
+  // private apiCallFailed() {
+  //   // todo: Snackbar for unexpected error
+  //   this.emptyWeatherData();
+  //   this.stopLoading();
+  //   this.openSnackbar("Sorry, something unexpected happened!");
+  // }
+  //
+  // private apiCallSucceeded(res: any, location: LocationData) {
+  //   if (res && res.data && res.city_name.toLowerCase() === location.city.toLowerCase()) {
+  //     this.updateWeather(res);
+  //   } else {
+  //     this.emptyWeatherData();
+  //   }
+  // }
+  //
+  // private openSnackbar(message: string): void {
+  //   this.snackbar.open(message, 'Close', {
+  //     duration: 1000,
+  //   });
+  // }
 
   private emptyWeatherData() {
     this.weatherData$$.next([]);
