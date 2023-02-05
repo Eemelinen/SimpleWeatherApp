@@ -1,10 +1,12 @@
 <form class="form" [formGroup]="form">
 
-  <app-custom-select
-    [options]="dropdownOptions"
-    [imageFolderUrl]="dropdownImageFolder"
-    (currentValueChange)="setOption($event)">
-  </app-custom-select>
+  <div class="select-container">
+    <app-custom-select
+      [options]="dropdownOptions"
+      [imageFolderUrl]="dropdownImageFolder"
+      (currentValueChange)="setOption($event)">
+    </app-custom-select>
+  </div>
 
   <div class="input-container">
     <input
