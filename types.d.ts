@@ -12,3 +12,8 @@ type SimpleFormOutput = {
   dropdownValue: string,
   textInputValue: string
 }
+
+type WeatherCardData = {
+  title: string,
+  temperatureValue: number,
+}

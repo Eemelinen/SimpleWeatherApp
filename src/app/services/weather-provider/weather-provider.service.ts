@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, map, Observable, tap} from 'rxjs';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
-import {WeatherApiData, WeatherApiDataModel} from '../weather-api/weather-api-response';
+import { WeatherApiData } from '../weather-api/weather-api-response';
+
+type DateObject = { year: string; month: string; day: string };
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherProviderService extends AbstractWeatherProviderService {
-  private weatherData$$ = new BehaviorSubject<WeatherData[]>([])
-  private weatherData$ = this.weatherData$$.asObservable();
+  private averageTemperature$$ = new BehaviorSubject<WeatherCardData>({title: '', temperatureValue: 0});
+  private averageTemperature$ = this.averageTemperature$$.asObservable();
 
-  private loading$$ = new BehaviorSubject<boolean>(false);
-  private loading$ = this.loading$$.asObservable();
+  private nextSevenDaysTemperature$$ = new BehaviorSubject<WeatherCardData[]>([]);
+  private nextSevenDaysTemperature$ = this.nextSevenDaysTemperature$$.asObservable();
+
+  getAverageTemperature(): Observable<WeatherCardData> {
+    return this.averageTemperature$;
+  }
+
+  getNextSevenDaysTemperature(): Observable<WeatherCardData[]> {
+    return this.nextSevenDaysTemperature$;
+  }
 
   constructor(
     protected override http: HttpClient,
@@ -23,68 +33,135 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     this.getWeather({country: "NL", city: "Amsterdam"});
   }
 
-  getLoading(): Observable<boolean> {
-    return this.loading$;
-  }
-
-  getWeather(location: LocationData): any {
+  getWeather(location: LocationData): Observable<any> {
     if (location.city && location.country) {
-      this.apiService.getWeatherData({country: "NL", city: "Amsterdam"})
+      return this.apiService.getWeatherData(location)
+      // return of(mockWeatherApiResponse)
         .pipe(
-          tap((res: any) => {
-            console.log(res)
-          }),
           map((res: any) => {
-            console.log('test1')
-            return res.data.map((day: any) => {
-              return {
-                date: day.datetime,
-                temp: day.temp
-              }
-            })
-          }),
-          map((res: any) => {
-            console.log('test2')
+            if (location.city.toLowerCase() !== res.city_name.toLowerCase()) {
+              return null;
+            }
             return res;
-          })
-        ).subscribe((res: any) => {
-          console.log(res)
-        });
-
-
-        // .subscribe((res: any) => {
-        //   console.log(res)
-        //   this.updateWeather(res);
-        // });
+          }),
+          map((res: any) => {
+            if (res) {
+              return this.createWeatherData(res);
+            }
+            return null;
+          }),
+          tap((res: any) => {
+            if (res) {
+              this.createOneWeekForecast(res);
+              this.createAverageTempValue(res);
+            } else {
+              this.emptyWeatherData();
+            }
+          }),
+        );
+    } else {
+      this.emptyWeatherData();
+      return of([]);
     }
   }
 
-  updateWeatherForecast(location: LocationData): any {
-      // if (location.city && location.country) {
-      //   this.apiCall(location);
-      // } else {
-      //   // this.emptyWeatherData();
-      // }
+  private createAverageTempValue(res: any) {
+    const dateRange = this.getDates(res);
+    const averageTemp = this.calculateAverageTemperature(res);
+    const averageTemperatureCard = {
+      title: dateRange,
+      temperatureValue: averageTemp
+    }
+    this.averageTemperature$$.next(averageTemperatureCard);
   }
 
-  private updateWeather(res: any) {
-    this.weatherData$$.next(res.data.map((day: any) => {
+  private createWeatherData(res: WeatherApiData): WeatherData[] {
+    console.log(res)
+
+    if (!res) {
+      return [];
+    }
+
+    return res.data.map((day: any) => {
       return {
         date: day.datetime,
         temp: day.temp
       }
-    }));
+    })
+  }
+
+  private calculateAverageTemperature(res: any): number {
+    const total = res.reduce((acc: any, day: WeatherData) => acc + day.temp, 0);
+    return Math.round((total / res.length));
+  }
+
+  private createOneWeekForecast(res: any) {
+    const days = res.slice(0, 7);
+    const tempNextSevenDays = days.map((day: WeatherData) => {
+      return {
+        date: this.getDayName(day.date),
+        temp: Math.round(day.temp)
+      }
+    });
+    this.nextSevenDaysTemperature$$.next(tempNextSevenDays);
+  }
+
+  private getDayName(date: any): string {
+    const day = new Date(date).getDay();
+    const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+    return days[day];
   }
 
   private emptyWeatherData() {
-    this.weatherData$$.next([]);
+    this.averageTemperature$$.next({title: '', temperatureValue: 0});
+    this.nextSevenDaysTemperature$$.next([]);
   }
 
-  private startLoading() {
-    this.loading$$.next(true);
+  getDates(data: WeatherData[]): string {
+    const dateRange = this.getDateRange(data);
+    return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private stopLoading() {
-    this.loading$$.next(false);
+  private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
+    const firstMonth = this.getMonthName(Number(firstDate.month) - 1);
+    const lastMonth = this.getMonthName(Number(lastDate.month) - 1);
+
+    if (firstDate.year !== lastDate.year) {
+      return `${firstMonth} ${firstDate.day}, ${firstDate.year} - ${lastMonth} ${lastDate.day} ${lastDate.year}`;
+    }
+
+    if (firstDate.month !== lastDate.month) {
+      return `${firstMonth} ${firstDate.day} - ${lastMonth} ${lastDate.day} ${lastDate.year}`;
+    }
+
+    return `${firstMonth} ${firstDate.day} - ${lastDate.day} ${lastDate.year}`;
   }
+
+  private getDateRange(data: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+    const firstDate = data[0].date;
+    const lastDate = data[data.length - 1].date;
+
+    const [fYear, fMonth, fDay] = firstDate.split("-");
+    const [eYear, eMonth, eDay] = lastDate.split("-");
+
+    const firstDateObj = {year: fYear, month: fMonth, day: this.removeFirstCharIfZero(fDay)};
+    const lastDateObj = {year:eYear, month: eMonth, day: this.removeFirstCharIfZero(eDay)};
+
+    return { firstDateObj, lastDateObj }
+  }
+
+  private getMonthName(month: number): string {
+    const months = [
+      'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
+    ];
+    return months[month];
+  }
+
+  private removeFirstCharIfZero(str: string) {
+    if (str[0] === '0') {
+      return str.slice(1);
+    }
+    return str;
+  }
+
 }

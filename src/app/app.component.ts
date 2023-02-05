@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
@@ -16,6 +16,8 @@ export class AppComponent implements OnInit, OnDestroy {
   averageTemperature: number = 0;
   loadingWeatherData: boolean = false;
 
+  averageTemperatureCard: WeatherCardData = {title: '', temperatureValue: 0};
+
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
     private locationService: AbstractLocationService
@@ -23,56 +25,28 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Todo: Change to reactive version
-    this.getWeatherData();
-    this.getLoading();
+    this.subscriptions.push(
+      this.weatherProvider.getAverageTemperature().subscribe((data: WeatherCardData) => {
+        this.averageTemperatureCard = data;
+        if (data.title) {
+          this.directive.changeEndpointColor(data.temperatureValue);
+        }
+      })
+    );
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  getLoading(): void{
-    this.subscriptions.push(
-      this.weatherProvider.getLoading().subscribe((loading: boolean) => {
-        this.loadingWeatherData = loading;
-      })
-    );
-  }
-
   updateForecast(location: LocationData): void {
-    this.weatherProvider.getWeather(location);
+    this.loadingWeatherData = true;
+    this.subscriptions.push(
+      this.weatherProvider.getWeather(location).subscribe(() => this.loadingWeatherData = false)
+    );
   }
 
   getAvailableCountries(): string[] {
     return this.locationService.getAvailableCountries();
-  }
-
-  getWeatherData(): void {
-    // this.subscriptions.push(
-    //   this.weatherProvider.getWeather().subscribe((forecasts: WeatherData[]) => {
-    //     this.forecasts = forecasts;
-    //     if (forecasts.length) {
-    //       this.setAverageTemperature(forecasts);
-    //     }
-    //   }),
-    // );
-  }
-
-  private setAverageTemperature(forecasts: WeatherData[]) {
-    this.averageTemperature = this.calculateAverageTemperature(forecasts);
-    this.directive.changeEndpointColor(this.averageTemperature);
-  }
-
-  nextWeekData(forecasts: WeatherData[]): WeatherData[] {
-    if (forecasts.length > 7) {
-      return forecasts.slice(0, 7);
-    }
-    // Todo: Add snackbar to inform user that there is no data for the next 7 days
-    return [];
-  }
-
-  private calculateAverageTemperature(forecasts: WeatherData[]) {
-    const total = forecasts.reduce((acc, day: WeatherData) => acc + day.temp, 0);
-    return Math.round((total / forecasts.length));
   }
 }
