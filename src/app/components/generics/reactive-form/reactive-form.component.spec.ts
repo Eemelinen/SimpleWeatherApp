@@ -5,6 +5,8 @@ import { MockComponents } from 'ng-mocks';
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+const testPlaceholder = 'test placeholder';
+
 fdescribe('ReactiveFormComponent', () => {
   let component: ReactiveFormComponent;
   let fixture: ComponentFixture<ReactiveFormComponent>;
@@ -26,6 +28,8 @@ fdescribe('ReactiveFormComponent', () => {
     fixture = TestBed.createComponent(ReactiveFormComponent);
     component = fixture.componentInstance;
     component.dropdownOptions = ['NL', 'BE'];
+    component.loading = false;
+    component.placeholder = testPlaceholder;
     fixture.detectChanges();
   });
 
@@ -59,9 +63,27 @@ fdescribe('ReactiveFormComponent', () => {
     expect(component.form.get('textInputValue')?.value).toEqual('');
   });
 
-  it('template should contain an image with class weather-icon', () => {
+  it('template should contain an input with placeholder received from inputs', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('img.weather-icon')).toBeTruthy();
+    expect(compiled.querySelector('input').placeholder).toEqual(testPlaceholder);
   });
 
+  it('template input should contain a search.svg img as a source if loading is false' , () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.input-container img').src).toContain('search.svg');
+    expect(compiled.querySelector('.input-container img')).not.toContain('loading.svg');
+  });
+
+  it('template input should contain a loading.svg img as a source if loading is true' , () => {
+    component.loading = true;
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.input-container img').src).toContain('loading.svg');
+    expect(compiled.querySelector('.input-container img')).not.toContain('search.svg');
+  });
+
+  it('template should contain a custom-select component', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-custom-select')).toBeTruthy();
+  });
 });
