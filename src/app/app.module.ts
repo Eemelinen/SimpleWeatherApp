@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AverageTemperatureCardComponent } from './components/average-temperature-card/average-temperature-card.component';
 import { DailyTemperatureCardComponent } from './components/daily-temperature-card/daily-temperature-card.component';
-import { LocationPickerFormComponent } from './components/location-picker-form/location-picker-form.component';
+import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
@@ -12,7 +12,7 @@ import { MockWeatherProviderService } from './services/weather-provider/mock-wea
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { LocationService } from './services/location/location.service';
 import { MockLocationService } from './services/location/mock-location.service';
-import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
+import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
 import { CustomSelectComponent } from './components/generics/custom-select/custom-select.component';
 import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +34,7 @@ const test = [
     AppComponent,
     AverageTemperatureCardComponent,
     DailyTemperatureCardComponent,
-    LocationPickerFormComponent,
+    LocationPickerComponent,
     GradientBackgroundDirective,
     CustomSelectComponent,
     ClickOutsideDirective,

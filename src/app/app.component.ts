@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
-import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
+import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +40,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateForecast(location: LocationData): void {
-    console.log('location', location)
     this.weatherProvider.updateWeatherForecast(location);
   }
 

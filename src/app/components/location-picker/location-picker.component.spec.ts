@@ -2,7 +2,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocationPickerFormComponent } from './location-picker-form.component';
+import { LocationPickerComponent } from './location-picker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
 import {MockComponents} from 'ng-mocks';
@@ -10,13 +10,13 @@ import {CustomSelectComponent} from '../generics/custom-select/custom-select.com
 import {ReactiveFormComponent} from '../generics/reactive-form/reactive-form.component';
 
 describe('LocationPickerFormComponent', () => {
-  let component: LocationPickerFormComponent;
-  let fixture: ComponentFixture<LocationPickerFormComponent>;
+  let component: LocationPickerComponent;
+  let fixture: ComponentFixture<LocationPickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        LocationPickerFormComponent,
+        LocationPickerComponent,
         MockComponents(
           CustomSelectComponent,
           ReactiveFormComponent
@@ -28,7 +28,7 @@ describe('LocationPickerFormComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LocationPickerFormComponent);
+    fixture = TestBed.createComponent(LocationPickerComponent);
     component = fixture.componentInstance;
     component.countries = mockAvailableCountries;
     fixture.detectChanges();
