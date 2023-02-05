@@ -15,6 +15,8 @@ import { MockLocationService } from './services/location/mock-location.service';
 import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
 import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -39,11 +41,13 @@ const test = [
   imports: [
     ReactiveFormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [
-    ...test,
-    // ...production,
+    // ...test,
+    ...production,
   ],
   bootstrap: [AppComponent]
 })

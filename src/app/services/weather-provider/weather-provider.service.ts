@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
 
   constructor(
     private http: HttpClient,
+    private snackbar: MatSnackBar
   ) {
     super();
   }
@@ -50,22 +52,17 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     this.http
       .get(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .subscribe({
-        next: (res: any) => {
-          this.apiCallSucceeded(res, location);
-        },
-          error: (error) => {
-            this.apiCallFailed();
-          },
-          complete: () => {
-            this.stopLoading();
-          }
+        next: (res: any) => this.apiCallSucceeded(res, location),
+        error: () => this.apiCallFailed(),
+        complete: () => this.stopLoading()
       });
   }
 
   private apiCallFailed() {
-    // todo: Snacbar for unexpected error
+    // todo: Snackbar for unexpected error
     this.emptyWeatherData();
     this.stopLoading();
+    this.openSnackbar("Sorry, something unexpected happened!");
   }
 
   private apiCallSucceeded(res: any, location: LocationData) {
@@ -76,15 +73,21 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     }
   }
 
+  private openSnackbar(message: string): void {
+    this.snackbar.open(message, 'Close', {
+      duration: 1000,
+    });
+  }
+
   private emptyWeatherData() {
     this.weatherData$$.next([]);
   }
 
-  startLoading() {
+  private startLoading() {
     this.loading$$.next(true);
   }
 
-  stopLoading() {
+  private stopLoading() {
     this.loading$$.next(false);
   }
 }
