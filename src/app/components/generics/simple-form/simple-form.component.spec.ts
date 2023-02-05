@@ -1,14 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SimpleFormComponent } from './simple-form.component';
+import { MockComponents } from 'ng-mocks';
+import { CustomSelectComponent } from '../custom-select/custom-select.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
-fdescribe('SimpleFormComponent', () => {
+describe('SimpleFormComponent', () => {
   let component: SimpleFormComponent;
   let fixture: ComponentFixture<SimpleFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SimpleFormComponent ]
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [
+        SimpleFormComponent,
+        MockComponents(
+          CustomSelectComponent
+        )
+      ]
     })
     .compileComponents();
 

@@ -32,7 +32,7 @@ export class SimpleFormComponent {
   }
 
   /**
-   * Emit form data if both dropdownValue and textInputValue are filled in
+   * Emit form data with small delay if both dropdownValue and textInputValue are filled in
    */
   private emitIfFormHasTextData() {
     this.simpleForm.get('textInputValue')?.valueChanges.pipe(
