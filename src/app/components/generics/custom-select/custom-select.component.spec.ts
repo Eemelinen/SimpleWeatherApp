@@ -3,7 +3,7 @@ import { CustomSelectComponent } from './custom-select.component';
 
 const imageFolderUrl = 'assets/images';
 
-fdescribe('CustomSelectComponent', () => {
+describe('CustomSelectComponent', () => {
   let component: CustomSelectComponent;
   let fixture: ComponentFixture<CustomSelectComponent>;
 

@@ -8,6 +8,7 @@ import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
 import {MockComponents} from 'ng-mocks';
 import {CustomSelectComponent} from '../generics/custom-select/custom-select.component';
 import {ReactiveFormComponent} from '../generics/reactive-form/reactive-form.component';
+import {LocationDataModel} from './location-data.model';
 
 describe('LocationPickerFormComponent', () => {
   let component: LocationPickerComponent;
@@ -37,40 +38,20 @@ describe('LocationPickerFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  //
-  // it('should have a form', () => {
-  //   expect(component.locationForm).toBeTruthy();
-  // });
-  //
-  // it('should have a form with a country control', () => {
-  //   expect(component.locationForm.get('country')).toBeTruthy();
-  // });
-  //
-  // it('should have a form with a city control', () => {
-  //   expect(component.locationForm.get('city')).toBeTruthy();
-  // });
-  //
-  // it('should have a form with a country control with first country', () => {
-  //   expect(component.locationForm.get('country')?.value).toEqual(component.countries[0]);
-  // });
-  //
-  // it('should render an input with value of empty string', () => {
-  //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('input').value).toEqual('');
-  // });
-  //
-  // it('should render a select with value of NL', () => {
-  //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('input').value).toEqual('');
-  // });
-  //
-  // it('should have a form with a city control with value NL', () => {
-  //   expect(component.locationForm.get('city')?.value).toEqual('');
-  // });
-  //
-  // it('should contain an image with class weather-icon', () => {
-  //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('img.weather-icon')).toBeTruthy();
-  // });
 
+  it('template should have an image with class weather-icon and alt cloudy', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('img.weather-icon').alt).toEqual('cloudy');
+  });
+
+  it('should have app-reactive-form inside div with form-container class', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.form-container app-reactive-form')).toBeTruthy();
+  });
+
+  it('emitLocationData should emit locationChanged event with LocationDataModel values', () => {
+    const emitSpy = spyOn(component.locationChanged, 'emit');
+    component.emitLocationData({dropdownValue: 'Poland', textInputValue: 'Warsaw'});
+    expect(emitSpy).toHaveBeenCalledWith(new LocationDataModel('Poland', 'Warsaw'));
+  });
 });
