@@ -5,6 +5,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LocationPickerFormComponent } from './location-picker-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
+import {MockComponents} from 'ng-mocks';
+import {CustomSelectComponent} from '../custom-select/custom-select.component';
 
 describe('LocationPickerFormComponent', () => {
   let component: LocationPickerFormComponent;
@@ -12,7 +14,10 @@ describe('LocationPickerFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LocationPickerFormComponent ],
+      declarations: [
+        LocationPickerFormComponent,
+        MockComponents(CustomSelectComponent),
+      ],
       imports: [
         ReactiveFormsModule,
       ],
@@ -61,7 +66,7 @@ describe('LocationPickerFormComponent', () => {
 
   it('should contain an image with class weather-icon', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('img.location__weather-icon')).toBeTruthy();
+    expect(compiled.querySelector('img.weather-icon')).toBeTruthy();
   });
 
 });
