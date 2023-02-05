@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 const testPlaceholder = 'test placeholder';
 
-fdescribe('ReactiveFormComponent', () => {
+describe('ReactiveFormComponent', () => {
   let component: ReactiveFormComponent;
   let fixture: ComponentFixture<ReactiveFormComponent>;
 
