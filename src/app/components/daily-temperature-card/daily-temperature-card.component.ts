@@ -6,16 +6,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./daily-temperature-card.component.scss']
 })
 export class DailyTemperatureCardComponent {
-  @Input() forecast: WeatherData = { date: 'default', temp: 0 };
+  @Input() title: string = '';
+  @Input() temperature: number = 0;
 
-  getTemperature(): number {
-    return Math.round(this.forecast.temp);
+  constructor() {
+    console.log('DailyTemperatureCardComponent constructor')
   }
-
-  getDayName(): string {
-    const day = new Date(this.forecast.date).getDay();
-    const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
-    return days[day];
-  }
-
 }

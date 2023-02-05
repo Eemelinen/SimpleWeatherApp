@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { WeatherApiData } from '../weather-api/weather-api-response';
+import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
 
 type DateObject = { year: string; month: string; day: string };
 
@@ -39,7 +40,12 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
       // return of(mockWeatherApiResponse)
         .pipe(
           map((res: any) => {
-            if (location.city.toLowerCase() !== res.city_name.toLowerCase()) {
+            console.log(res)
+            if (!res) {
+              return null;
+            }
+
+            if (location.city && location.city.toLowerCase() !== res.city_name.toLowerCase()) {
               return null;
             }
             return res;
@@ -76,8 +82,6 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   }
 
   private createWeatherData(res: WeatherApiData): WeatherData[] {
-    console.log(res)
-
     if (!res) {
       return [];
     }
@@ -95,12 +99,12 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     return Math.round((total / res.length));
   }
 
-  private createOneWeekForecast(res: any) {
+  private createOneWeekForecast(res: any): void {
     const days = res.slice(0, 7);
-    const tempNextSevenDays = days.map((day: WeatherData) => {
+    const tempNextSevenDays: WeatherCardData[] = days.map((day: WeatherData) => {
       return {
-        date: this.getDayName(day.date),
-        temp: Math.round(day.temp)
+        title: this.getDayName(day.date),
+        temperatureValue: Math.round(day.temp)
       }
     });
     this.nextSevenDaysTemperature$$.next(tempNextSevenDays);

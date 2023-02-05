@@ -42,7 +42,7 @@ xdescribe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    component.forecasts = [];
+    component.nextSevenDays = [];
     fixture.detectChanges();
   });
 
@@ -59,7 +59,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class average-temperature if weather data is available', () => {
-    component.forecasts = mockForecasts;
+    component.nextSevenDays = mockForecasts;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
   });
@@ -69,7 +69,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class next-week-temperatures if weather data is available', () => {
-    component.forecasts = mockForecasts;
+    component.nextSevenDays = mockForecasts;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toBeTruthy();
   });

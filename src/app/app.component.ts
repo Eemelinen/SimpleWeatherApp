@@ -12,11 +12,10 @@ import { GradientBackgroundDirective } from './directives/bgGradient/gradient-ba
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
   subscriptions: Subscription[] = [];
-  forecasts: WeatherData[] = [];
+  nextSevenDays: WeatherCardData[] = [];
   averageTemperature: number = 0;
   loadingWeatherData: boolean = false;
-
-  averageTemperatureCard: WeatherCardData = {title: '', temperatureValue: 0};
+  averageTemperatureCard: WeatherCardData = { title: '', temperatureValue: 0 };
 
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
@@ -26,13 +25,22 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Todo: Change to reactive version
     this.subscriptions.push(
-      this.weatherProvider.getAverageTemperature().subscribe((data: WeatherCardData) => {
-        this.averageTemperatureCard = data;
-        if (data.title) {
-          this.directive.changeEndpointColor(data.temperatureValue);
-        }
+      this.weatherProvider.getAverageTemperature()
+        .subscribe((data: WeatherCardData) => {
+          this.averageTemperatureCard = data;
+          this.updateBackgroundGradient(data);
+      }),
+      this.weatherProvider.getNextSevenDaysTemperature()
+        .subscribe((data: WeatherCardData[]) => {
+          this.nextSevenDays = data;
       })
     );
+  }
+
+  private updateBackgroundGradient(data: WeatherCardData) {
+    if (data.title) {
+      this.directive.changeEndpointColor(data.temperatureValue);
+    }
   }
 
   ngOnDestroy() {

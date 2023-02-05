@@ -19,18 +19,20 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  getWeatherData(location: LocationDataModel): Observable<WeatherApiData | []> {
+  getWeatherData(location: LocationDataModel): Observable<WeatherApiData | null> {
     return this.http
       .get<WeatherApiData>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .pipe(
-        map((res: WeatherApiData) => new WeatherApiDataModel(res.city_name, res.country_code, res.data)),
+        map((res: WeatherApiData) => {
+          return new WeatherApiDataModel(res?.city_name ?? '', res?.country_code ?? '', res?.data ?? []);
+        }),
         catchError(() => this.apiCallFailed())
       );
   }
 
-  private apiCallFailed(): Observable<[]> {
+  private apiCallFailed(): Observable<null> {
     this.openSnackbar("Sorry. Something unexpected happened.");
-    return of([]);
+    return of(null);
   }
 
   private openSnackbar(message: string): void {
