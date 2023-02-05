@@ -1,9 +1,9 @@
 <ng-container *ngIf="forecast.date !== 'default'">
   <div class="card">
     <p class="info">{{getDayName()}}</p>
-    <div class="data">
+    <div class="temp-container">
       <p class="temperature">{{getTemperature()}}</p>
-      <span class="celcius">°C</span>
+      <span class="unit">°C</span>
     </div>
   </div>
 </ng-container>

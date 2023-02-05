@@ -12,7 +12,7 @@
     opacity: .6;
   }
 
-  .data {
+  .temp-container {
     display: flex;
     color: var(--white-1);
   }
@@ -23,7 +23,7 @@
     line-height: 3.2rem;
   }
 
-  .celcius {
+  .unit {
     font-size: 1.4rem;
     line-height: 2.4rem;
   }

@@ -7,9 +7,9 @@
     (click)="toggleDropdown()"
     (clickOutside)="dropdownOpen = false">
     <div class="button-content">
-      <img class="flag" src="assets/images/flags/{{currentValue.toLowerCase()}}.svg" alt="{{currentValue}}">
+      <img class="dropdown-image" src="{{imageFolderUrl}}/{{currentValue.toLowerCase()}}.svg" alt="{{currentValue}}">
       <span class="dropdown-value">{{currentValue}}</span>
-      <img class="chevron" src="assets/images/down.svg" alt="select">
+      <img class="chevron" src="../../../../assets/images/down.svg" alt="select">
     </div>
   </button>
 
@@ -20,7 +20,7 @@
         (click)="select(o)"
         role="option">
         <div class="list-item-content">
-          <img class="flag" src="assets/images/flags/{{o.toLowerCase()}}.svg" alt="{{o}}">
+          <img class="dropdown-image" src="{{imageFolderUrl}}/{{o.toLowerCase()}}.svg" alt="{{o}}">
           <span>{{o}}</span>
         </div>
     </li>

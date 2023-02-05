@@ -40,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateForecast(location: LocationData): void {
+    console.log('location', location)
     this.weatherProvider.updateWeatherForecast(location);
   }
 

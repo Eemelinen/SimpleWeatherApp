@@ -12,10 +12,11 @@ export type SelectOption = {
   styleUrls: ['./custom-select.component.scss']
 })
 export class CustomSelectComponent {
-  @Input() options = ['NL'];
+  @Input() options = ['option 1'];
+  @Input() imageFolderUrl = 'assets/images/';
   @Output() currentValueChange = new EventEmitter();
 
-  public currentValue: string = 'NL';
+  public currentValue: string = this.options[0];
   public dropdownOpen: boolean = false;
   public get dropdownElement(): Element {return this.elem.nativeElement.querySelector('.dropdown-list')}
 

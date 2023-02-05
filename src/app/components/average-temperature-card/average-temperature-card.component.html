@@ -1,9 +1,9 @@
 <ng-container *ngIf="forecasts.length">
   <div class="card">
-    <p class="info">{{getDates()}}</p>
-    <div class="data">
-      <p class="temperature">{{averageTemperature}}</p>
-      <span class="celcius">°C</span>
+    <p class="info">{{timePeriod}}</p>
+    <div class="temp-container">
+      <p class="temperature">{{temperature}}</p>
+      <span class="unit">°C</span>
     </div>
   </div>
 </ng-container>

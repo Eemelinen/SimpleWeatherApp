@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 type DateObject = { year: string; month: string; day: string };
 
@@ -7,13 +7,19 @@ type DateObject = { year: string; month: string; day: string };
   templateUrl: './average-temperature-card.component.html',
   styleUrls: ['./average-temperature-card.component.scss']
 })
-export class AverageTemperatureCardComponent {
+export class AverageTemperatureCardComponent implements OnInit {
   @Input() forecasts: WeatherData[] = [];
-  @Input() averageTemperature: number = 9999;
+  @Input() temperature: number = 0;
+  timePeriod: string = '';
 
-  getDates(): string {
+  // Todo: remove when service handles getDates
+  ngOnInit(): void {
+    this.getDates();
+  }
+
+  getDates(): void {
     const dateRange = this.getDateRange(this.forecasts);
-    return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
+    this.timePeriod = this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
   private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {

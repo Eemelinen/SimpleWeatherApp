@@ -1,43 +1,31 @@
-/// <reference path="../../../../types.d.ts" />
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocationPickerFormComponent } from './location-picker-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
-import {MockComponents} from 'ng-mocks';
-import {CustomSelectComponent} from '../generics/custom-select/custom-select.component';
+import { SimpleFormComponent } from './simple-form.component';
 
-describe('LocationPickerFormComponent', () => {
-  let component: LocationPickerFormComponent;
-  let fixture: ComponentFixture<LocationPickerFormComponent>;
+fdescribe('SimpleFormComponent', () => {
+  let component: SimpleFormComponent;
+  let fixture: ComponentFixture<SimpleFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        LocationPickerFormComponent,
-        MockComponents(CustomSelectComponent),
-      ],
-      imports: [
-        ReactiveFormsModule,
-      ],
+      declarations: [ SimpleFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LocationPickerFormComponent);
+    fixture = TestBed.createComponent(SimpleFormComponent);
     component = fixture.componentInstance;
-    component.countries = mockAvailableCountries;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  //
-  // it('should have a form', () => {
-  //   expect(component.locationForm).toBeTruthy();
-  // });
-  //
+
+
+  it('should have a form', () => {
+    expect(component.simpleForm).toBeTruthy();
+  });
+
   // it('should have a form with a country control', () => {
   //   expect(component.locationForm.get('country')).toBeTruthy();
   // });

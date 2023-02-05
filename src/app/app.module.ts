@@ -13,10 +13,11 @@ import { AbstractLocationService } from './services/location/abstract-location.s
 import { LocationService } from './services/location/location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 import { GradientBackgroundDirective } from './directives/bg-gradient/gradient-background.directive';
-import { CustomSelectComponent } from './components/custom-select/custom-select.component';
+import { CustomSelectComponent } from './components/generics/custom-select/custom-select.component';
 import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SimpleFormComponent } from './components/generics/simple-form/simple-form.component';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -37,6 +38,7 @@ const test = [
     GradientBackgroundDirective,
     CustomSelectComponent,
     ClickOutsideDirective,
+    SimpleFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -46,8 +48,8 @@ const test = [
     MatSnackBarModule,
   ],
   providers: [
-    ...test,
-    // ...production,
+    // ...test,
+    ...production,
   ],
   bootstrap: [AppComponent]
 })

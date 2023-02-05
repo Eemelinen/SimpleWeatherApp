@@ -4,27 +4,37 @@
     <img class="weather-icon" src="assets/images/cloudy-1.svg" alt="cloudy">
   </div>
 
-  <form class="form" [formGroup]="locationForm">
+  <div class="form-container">
+    <app-simple-form
+      [dropdownImageFolder]="'assets/images/flags'"
+      [dropdownOptions]="countries"
+      [placeholder]="'Please enter your location...'"
+      [loading]="loading"
+      (valuesChanged)="emitLocationData($event)"
+    ></app-simple-form>
+  </div>
 
-    <app-custom-select [options]="countries" (currentValueChange)="setCountry($event)"></app-custom-select>
+<!--  <form class="form" [formGroup]="locationForm">-->
 
-    <div class="input-container">
-      <input
-        type="text"
-        id="city"
-        formControlName="city"
-        class="form-element input"
-        name="city"
-        placeholder="Please enter your location...">
+<!--    <app-custom-select [options]="countries" [imageFolderUrl]="'assets/images/flags'" (currentValueChange)="setCountry($event)"></app-custom-select>-->
 
-      <img *ngIf="!loading; else loader"
-        class="search-icon"
-        [ngClass]="{ opaque: !locationForm.get('city')?.value }"
-        src="../../../assets/images/search.svg" alt="search">
-        <ng-template #loader>
-          <img class="search-icon rotate" src="assets/images/loading.svg" alt="loader">
-        </ng-template>
-    </div>
+<!--    <div class="input-container">-->
+<!--      <input-->
+<!--        type="text"-->
+<!--        id="city"-->
+<!--        formControlName="city"-->
+<!--        class="form-element input"-->
+<!--        name="city"-->
+<!--        placeholder="Please enter your location...">-->
 
-  </form>
+<!--      <img *ngIf="!loading; else loader"-->
+<!--        class="search-icon"-->
+<!--        [ngClass]="{ opaque: !locationForm.get('city')?.value }"-->
+<!--        src="../../../assets/images/search.svg" alt="search">-->
+<!--        <ng-template #loader>-->
+<!--          <img class="search-icon rotate" src="assets/images/loading.svg" alt="loader">-->
+<!--        </ng-template>-->
+<!--    </div>-->
+
+<!--  </form>-->
 </div>
