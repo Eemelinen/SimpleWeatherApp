@@ -6,7 +6,7 @@
   justify-content: center;
   font-weight: 600;
 
-  &__info {
+  .info {
     line-height: 2.4rem;
     font-size: 1.2rem;
     letter-spacing: 0.06em;
@@ -14,18 +14,18 @@
     margin-bottom: 1.4rem;
   }
 
-  &__data {
+  .data {
     display: flex;
     color: var(--white-1);
   }
 
-  &__temperature {
+  .temperature {
     font-size: 12rem;
     line-height: 12rem;
     margin-right: -1.1rem;
   }
 
-  &__celcius {
+  .celcius {
     font-size: 2.4rem;
     line-height: 3.2rem;
   }

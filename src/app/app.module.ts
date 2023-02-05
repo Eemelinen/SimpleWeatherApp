@@ -46,8 +46,8 @@ const test = [
     MatSnackBarModule,
   ],
   providers: [
-    // ...test,
-    ...production,
+    ...test,
+    // ...production,
   ],
   bootstrap: [AppComponent]
 })
