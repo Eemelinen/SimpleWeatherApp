@@ -22,7 +22,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    * A list of RGB Value tuples used to define the gradient
    */
   @Input()
-  colors: RGBValue[] = [[16, 47, 126], [12, 141, 214], [26, 160, 236], [96, 198, 255], [155, 219, 255], [180, 222, 218], [255, 214, 107], [255, 193, 120], [254, 146, 85]];
+  colors: RGBValue[] = [[16, 47, 126], [14,106, 181], [12, 141, 214], [26, 160, 236], [96, 198, 255], [155, 219, 255], [180, 222, 218], [255, 214, 107], [255, 193, 120], [254, 146, 85]];
 
   /**
    * The tick speed for calling the update of the gradient
@@ -34,13 +34,13 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    * The multiplier for the gradient speed
    */
   @Input()
-  gradientSpeed = 0.0015;
+  gradientSpeed = 0.0025;
 
   private direction = InterpolationDirection.FORWARD;
   private step$ = new BehaviorSubject<number>(0);
   private componentDestroyed$ = new Subject<boolean>();
   private gradientRunning$ = new BehaviorSubject<boolean>(true);
-  private endColorIndex: number = 6;
+  private endColorIndex: number = 8;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
@@ -163,22 +163,24 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     switch (true) {
       case averageTemperature <= -40:
         return 0;
-      case averageTemperature < -30:
+      case averageTemperature < -33:
         return 1;
-      case averageTemperature < -20:
+      case averageTemperature < -30:
         return 2;
-      case averageTemperature < -10:
+      case averageTemperature < -20:
         return 3;
-      case averageTemperature < 0:
+      case averageTemperature < -10:
         return 4;
-      case averageTemperature < 10:
+      case averageTemperature < 0:
         return 5;
-      case averageTemperature < 20:
+      case averageTemperature < 10:
         return 6;
-      case averageTemperature < 30:
+      case averageTemperature < 20:
         return 7;
-      case averageTemperature >= 40:
+      case averageTemperature >= 30:
         return 8;
+      case averageTemperature >= 40:
+        return 9;
       default:
         return 6;
     }
