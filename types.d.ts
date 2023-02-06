@@ -1,5 +1,5 @@
 type WeatherData = {
-  date: string;
+  datetime: string;
   temp: number;
 }
 

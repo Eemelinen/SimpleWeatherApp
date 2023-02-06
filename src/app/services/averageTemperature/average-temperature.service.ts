@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { WeatherApiService } from '../weather-api/weather-api.service';
 import { AbstractAverageTemperatureService } from './abstract-average-temperature.service';
-import { WeatherApiData } from '../weather-api/weather-api-response';
+import {WeatherApiData, WeatherApiDataModel} from '../weather-api/weather-api-response';
 import {AbstractWeatherApiService} from '../weather-api/abstract-weather-api-service';
 
 type DateObject = { year: string; month: string; day: string };
@@ -17,10 +17,9 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
   constructor(private weatherApiService: AbstractWeatherApiService) {
     super(weatherApiService);
     this.weatherApiService.getCurrentForecast().subscribe((forecast: WeatherApiData) => {
-      console.log(forecast)
       // Todo: check if this is how api service works
-      if (forecast.city_name && !forecast.country_code && !forecast.data.length) {
-        this.averageTemperature$$.next(this.createAverageTempValue(forecast));
+      if (forecast.city_name && forecast.country_code && forecast.data.length) {
+        this.averageTemperature$$.next(this.createAverageTempValue(forecast.data));
       }
     });
   }
@@ -40,23 +39,26 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     // );
   }
 
-  private createAverageTempValue(res: any): WeatherCardData {
-    const dateRange = this.getDates(res);
-    const averageTemp = this.calculateAverageTemperature(res);
+  // Todo: refactore these methods
+
+  private createAverageTempValue(forecasts: any): WeatherCardData
+  {
+    const dateRange = this.getDates(forecasts);
+    const averageTemp = this.calculateAverageTemperature(forecasts);
     return {
       title: dateRange,
       temperatureValue: averageTemp
     };
   }
 
-  getDates(data: WeatherData[]): string {
-    const dateRange = this.getDateRange(data);
+  getDates(forecasts: any): string {
+    const dateRange = this.getDateRange(forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private calculateAverageTemperature(res: any): number {
-    const total = res.reduce((acc: any, day: WeatherData) => acc + day.temp, 0);
-    return Math.round((total / res.length));
+  private calculateAverageTemperature(forecasts: any): number {
+    const total = forecasts.reduce((acc: any, day: WeatherData) => acc + day.temp, 0);
+    return Math.round((total / forecasts.length));
   }
 
   private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
@@ -74,9 +76,9 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     return `${firstMonth} ${firstDate.day} - ${lastDate.day} ${lastDate.year}`;
   }
 
-  private getDateRange(data: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
-    const firstDate = data[0].date;
-    const lastDate = data[data.length - 1].date;
+  private getDateRange(forecasts: any[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+    const firstDate = forecasts[0].datetime;
+    const lastDate =  forecasts[forecasts.length - 1].datetime;
 
     const [fYear, fMonth, fDay] = firstDate.split("-");
     const [eYear, eMonth, eDay] = lastDate.split("-");

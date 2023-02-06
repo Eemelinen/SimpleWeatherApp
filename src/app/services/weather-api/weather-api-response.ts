@@ -20,7 +20,7 @@ export class WeatherApiDataModel implements WeatherApiData {
   constructor(
     public city_name: string,
     public country_code: string,
-    public data: [
+    public data: [] | [
       temp: number,
       datetime: string
     ]

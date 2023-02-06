@@ -82,9 +82,10 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
       return [];
     }
 
-    return res.data.map((day: any) => {
+    // @ts-ignore
+    return res.data.map((day: WeatherData) => {
       return {
-        date: day.datetime,
+        datetime: day.datetime,
         temp: day.temp
       }
     })
@@ -99,7 +100,7 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     const days = res.slice(0, 7);
     const tempNextSevenDays: WeatherCardData[] = days.map((day: WeatherData) => {
       return {
-        title: this.getDayName(day.date),
+        title: this.getDayName(day.datetime),
         temperatureValue: Math.round(day.temp)
       }
     });
@@ -138,8 +139,8 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   }
 
   private getDateRange(data: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
-    const firstDate = data[0].date;
-    const lastDate = data[data.length - 1].date;
+    const firstDate = data[0].datetime;
+    const lastDate = data[data.length - 1].datetime;
 
     const [fYear, fMonth, fDay] = firstDate.split("-");
     const [eYear, eMonth, eDay] = lastDate.split("-");

@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {
           this.nextWeekForecast = data;
-      })
+        })
     );
   }
 

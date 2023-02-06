@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class WeatherApiService extends AbstractWeatherApiService {
-  private currentForecast$$ = new BehaviorSubject<WeatherApiData>({city_name: '', country_code: '', data: []});
+  private currentForecast$$ = new BehaviorSubject<WeatherApiDataModel>({city_name: '', country_code: '', data: []});
   private currentForecast$ = this.currentForecast$$.asObservable();
 
   constructor(
@@ -36,7 +36,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
       .pipe(
         tap((res: any) => {
           if (res) {
-            this.currentForecast$$.next(res);
+            this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
             console.log(this.currentForecast$$.value)
           }
           return null;
