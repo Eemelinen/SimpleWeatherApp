@@ -12,10 +12,9 @@ import { GradientBackgroundDirective } from './directives/bgGradient/gradient-ba
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
   subscriptions: Subscription[] = [];
-  nextSevenDays: WeatherCardData[] = [];
-  averageTemperature: number = 0;
+  nextWeekForecast: WeatherCardData[] = [];
+  averageTempForecast: WeatherCardData = { title: '', temperatureValue: 0 };
   loadingWeatherData: boolean = false;
-  averageTemperatureCard: WeatherCardData = { title: '', temperatureValue: 0 };
 
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
@@ -27,12 +26,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.weatherProvider.getAverageTemperature()
         .subscribe((data: WeatherCardData) => {
-          this.averageTemperatureCard = data;
+          console.log(data)
+          this.averageTempForecast = data;
           this.updateBackgroundGradient(data);
       }),
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {
-          this.nextSevenDays = data;
+          this.nextWeekForecast = data;
       })
     );
   }

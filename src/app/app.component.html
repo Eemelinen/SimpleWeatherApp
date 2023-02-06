@@ -7,20 +7,20 @@
         [loading]="loadingWeatherData"></app-location-picker>
     </section>
 
-    <ng-container *ngIf="averageTemperatureCard.temperatureValue && averageTemperatureCard.title">
+    <ng-container *ngIf="averageTempForecast.title">
       <section class="average-temperature">
         <app-temperature-card
           [bigCard]="true"
-          [title]="averageTemperatureCard.title"
-          [temperature]="averageTemperatureCard.temperatureValue">
+          [title]="averageTempForecast.title"
+          [temperature]="averageTempForecast.temperatureValue">
         </app-temperature-card>
       </section>
     </ng-container>
 
-    <ng-container *ngIf="nextSevenDays.length">
+    <ng-container *ngIf="nextWeekForecast.length">
       <section class="next-week-temperatures">
         <app-temperature-card
-          *ngFor="let forecast of nextSevenDays"
+          *ngFor="let forecast of nextWeekForecast"
           [title]="forecast.title"
           [temperature]="forecast.temperatureValue">
         </app-temperature-card>

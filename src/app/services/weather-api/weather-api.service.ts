@@ -24,6 +24,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
       .get<WeatherApiData>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .pipe(
         map((res: WeatherApiData) => {
+          console.log(res)
           return new WeatherApiDataModel(
             res?.city_name ?? '',
             res?.country_code ?? '',
