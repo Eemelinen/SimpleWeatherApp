@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, Subscription, tap} from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
@@ -32,11 +32,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.countries = this.locationService.getAvailableCountries();
 
     this.subscriptions.push(
-      this.averageTempService.get()
+      this.averageTempService.get().pipe(
+        tap((data: WeatherCardData) => this.loadingWeatherData = false))
         .subscribe((data: WeatherCardData) => {
           this.averageTempForecast = data;
           this.updateBackgroundGradient(data);
-          this.loadingWeatherData = false;
       }),
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {
