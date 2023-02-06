@@ -19,12 +19,15 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  getWeatherData(location: LocationDataModel): Observable<WeatherApiData | null> {
+  getWeatherData(location: LocationDataModel): Observable<WeatherApiDataModel | null> {
     return this.http
       .get<WeatherApiData>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .pipe(
         map((res: WeatherApiData) => {
-          return new WeatherApiDataModel(res?.city_name ?? '', res?.country_code ?? '', res?.data ?? []);
+          return new WeatherApiDataModel(
+            res?.city_name ?? '',
+            res?.country_code ?? '',
+            res?.data ?? []);
         }),
         catchError(() => this.apiCallFailed())
       );
