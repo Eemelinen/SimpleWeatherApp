@@ -4,11 +4,10 @@ import { AppComponent } from './app.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 import { MockComponents } from 'ng-mocks';
 import { mockForecasts } from '../mocks/mock-forecasts';
-import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
-import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
+import { of } from 'rxjs';
 
 xdescribe('AppComponent', () => {
   let component: AppComponent;
@@ -26,10 +25,6 @@ xdescribe('AppComponent', () => {
       ],
       providers: [
         {
-          provide: AbstractWeatherProviderService,
-          useClass: MockWeatherProviderService
-        },
-        {
           provide: AbstractLocationService,
           useClass: MockLocationService
         }
@@ -38,7 +33,7 @@ xdescribe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    component.nextWeekForecast$ = [];
+    component.nextWeekForecast$ = of(mockForecasts);
     fixture.detectChanges();
   });
 
@@ -55,7 +50,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class average-temperature if weather data is available', () => {
-    component.nextWeekForecast$ = [mockForecasts[0]];
+    component.nextWeekForecast$ = of([mockForecasts[0]]);
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
   });
@@ -65,7 +60,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class next-week-temperatures if weather data is available', () => {
-    component.nextWeekForecast$ = mockForecasts;
+    component.nextWeekForecast$ = of(mockForecasts);
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toBeTruthy();
   });

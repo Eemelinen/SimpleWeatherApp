@@ -4,12 +4,8 @@ import { AppComponent } from './app.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
-import { WeatherProviderService } from './services/weather-provider/weather-provider.service';
-import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { LocationService } from './services/location/location.service';
-import { MockLocationService } from './services/location/mock-location.service';
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
 import { CustomSelectComponent } from './components/generics/custom-select/custom-select.component';
 import { ClickOutsideDirective } from './directives/clickOutside/click-outside.directive';
@@ -25,16 +21,10 @@ import { AbstractNextWeekWeatherService } from './services/next-week-weather/abs
 import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
 
 const production = [
-  { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
   { provide: AbstractLocationService, useClass: LocationService },
   { provide: AbstractWeatherApiService, useClass: WeatherApiService },
   { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
   { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
-];
-
-const test = [
-  { provide: AbstractWeatherProviderService, useClass: MockWeatherProviderService },
-  { provide: AbstractLocationService, useClass: MockLocationService },
 ];
 
 @NgModule({
@@ -55,7 +45,6 @@ const test = [
     MatSnackBarModule,
   ],
   providers: [
-    // ...test,
     ...production,
   ],
   bootstrap: [AppComponent]
