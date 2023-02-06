@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { AbstractWeatherProviderService } from './abstract-weather-provider.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { WeatherApiData } from '../weather-api/weather-api-response';
-import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
 
 type DateObject = { year: string; month: string; day: string };
 
@@ -27,17 +25,16 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   }
 
   constructor(
-    protected override http: HttpClient,
     protected override apiService: AbstractWeatherApiService
   ) {
-    super(http, apiService);
+    super(apiService);
     this.getWeather({country: "NL", city: "Amsterdam"});
   }
 
   getWeather(location: LocationData): Observable<any> {
     if (location.city && location.country) {
-      // return this.apiService.getWeatherData(location)
-      return of(mockWeatherApiResponse)
+      return this.apiService.getWeatherData(location)
+      // return of(mockWeatherApiResponse)
         .pipe(
           map((res: any) => {
             if (!res) {

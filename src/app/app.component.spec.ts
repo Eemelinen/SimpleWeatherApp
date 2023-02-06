@@ -1,17 +1,14 @@
 /// <reference path="../../types.d.ts" />
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { DailyTemperatureCardComponent } from './components/daily-temperature-card/daily-temperature-card.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
-import {
-  AverageTemperatureCardComponent
-} from './components/average-temperature-card/average-temperature-card.component';
 import { MockComponents } from 'ng-mocks';
 import { mockForecasts } from '../mocks/mock-forecasts';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { MockWeatherProviderService } from './services/weather-provider/mock-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
+import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
 
 xdescribe('AppComponent', () => {
   let component: AppComponent;
@@ -23,8 +20,7 @@ xdescribe('AppComponent', () => {
       declarations: [
         AppComponent,
         MockComponents(
-          DailyTemperatureCardComponent,
-          AverageTemperatureCardComponent,
+          TemperatureCardComponent,
           LocationPickerComponent
         ),
       ],

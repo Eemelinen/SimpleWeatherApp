@@ -18,12 +18,6 @@ describe('WeatherProviderService', () => {
       ],
       providers: [
         {
-          provide: MatSnackBar,
-          useValue: {
-            open: () => 'Snackbar opened'
-          }
-        },
-        {
           provide: AbstractWeatherApiService,
           useValue: {
             getWeatherData: () => of(mockWeatherApiResponse)
