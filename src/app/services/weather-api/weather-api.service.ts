@@ -37,7 +37,8 @@ export class WeatherApiService extends AbstractWeatherApiService {
       return;
     }
 
-    this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=${days}`)
+    this.http.get<WeatherApiResponse>(
+      `${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=${days}`)
       .subscribe({
         next: (res: WeatherApiResponse) => this.handleSuccess(res, location),
         error: (err: any) => this.handleError(err)
@@ -45,7 +46,10 @@ export class WeatherApiService extends AbstractWeatherApiService {
   }
 
   private handleSuccess(res: WeatherApiResponse, location: LocationDataModel) {
-    if (res && res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
+    if (
+      res
+      && res.city_name.toLowerCase() === location.city.toLowerCase()
+      && res.country_code.toLowerCase() === location.country.toLowerCase()) {
       this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
     } else {
       this.currentForecast$$.next(defaultWeatherData);
