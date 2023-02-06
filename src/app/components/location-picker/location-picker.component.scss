@@ -17,5 +17,14 @@
     align-items: center;
     padding-left: 2.2rem;
     height: 9.2rem;
+
+    @media only screen and (max-width: 600px) {
+      padding-left: 1.5rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-left: 1rem;
+    }
   }
+
 }

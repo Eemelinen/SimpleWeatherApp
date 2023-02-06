@@ -6,16 +6,25 @@
   height: 100vh;
 
   .content {
-    width: 63.2rem;
+    width: 65.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    .location-selection {
-      width: 100%;
+    @media only screen and (max-width: 900px) {
+      width: 50rem;
     }
 
-    .average-temperature {
+    @media only screen and (max-width: 600px) {
+      width: 40rem;
+    }
+
+    @media only screen and (max-width: 400px) {
+      width: 32rem;
+    }
+
+    .location-selection {
+      width: 100%;
     }
 
     .next-week-temperatures {
