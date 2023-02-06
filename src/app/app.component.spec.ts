@@ -8,8 +8,10 @@ import { AbstractLocationService } from './services/location/abstract-location.s
 import { MockLocationService } from './services/location/mock-location.service';
 import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
 import { of } from 'rxjs';
+import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
+import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 
-xdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
@@ -27,13 +29,26 @@ xdescribe('AppComponent', () => {
         {
           provide: AbstractLocationService,
           useClass: MockLocationService
-        }
+        },
+        {
+          provide: AbstractAverageTemperatureService,
+          useValue: {
+            get: () => of(mockForecasts[0])
+          }
+        },
+        {
+          provide: AbstractNextWeekWeatherService,
+          useValue: {
+            get: () => {
+              return of(mockForecasts)
+            }
+          }
+        },
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    component.nextWeekForecast$ = of(mockForecasts);
     fixture.detectChanges();
   });
 
@@ -46,22 +61,22 @@ xdescribe('AppComponent', () => {
   });
 
   it('Should NOT show average-temperature if NO weather data is available', () => {
+    component.averageTempForecast$ = of({ title: '', temperatureValue: 0 });
+    fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.average-temperature')).toEqual(null);
   });
 
-  it('should have a section with class average-temperature if weather data is available', () => {
-    component.nextWeekForecast$ = of([mockForecasts[0]]);
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
-  });
-
   it('Should NOT show next-week-temperatures if no weather data is available', () => {
+    component.nextWeekForecast$ = of([]);
+    fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toEqual(null);
   });
 
-  it('should have a section with class next-week-temperatures if weather data is available', () => {
-    component.nextWeekForecast$ = of(mockForecasts);
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toBeTruthy();
+  it('should have a section with class next-week-temperatures if averageTempForecast$ has resolved',() => {
+    expect(fixture.nativeElement.querySelector('.next-week-temperatures')).toBeTruthy();
+  });
+
+  it('should have a section with class average-temperature if averageTemp is available and has a title', () => {
+    expect(fixture.nativeElement.querySelector('.average-temperature')).toBeTruthy();
   });
 });

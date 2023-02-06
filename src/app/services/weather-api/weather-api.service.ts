@@ -45,7 +45,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
       });
   }
 
-  private handleSuccess(res: WeatherApiResponse, location: LocationDataModel) {
+  private handleSuccess(res: WeatherApiResponse, location: LocationDataModel):void {
     if (
       res
       && res.city_name.toLowerCase() === location.city.toLowerCase()
@@ -56,7 +56,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     }
   }
 
-  private handleError() {
+  private handleError(): void {
     this.openSnackbar("Hmm. Something unexpected happened while fetching your weather. Please try again");
     this.currentForecast$$.next(defaultWeatherData);
   }

@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { WeatherApiResponse } from '../weather-api/weather-api-response';
 import { AbstractNextWeekWeatherService } from './abstract-next-week-weather.service';
 
-const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+const days = [ 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 
 @Injectable({
   providedIn: 'root'

@@ -44,7 +44,11 @@ export class AppComponent implements OnInit {
 
   private updateBackgroundGradient(data: WeatherCardData): void {
     if (data.title) {
-      this.directive.changeEndpointColor(data.temperatureValue);
+      try {
+        this.directive.changeEndpointColor(data.temperatureValue);
+      } catch (e) {
+        return;
+      }
     }
   }
 }

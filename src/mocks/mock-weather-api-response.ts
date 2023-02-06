@@ -1,3 +1,5 @@
+import {WeatherApiResponse} from '../app/services/weather-api/weather-api-response';
+
 export const mockWeatherApiResponse = {
   "city_name": "Amsterdam",
   "country_code": "NL",
