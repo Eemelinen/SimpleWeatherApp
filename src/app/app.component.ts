@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import {Observable, Subscription, tap} from 'rxjs';
+import {Observable, of, Subscription, tap} from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
@@ -7,6 +7,7 @@ import {AverageTemperatureService} from './services/averageTemperature/average-t
 import {AbstractWeatherApiService} from './services/weather-api/abstract-weather-api-service';
 import {WeatherApiData} from './services/weather-api/weather-api-response';
 
+const defaultAverageTemp: WeatherCardData = { title: '', temperatureValue: 0 };
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
   subscriptions: Subscription[] = [];
   nextWeekForecast: WeatherCardData[] = [];
-  averageTempForecast: WeatherCardData = { title: '', temperatureValue: 0 };
+  averageTempForecast$: Observable<WeatherCardData> = of(defaultAverageTemp);
   loadingWeatherData: boolean = false;
   countries: string[] = [];
 
@@ -31,13 +32,16 @@ export class AppComponent implements OnInit, OnDestroy {
     // Todo: Change to reactive version
     this.countries = this.locationService.getAvailableCountries();
 
+    this.averageTempForecast$ = this.averageTempService.get().pipe(
+      tap((data: WeatherCardData) => {
+        this.loadingWeatherData = false;
+        this.updateBackgroundGradient(data);
+      }));
+      // .subscribe((data: WeatherCardData) => {
+      //   this.averageTempForecast = data;
+      //   this.updateBackgroundGradient(data);
+      // }),
     this.subscriptions.push(
-      this.averageTempService.get().pipe(
-        tap((data: WeatherCardData) => this.loadingWeatherData = false))
-        .subscribe((data: WeatherCardData) => {
-          this.averageTempForecast = data;
-          this.updateBackgroundGradient(data);
-      }),
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {
           this.nextWeekForecast = data;
@@ -50,17 +54,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateForecast(location: LocationData): void {
-    if (!location.city || !location.country) {
-      this.clearComponentData();
-    } else {
+    if (location.city && location.country) {
       this.loadingWeatherData = true;
       this.weatherApiService.updateWeatherData(location);
     }
-  }
-
-  private clearComponentData(): void {
-    this.nextWeekForecast = [];
-    this.averageTempForecast = {title: '', temperatureValue: 0};
   }
 
   private updateBackgroundGradient(data: WeatherCardData): void {
