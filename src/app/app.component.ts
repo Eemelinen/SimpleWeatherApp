@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
   nextWeekForecast$: Observable<WeatherCardData[]> = of([]);
   averageTempForecast$: Observable<WeatherCardData> = of(defaultAverageTemp);
-  loadingWeatherData: boolean = false;
   countries: string[] = [];
+  loadingWeatherData = false;
 
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.countries = this.locationService.getAvailableCountries();
     this.nextWeekForecast$ = this.nextWeekForecastService.get();
-
     this.averageTempForecast$ = this.averageTempService.get().pipe(
       tap((data: WeatherCardData) => {
         this.loadingWeatherData = false;
