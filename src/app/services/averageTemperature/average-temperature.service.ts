@@ -11,17 +11,9 @@ type DateObject = { year: string; month: string; day: string };
   providedIn: 'root'
 })
 export class AverageTemperatureService extends AbstractAverageTemperatureService {
-  // private averageTemperature$$ = new BehaviorSubject<WeatherCardData>({title: '', temperatureValue: 0});
-  // private averageTemperature$ = this.averageTemperature$$.asObservable();
 
   constructor(private weatherApiService: AbstractWeatherApiService) {
     super(weatherApiService);
-    // this.weatherApiService.getCurrentForecast().subscribe((forecast: WeatherApiData) => {
-    //   // Todo: check if this is how api service works
-    //   if (forecast.city_name && forecast.country_code && forecast.data.length) {
-    //     this.averageTemperature$$.next(this.createAverageTempValue(forecast.data));
-    //   }
-    // });
   }
 
   get(): Observable<WeatherCardData> {

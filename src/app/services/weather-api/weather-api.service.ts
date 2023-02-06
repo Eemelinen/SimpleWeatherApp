@@ -26,32 +26,48 @@ export class WeatherApiService extends AbstractWeatherApiService {
     return this.currentForecast$;
   }
 
-  updateWeatherData(locationData: LocationDataModel): Observable<WeatherApiData | null> {
-    return of(null);
-  }
+  updateWeatherData(location: LocationDataModel): void {
+    this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`).subscribe((res: any) => {
+      if (res) {
+        if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
+          this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
+        } else {
+          this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
+        }
+      }
+    });
 
-  getWeatherData(location: LocationDataModel): Observable<WeatherApiData | null> {
-    return this.http
-      .get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
-      .pipe(
-        tap((res: any) => {
-          if (res) {
-            if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
-              this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
-            } else {
-              this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
-            }
-          }
-        }),
-        map((res: WeatherApiResponse) => {
-          console.log(res)
-          return new WeatherApiDataModel(
-            res?.city_name ?? '',
-            res?.country_code ?? '',
-            res?.data ?? []);
-        }),
-        catchError(() => this.apiCallFailed())
-      );
+  // // getWeatherData(location: LocationDataModel): Observable<WeatherApiData | null> {
+  // public getWeatherData(location: LocationDataModel): void {
+  //   this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`).subscribe((res: any) => {
+  //     if (res) {
+  //       if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
+  //         this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
+  //       } else {
+  //         this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
+  //       }
+  //     }
+  //   });
+
+      // .pipe(
+      //   tap((res: any) => {
+      //     if (res) {
+      //       if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
+      //         this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
+      //       } else {
+      //         this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
+      //       }
+      //     }
+      //   }),
+      //   map((res: WeatherApiResponse) => {
+      //     console.log(res)
+      //     return new WeatherApiDataModel(
+      //       res?.city_name ?? '',
+      //       res?.country_code ?? '',
+      //       res?.data ?? []);
+      //   }),
+      //   catchError(() => this.apiCallFailed())
+      // );
   }
 
   private apiCallFailed(): Observable<null> {

@@ -32,39 +32,40 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
   }
 
   getWeather(location: LocationData): Observable<any> {
-    if (location.city && location.country) {
-      return this.apiService.getWeatherData(location)
-      // return of(mockWeatherApiResponse)
-        .pipe(
-          map((res: any) => {
-            if (!res) {
-              return null;
-            }
-
-            if (location.city && location.city.toLowerCase() !== res.city_name.toLowerCase()) {
-              return null;
-            }
-            return res;
-          }),
-          map((res: any) => {
-            if (res) {
-              return this.createWeatherData(res);
-            }
-            return null;
-          }),
-          tap((res: any) => {
-            if (res) {
-              this.createOneWeekForecast(res);
-              this.createAverageTempValue(res);
-            } else {
-              this.emptyWeatherData();
-            }
-          }),
-        );
-    } else {
-      this.emptyWeatherData();
-      return of([]);
-    }
+    return of([]);
+    // if (location.city && location.country) {
+    //   return this.apiService.getWeatherData(location)
+    //   // return of(mockWeatherApiResponse)
+    //     .pipe(
+    //       map((res: any) => {
+    //         if (!res) {
+    //           return null;
+    //         }
+    //
+    //         if (location.city && location.city.toLowerCase() !== res.city_name.toLowerCase()) {
+    //           return null;
+    //         }
+    //         return res;
+    //       }),
+    //       map((res: any) => {
+    //         if (res) {
+    //           return this.createWeatherData(res);
+    //         }
+    //         return null;
+    //       }),
+    //       tap((res: any) => {
+    //         if (res) {
+    //           this.createOneWeekForecast(res);
+    //           this.createAverageTempValue(res);
+    //         } else {
+    //           this.emptyWeatherData();
+    //         }
+    //       }),
+    //     );
+    // } else {
+    //   this.emptyWeatherData();
+    //   return of([]);
+    // }
   }
 
   private createAverageTempValue(res: any) {

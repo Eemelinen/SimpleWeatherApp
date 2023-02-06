@@ -49,10 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updateForecast(location: LocationData): void {
     this.loadingWeatherData = true;
-
-    this.subscriptions.push(
-      this.weatherApiService.getWeatherData(location).subscribe()
-    );
+    this.weatherApiService.updateWeatherData(location);
   }
 
   getAvailableCountries(): string[] {

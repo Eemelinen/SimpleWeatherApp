@@ -12,8 +12,5 @@ export abstract class AbstractWeatherApiService {
     return new Observable<WeatherApiData>();
   }
 
-  // Todo: should not need a locationData parameter here
-  public abstract getWeatherData(locationData: LocationDataModel): Observable<WeatherApiData | null>;
-
-  public abstract updateWeatherData(locationData: LocationDataModel): Observable<WeatherApiData | null>;
+  public abstract updateWeatherData(location: LocationDataModel): void;
 }
