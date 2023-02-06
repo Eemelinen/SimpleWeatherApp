@@ -11,12 +11,12 @@ type DateObject = { year: string; month: string; day: string };
 })
 export class AverageTemperatureService extends AbstractAverageTemperatureService {
 
-  constructor(private weatherApiService: AbstractWeatherApiService) {
-    super(weatherApiService);
+  constructor(protected override apiService: AbstractWeatherApiService) {
+    super(apiService);
   }
 
   get(): Observable<WeatherCardData> {
-    return this.weatherApiService.getCurrentForecast().pipe(
+    return this.apiService.getCurrentForecast().pipe(
       map((forecast: WeatherApiData) => {
         if (!forecast.city_name || !forecast.country_code || !forecast.data.length) {
           return { title: '', temperatureValue: 0 };
@@ -26,7 +26,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     );
   }
 
-  // Todo: refactore these methods
+  // Todo: refactor these methods
 
   private createAverageTempValue(forecasts: any): WeatherCardData
   {

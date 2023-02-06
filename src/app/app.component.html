@@ -17,8 +17,8 @@
         </section>
     </ng-container>
 
-    <ng-container *ngIf="nextWeekForecast.length">
-      <section class="next-week-temperatures">
+    <ng-container *ngIf="nextWeekForecast$ | async as nextWeekForecast">
+      <section  *ngIf="nextWeekForecast.length" class="next-week-temperatures">
         <app-temperature-card
           *ngFor="let forecast of nextWeekForecast"
           [title]="forecast.title"

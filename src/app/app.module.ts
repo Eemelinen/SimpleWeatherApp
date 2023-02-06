@@ -19,11 +19,17 @@ import { ReactiveFormComponent } from './components/generics/reactive-form/react
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { WeatherApiService } from './services/weather-api/weather-api.service';
 import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
+import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
+import { AverageTemperatureService } from './services/average-temperature/average-temperature.service';
+import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
+import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
   { provide: AbstractLocationService, useClass: LocationService },
   { provide: AbstractWeatherApiService, useClass: WeatherApiService },
+  { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
+  { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
 ];
 
 const test = [

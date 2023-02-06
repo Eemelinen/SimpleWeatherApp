@@ -97,22 +97,22 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     return Math.round((total / res.length));
   }
 
-  private createOneWeekForecast(res: any): void {
-    const days = res.slice(0, 7);
-    const tempNextSevenDays: WeatherCardData[] = days.map((day: WeatherData) => {
-      return {
-        title: this.getDayName(day.datetime),
-        temperatureValue: Math.round(day.temp)
-      }
-    });
-    this.nextSevenDaysTemperature$$.next(tempNextSevenDays);
-  }
-
-  private getDayName(date: any): string {
-    const day = new Date(date).getDay();
-    const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
-    return days[day];
-  }
+  // private createOneWeekForecast(res: any): void {
+  //   const days = res.slice(0, 7);
+  //   const tempNextSevenDays: WeatherCardData[] = days.map((day: WeatherData) => {
+  //     return {
+  //       title: this.getDayName(day.datetime),
+  //       temperatureValue: Math.round(day.temp)
+  //     }
+  //   });
+  //   this.nextSevenDaysTemperature$$.next(tempNextSevenDays);
+  // }
+  //
+  // private getDayName(date: any): string {
+  //   const day = new Date(date).getDay();
+  //   const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+  //   return days[day];
+  // }
 
   private emptyWeatherData() {
     this.averageTemperature$$.next({title: '', temperatureValue: 0});

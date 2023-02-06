@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export abstract class AbstractAverageTemperatureService extends AbstractWeatherWidgetService {
+
   constructor(protected override apiService: AbstractWeatherApiService) {
     super(apiService);
   }

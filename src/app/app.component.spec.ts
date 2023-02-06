@@ -38,7 +38,7 @@ xdescribe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    component.nextWeekForecast = [];
+    component.nextWeekForecast$ = [];
     fixture.detectChanges();
   });
 
@@ -55,7 +55,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class average-temperature if weather data is available', () => {
-    component.nextWeekForecast = [mockForecasts[0]];
+    component.nextWeekForecast$ = [mockForecasts[0]];
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.average-temperature')).toBeTruthy();
   });
@@ -65,7 +65,7 @@ xdescribe('AppComponent', () => {
   });
 
   it('should have a section with class next-week-temperatures if weather data is available', () => {
-    component.nextWeekForecast = mockForecasts;
+    component.nextWeekForecast$ = mockForecasts;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toBeTruthy();
   });

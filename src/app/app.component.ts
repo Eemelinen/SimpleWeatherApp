@@ -3,9 +3,12 @@ import {Observable, of, Subscription, tap} from 'rxjs';
 import { AbstractWeatherProviderService } from './services/weather-provider/abstract-weather-provider.service';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
-import {AverageTemperatureService} from './services/averageTemperature/average-temperature.service';
+import {AverageTemperatureService} from './services/average-temperature/average-temperature.service';
 import {AbstractWeatherApiService} from './services/weather-api/abstract-weather-api-service';
 import {WeatherApiData} from './services/weather-api/weather-api-response';
+import {AbstractAverageTemperatureService} from './services/average-temperature/abstract-average-temperature.service';
+import {NextWeekWeatherService} from './services/next-week-weather/next-week-weather.service';
+import {AbstractNextWeekWeatherService} from './services/next-week-weather/abstract-next-week-weather.service';
 
 const defaultAverageTemp: WeatherCardData = { title: '', temperatureValue: 0 };
 
@@ -14,10 +17,9 @@ const defaultAverageTemp: WeatherCardData = { title: '', temperatureValue: 0 };
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
-  subscriptions: Subscription[] = [];
-  nextWeekForecast: WeatherCardData[] = [];
+  nextWeekForecast$: Observable<WeatherCardData[]> = of([]);
   averageTempForecast$: Observable<WeatherCardData> = of(defaultAverageTemp);
   loadingWeatherData: boolean = false;
   countries: string[] = [];
@@ -25,29 +27,20 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
     private locationService: AbstractLocationService,
-    private averageTempService: AverageTemperatureService,
-    private weatherApiService: AbstractWeatherApiService
+    private averageTempService: AbstractAverageTemperatureService,
+    private weatherApiService: AbstractWeatherApiService,
+    private nextWeekForecastService: AbstractNextWeekWeatherService,
   ) {}
 
   ngOnInit(): void {
     this.countries = this.locationService.getAvailableCountries();
+    this.nextWeekForecast$ = this.nextWeekForecastService.get();
 
     this.averageTempForecast$ = this.averageTempService.get().pipe(
       tap((data: WeatherCardData) => {
         this.loadingWeatherData = false;
         this.updateBackgroundGradient(data);
       }));
-
-    this.subscriptions.push(
-      this.weatherProvider.getNextSevenDaysTemperature()
-        .subscribe((data: WeatherCardData[]) => {
-          this.nextWeekForecast = data;
-      })
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   updateForecast(location: LocationData): void {
