@@ -36,11 +36,10 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
 
   getWeather(location: LocationData): Observable<any> {
     if (location.city && location.country) {
-      return this.apiService.getWeatherData(location)
-      // return of(mockWeatherApiResponse)
+      // return this.apiService.getWeatherData(location)
+      return of(mockWeatherApiResponse)
         .pipe(
           map((res: any) => {
-            console.log(res)
             if (!res) {
               return null;
             }

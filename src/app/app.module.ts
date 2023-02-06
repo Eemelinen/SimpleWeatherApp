@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormComponent } from './components/generics/reactive-form/reactive-form.component';
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { WeatherApiService } from './services/weather-api/weather-api.service';
+import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
 
 const production = [
   { provide: AbstractWeatherProviderService, useClass: WeatherProviderService },
@@ -42,6 +43,7 @@ const test = [
     CustomSelectComponent,
     ClickOutsideDirective,
     ReactiveFormComponent,
+    TemperatureCardComponent,
   ],
   imports: [
     ReactiveFormsModule,
