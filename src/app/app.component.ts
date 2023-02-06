@@ -8,6 +8,7 @@ import {AbstractWeatherApiService} from './services/weather-api/abstract-weather
 import {WeatherApiData} from './services/weather-api/weather-api-response';
 
 const defaultAverageTemp: WeatherCardData = { title: '', temperatureValue: 0 };
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,7 +30,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Todo: Change to reactive version
     this.countries = this.locationService.getAvailableCountries();
 
     this.averageTempForecast$ = this.averageTempService.get().pipe(
@@ -37,10 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.loadingWeatherData = false;
         this.updateBackgroundGradient(data);
       }));
-      // .subscribe((data: WeatherCardData) => {
-      //   this.averageTempForecast = data;
-      //   this.updateBackgroundGradient(data);
-      // }),
+
     this.subscriptions.push(
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {

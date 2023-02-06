@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AbstractWeatherApiService } from './abstract-weather-api-service';
 import { LocationDataModel } from '../../components/location-picker/location-data.model';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherApiData, WeatherApiDataModel, WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -48,7 +48,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
   }
 
   private handleError(err: any) {
-    this.openSnackbar("Sorry. Something unexpected happened.");
+    this.openSnackbar("Hmm. Something unexpected happened while fetching your weather. Please try again");
     this.currentForecast$$.next(defaultWeatherData);
   }
 
