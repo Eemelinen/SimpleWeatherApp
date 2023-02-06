@@ -3,5 +3,4 @@ import { AbstractWeatherApiService } from './weather-api/abstract-weather-api-se
 
 export abstract class AbstractWeatherWidgetService {
   constructor(protected apiService: AbstractWeatherApiService) {}
-  public abstract get(): Observable<any>
 }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { WeatherApiService } from '../weather-api/weather-api.service';
 import { AbstractAverageTemperatureService } from './abstract-average-temperature.service';
-import {WeatherApiData, WeatherApiDataModel} from '../weather-api/weather-api-response';
-import {AbstractWeatherApiService} from '../weather-api/abstract-weather-api-service';
+import { WeatherApiData, WeatherApiDataModel } from '../weather-api/weather-api-response';
+import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 
 type DateObject = { year: string; month: string; day: string };
 
@@ -11,32 +11,28 @@ type DateObject = { year: string; month: string; day: string };
   providedIn: 'root'
 })
 export class AverageTemperatureService extends AbstractAverageTemperatureService {
-  private averageTemperature$$ = new BehaviorSubject<WeatherCardData>({title: '', temperatureValue: 0});
-  private averageTemperature$ = this.averageTemperature$$.asObservable();
+  // private averageTemperature$$ = new BehaviorSubject<WeatherCardData>({title: '', temperatureValue: 0});
+  // private averageTemperature$ = this.averageTemperature$$.asObservable();
 
   constructor(private weatherApiService: AbstractWeatherApiService) {
     super(weatherApiService);
-    this.weatherApiService.getCurrentForecast().subscribe((forecast: WeatherApiData) => {
-      // Todo: check if this is how api service works
-      if (forecast.city_name && forecast.country_code && forecast.data.length) {
-        this.averageTemperature$$.next(this.createAverageTempValue(forecast.data));
-      }
-    });
+    // this.weatherApiService.getCurrentForecast().subscribe((forecast: WeatherApiData) => {
+    //   // Todo: check if this is how api service works
+    //   if (forecast.city_name && forecast.country_code && forecast.data.length) {
+    //     this.averageTemperature$$.next(this.createAverageTempValue(forecast.data));
+    //   }
+    // });
   }
 
-  get(): Observable<any> {
-    return this.averageTemperature$;
-
-    // return this.weatherApiService.getCurrentForecast().pipe(
-    //   map((forecast: WeatherApiData) => {
-    //     console.log(forecast)
-    //     // Todo: check if this is how api service works
-    //     if (!forecast.city_name || !forecast.country_code || !forecast.data.length) {
-    //       return forecast;
-    //     }
-    //     return this.createAverageTempValue(forecast);
-    //   }),
-    // );
+  get(): Observable<WeatherCardData> {
+    return this.weatherApiService.getCurrentForecast().pipe(
+      map((forecast: WeatherApiData) => {
+        if (!forecast.city_name || !forecast.country_code || !forecast.data.length) {
+          return { title: '', temperatureValue: 0 };
+        }
+        return this.createAverageTempValue(forecast.data);
+      })
+    );
   }
 
   // Todo: refactore these methods

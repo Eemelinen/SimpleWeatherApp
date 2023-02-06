@@ -37,7 +37,6 @@ export class WeatherApiService extends AbstractWeatherApiService {
         tap((res: any) => {
           if (res) {
             this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
-            console.log(this.currentForecast$$.value)
           }
           return null;
         }),

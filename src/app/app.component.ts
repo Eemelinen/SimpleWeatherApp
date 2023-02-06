@@ -28,20 +28,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Todo: Change to reactive version
+    this.subscriptions.push(
+
       this.averageTempService.get().subscribe((data: WeatherCardData) => {
         console.log('data', data)
         this.averageTempForecast = data;
         this.updateBackgroundGradient(data);
-      });
-    this.subscriptions.push(
+      }),
 
-
-
-      // this.weatherProvider.getAverageTemperature()
-      //   .subscribe((data: WeatherCardData) => {
-      //     this.averageTempForecast = data;
-      //     this.updateBackgroundGradient(data);
-      // }),
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {
           this.nextWeekForecast = data;
@@ -56,11 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
   updateForecast(location: LocationData): void {
     this.loadingWeatherData = true;
 
-    this.weatherApiService.getWeatherData(location).subscribe();
 
-    // this.subscriptions.push(
-    //   this.weatherProvider.getWeather(location).subscribe(() => this.loadingWeatherData = false)
-    // );
+    this.subscriptions.push(
+      this.weatherApiService.getWeatherData(location).subscribe()
+    );
   }
 
   getAvailableCountries(): string[] {
