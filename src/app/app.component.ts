@@ -38,10 +38,8 @@ export class AppComponent implements OnInit {
   }
 
   updateForecast(location: LocationData): void {
-    if (location.city && location.country) {
-      this.loadingWeatherData = true;
-      this.weatherApiService.updateWeatherData(location);
-    }
+    this.loadingWeatherData = true;
+    this.weatherApiService.updateWeatherData(location);
   }
 
   private updateBackgroundGradient(data: WeatherCardData): void {

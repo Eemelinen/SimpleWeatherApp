@@ -32,6 +32,11 @@ export class WeatherApiService extends AbstractWeatherApiService {
   }
 
   updateWeatherData(location: LocationDataModel, days = 10): void {
+    if (!location.city || !location.country) {
+      this.currentForecast$$.next(defaultWeatherData);
+      return;
+    }
+
     this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=${days}`)
       .subscribe({
         next: (res: WeatherApiResponse) => this.handleSuccess(res, location),
