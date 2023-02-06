@@ -157,8 +157,8 @@ export class WeatherProviderService extends AbstractWeatherProviderService {
     return months[month];
   }
 
-  private removeFirstCharIfZero(str: string) {
-    if (str[0] === '0') {
+  private removeFirstCharIfZero(str: string): string {
+    if (str && str[0] === '0') {
       return str.slice(1);
     }
     return str;

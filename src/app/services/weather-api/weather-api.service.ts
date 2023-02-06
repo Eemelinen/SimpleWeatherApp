@@ -22,7 +22,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
   }
 
   // Todo: change naming in abstract
-  getCurrentForecast(): Observable<WeatherApiData> {
+  override getCurrentForecast(): Observable<WeatherApiData> {
     return this.currentForecast$;
   }
 
@@ -37,6 +37,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
         tap((res: any) => {
           if (res) {
             this.currentForecast$$.next(res);
+            console.log(this.currentForecast$$.value)
           }
           return null;
         }),
