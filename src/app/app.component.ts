@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   nextWeekForecast: WeatherCardData[] = [];
   averageTempForecast: WeatherCardData = { title: '', temperatureValue: 0 };
   loadingWeatherData: boolean = false;
+  countries: string[] = [];
 
   constructor(
     private weatherProvider: AbstractWeatherProviderService,
@@ -28,18 +29,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Todo: Change to reactive version
+    this.countries = this.locationService.getAvailableCountries();
+
     this.subscriptions.push(
-
-      this.averageTempService.get().subscribe((data: WeatherCardData) => {
-        console.log('data', data)
-        this.averageTempForecast = data;
-        this.updateBackgroundGradient(data);
+      this.averageTempService.get()
+        .subscribe((data: WeatherCardData) => {
+          this.averageTempForecast = data;
+          this.updateBackgroundGradient(data);
+          this.loadingWeatherData = false;
       }),
-
       this.weatherProvider.getNextSevenDaysTemperature()
         .subscribe((data: WeatherCardData[]) => {
           this.nextWeekForecast = data;
-        })
+      })
     );
   }
 
@@ -48,15 +50,20 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateForecast(location: LocationData): void {
-    this.loadingWeatherData = true;
-    this.weatherApiService.updateWeatherData(location);
+    if (!location.city || !location.country) {
+      this.clearComponentData();
+    } else {
+      this.loadingWeatherData = true;
+      this.weatherApiService.updateWeatherData(location);
+    }
   }
 
-  getAvailableCountries(): string[] {
-    return this.locationService.getAvailableCountries();
+  private clearComponentData(): void {
+    this.nextWeekForecast = [];
+    this.averageTempForecast = {title: '', temperatureValue: 0};
   }
 
-  private updateBackgroundGradient(data: WeatherCardData) {
+  private updateBackgroundGradient(data: WeatherCardData): void {
     if (data.title) {
       this.directive.changeEndpointColor(data.temperatureValue);
     }

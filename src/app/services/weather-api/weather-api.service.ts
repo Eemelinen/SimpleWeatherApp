@@ -7,6 +7,12 @@ import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { WeatherApiData, WeatherApiDataModel, WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+const defaultWeatherData: WeatherApiDataModel = {
+  city_name: '',
+  country_code: '',
+  data: []
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,58 +27,29 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  // Todo: change naming in abstract
-  override getCurrentForecast(): Observable<WeatherApiData> {
+  getCurrentForecast(): Observable<WeatherApiData> {
     return this.currentForecast$;
   }
 
-  updateWeatherData(location: LocationDataModel): void {
-    this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`).subscribe((res: any) => {
-      if (res) {
-        if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
-          this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
-        } else {
-          this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
-        }
-      }
-    });
-
-  // // getWeatherData(location: LocationDataModel): Observable<WeatherApiData | null> {
-  // public getWeatherData(location: LocationDataModel): void {
-  //   this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`).subscribe((res: any) => {
-  //     if (res) {
-  //       if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
-  //         this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
-  //       } else {
-  //         this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
-  //       }
-  //     }
-  //   });
-
-      // .pipe(
-      //   tap((res: any) => {
-      //     if (res) {
-      //       if (res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
-      //         this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
-      //       } else {
-      //         this.currentForecast$$.next(new WeatherApiDataModel('', '', []));
-      //       }
-      //     }
-      //   }),
-      //   map((res: WeatherApiResponse) => {
-      //     console.log(res)
-      //     return new WeatherApiDataModel(
-      //       res?.city_name ?? '',
-      //       res?.country_code ?? '',
-      //       res?.data ?? []);
-      //   }),
-      //   catchError(() => this.apiCallFailed())
-      // );
+  updateWeatherData(location: LocationDataModel, days = 10): void {
+    this.http.get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=${days}`)
+      .subscribe({
+        next: (res: WeatherApiResponse) => this.handleSuccess(res, location),
+        error: (err: any) => this.handleError(err)
+      });
   }
 
-  private apiCallFailed(): Observable<null> {
+  private handleSuccess(res: WeatherApiResponse, location: LocationDataModel) {
+    if (res && res.city_name.toLowerCase() === location.city.toLowerCase() && res.country_code.toLowerCase() === location.country.toLowerCase()) {
+      this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
+    } else {
+      this.currentForecast$$.next(defaultWeatherData);
+    }
+  }
+
+  private handleError(err: any) {
     this.openSnackbar("Sorry. Something unexpected happened.");
-    return of(null);
+    this.currentForecast$$.next(defaultWeatherData);
   }
 
   private openSnackbar(message: string): void {

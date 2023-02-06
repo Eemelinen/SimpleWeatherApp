@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, of } from 'rxjs';
-import { WeatherApiService } from '../weather-api/weather-api.service';
+import { map, Observable } from 'rxjs';
 import { AbstractAverageTemperatureService } from './abstract-average-temperature.service';
-import { WeatherApiData, WeatherApiDataModel } from '../weather-api/weather-api-response';
+import { WeatherApiData } from '../weather-api/weather-api-response';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 
 type DateObject = { year: string; month: string; day: string };

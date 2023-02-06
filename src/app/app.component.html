@@ -3,7 +3,7 @@
     <section class="location-selection">
       <app-location-picker
         (locationChanged)="updateForecast($event)"
-        [countries]="getAvailableCountries()"
+        [countries]="countries"
         [loading]="loadingWeatherData"></app-location-picker>
     </section>
 

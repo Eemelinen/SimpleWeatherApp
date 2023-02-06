@@ -7,10 +7,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export abstract class AbstractWeatherApiService {
-
-  getCurrentForecast(): Observable<WeatherApiData> {
-    return new Observable<WeatherApiData>();
-  }
-
-  public abstract updateWeatherData(location: LocationDataModel): void;
+  public abstract getCurrentForecast(): Observable<WeatherApiData>;
+  public abstract updateWeatherData(location: LocationDataModel, days?: number): void;
 }
