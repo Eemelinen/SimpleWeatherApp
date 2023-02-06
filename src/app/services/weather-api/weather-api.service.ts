@@ -4,10 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { AbstractWeatherApiService } from './abstract-weather-api-service';
 import { LocationDataModel } from '../../components/location-picker/location-data.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { WeatherApiData, WeatherApiDataModel, WeatherApiResponse } from './weather-api-response';
+import { WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-const defaultWeatherData: WeatherApiDataModel = {
+const defaultWeatherData: WeatherApiResponse = {
   city_name: '',
   country_code: '',
   data: []
@@ -17,7 +17,7 @@ const defaultWeatherData: WeatherApiDataModel = {
   providedIn: 'root'
 })
 export class WeatherApiService extends AbstractWeatherApiService {
-  private currentForecast$$ = new BehaviorSubject<WeatherApiDataModel>({city_name: '', country_code: '', data: []});
+  private currentForecast$$ = new BehaviorSubject<WeatherApiResponse>({city_name: '', country_code: '', data: []});
   private currentForecast$ = this.currentForecast$$.asObservable();
 
   constructor(
@@ -27,7 +27,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  getCurrentForecast(): Observable<WeatherApiData> {
+  getCurrentForecast(): Observable<WeatherApiResponse> {
     return this.currentForecast$;
   }
 
@@ -41,7 +41,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
       `${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=${days}`)
       .subscribe({
         next: (res: WeatherApiResponse) => this.handleSuccess(res, location),
-        error: (err: any) => this.handleError(err)
+        error: () => this.handleError()
       });
   }
 
@@ -50,13 +50,13 @@ export class WeatherApiService extends AbstractWeatherApiService {
       res
       && res.city_name.toLowerCase() === location.city.toLowerCase()
       && res.country_code.toLowerCase() === location.country.toLowerCase()) {
-      this.currentForecast$$.next(new WeatherApiDataModel(res.city_name, res.country_code, res.data));
+      this.currentForecast$$.next({city_name: res.city_name, country_code: res.country_code, data: res.data});
     } else {
       this.currentForecast$$.next(defaultWeatherData);
     }
   }
 
-  private handleError(err: any) {
+  private handleError() {
     this.openSnackbar("Hmm. Something unexpected happened while fetching your weather. Please try again");
     this.currentForecast$$.next(defaultWeatherData);
   }

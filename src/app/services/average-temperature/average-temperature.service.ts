@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AbstractAverageTemperatureService } from './abstract-average-temperature.service';
-import { WeatherApiData } from '../weather-api/weather-api-response';
+import { WeatherApiResponse } from '../weather-api/weather-api-response';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 
 type DateObject = { year: string; month: string; day: string };
+const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
 
   get(): Observable<WeatherCardData> {
     return this.apiService.getCurrentForecast().pipe(
-      map((forecast: WeatherApiData) => {
+      map((forecast: WeatherApiResponse) => {
         if (!forecast.city_name || !forecast.country_code || !forecast.data.length) {
           return { title: '', temperatureValue: 0 };
         }
@@ -28,7 +29,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
 
   // Todo: refactor these methods
 
-  private createAverageTempValue(forecasts: any): WeatherCardData
+  private createAverageTempValue(forecasts: WeatherData[]): WeatherCardData
   {
     const dateRange = this.getDates(forecasts);
     const averageTemp = this.calculateAverageTemperature(forecasts);
@@ -38,13 +39,13 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     };
   }
 
-  getDates(forecasts: any): string {
+  getDates(forecasts: WeatherData[]): string {
     const dateRange = this.getDateRange(forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private calculateAverageTemperature(forecasts: any): number {
-    const total = forecasts.reduce((acc: any, day: WeatherData) => acc + day.temp, 0);
+  private calculateAverageTemperature(forecasts: WeatherData[]): number {
+    const total = forecasts.reduce((acc: number, day: WeatherData) => acc + day.temp, 0);
     return Math.round((total / forecasts.length));
   }
 
@@ -63,7 +64,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     return `${firstMonth} ${firstDate.day} - ${lastDate.day} ${lastDate.year}`;
   }
 
-  private getDateRange(forecasts: any[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+  private getDateRange(forecasts: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
     const firstDate = forecasts[0].datetime;
     const lastDate =  forecasts[forecasts.length - 1].datetime;
 
@@ -77,9 +78,6 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
   }
 
   private getMonthName(month: number): string {
-    const months = [
-      'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
-    ];
     return months[month];
   }
 
