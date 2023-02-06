@@ -29,6 +29,11 @@
 
     .next-week-temperatures {
       display: flex;
+      align-items: center;
+
+      @media only screen and (max-width: 900px) {
+        flex-wrap: wrap;
+      }
     }
   }
 }
