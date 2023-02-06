@@ -3,14 +3,16 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AbstractWeatherApiService } from './abstract-weather-api-service';
 import { LocationDataModel } from '../../components/location-picker/location-data.model';
-import { catchError, map, Observable, of } from 'rxjs';
-import { WeatherApiData, WeatherApiDataModel } from './weather-api-response';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { WeatherApiData, WeatherApiDataModel, WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherApiService extends AbstractWeatherApiService {
+  private currentForecast$$ = new BehaviorSubject<WeatherApiData>({city_name: '', country_code: '', data: []});
+  private currentForecast$ = this.currentForecast$$.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -19,11 +21,26 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  getWeatherData(location: LocationDataModel): Observable<WeatherApiDataModel | null> {
+  // Todo: change naming in abstract
+  getCurrentForecast(): Observable<WeatherApiData> {
+    return this.currentForecast$;
+  }
+
+  updateWeatherData(locationData: LocationDataModel): Observable<WeatherApiData | null> {
+    return of(null);
+  }
+
+  getWeatherData(location: LocationDataModel): Observable<WeatherApiData | null> {
     return this.http
-      .get<WeatherApiData>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
+      .get<WeatherApiResponse>(`${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=10`)
       .pipe(
-        map((res: WeatherApiData) => {
+        tap((res: any) => {
+          if (res) {
+            this.currentForecast$$.next(res);
+          }
+          return null;
+        }),
+        map((res: WeatherApiResponse) => {
           console.log(res)
           return new WeatherApiDataModel(
             res?.city_name ?? '',

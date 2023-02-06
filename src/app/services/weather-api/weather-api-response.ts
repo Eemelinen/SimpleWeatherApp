@@ -10,7 +10,7 @@ export interface WeatherApiResponse {
 export interface WeatherApiData {
   "city_name": string,
   "country_code": string,
-  "data": [
+  "data": [] | [
     temp: number,
     datetime: string
   ]
