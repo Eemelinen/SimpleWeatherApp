@@ -27,8 +27,6 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     );
   }
 
-  // Todo: refactor these methods
-
   private createAverageTempValue(forecasts: WeatherData[]): WeatherCardData
   {
     const dateRange = this.getDates(forecasts);
@@ -39,7 +37,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     };
   }
 
-  getDates(forecasts: WeatherData[]): string {
+  private getDates(forecasts: WeatherData[]): string {
     const dateRange = this.getDateRange(forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
@@ -47,6 +45,31 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
   private calculateAverageTemperature(forecasts: WeatherData[]): number {
     const total = forecasts.reduce((acc: number, day: WeatherData) => acc + day.temp, 0);
     return Math.round((total / forecasts.length));
+  }
+
+
+  private getMonthName(month: number): string {
+    return months[month];
+  }
+
+  private removeFirstCharIfZero(str: string): string {
+    return str && str[0] === '0' ? str.slice(1) : str;
+  }
+
+  private getDateRange(forecasts: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+    const [firstDateObj, lastDateObj] = [
+      forecasts[0].datetime,
+      forecasts[forecasts.length - 1].datetime
+    ].map(dateString => {
+      const [year, month, day] = dateString.split("-");
+      return {
+        year,
+        month,
+        day: this.removeFirstCharIfZero(day)
+      };
+    });
+
+    return { firstDateObj, lastDateObj };
   }
 
   private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
@@ -62,30 +85,6 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     }
 
     return `${firstMonth} ${firstDate.day} - ${lastDate.day} ${lastDate.year}`;
-  }
-
-  private getDateRange(forecasts: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
-    const firstDate = forecasts[0].datetime;
-    const lastDate =  forecasts[forecasts.length - 1].datetime;
-
-    const [fYear, fMonth, fDay] = firstDate.split("-");
-    const [eYear, eMonth, eDay] = lastDate.split("-");
-
-    const firstDateObj = {year: fYear, month: fMonth, day: this.removeFirstCharIfZero(fDay)};
-    const lastDateObj = {year:eYear, month: eMonth, day: this.removeFirstCharIfZero(eDay)};
-
-    return { firstDateObj, lastDateObj }
-  }
-
-  private getMonthName(month: number): string {
-    return months[month];
-  }
-
-  private removeFirstCharIfZero(str: string): string {
-    if (str && str[0] === '0') {
-      return str.slice(1);
-    }
-    return str;
   }
 
 }
