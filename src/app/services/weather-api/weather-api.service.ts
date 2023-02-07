@@ -6,12 +6,7 @@ import { LocationDataModel } from '../../components/location-picker/location-dat
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-const defaultWeatherData: WeatherApiResponse = {
-  city_name: '',
-  country_code: '',
-  data: []
-}
+import { defaultWeatherData } from './default-weather-data';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +40,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
       });
   }
 
-  private handleSuccess(res: WeatherApiResponse, location: LocationDataModel):void {
+  private handleSuccess(res: WeatherApiResponse, location: LocationDataModel): void {
     if (
       res
       && res.city_name.toLowerCase() === location.city.toLowerCase()
