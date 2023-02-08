@@ -40,7 +40,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
   private step$ = new BehaviorSubject<number>(0);
   private componentDestroyed$ = new Subject<boolean>();
   private gradientRunning$ = new BehaviorSubject<boolean>(true);
-  private endColorIndex: number = 8;
+  private endColorIndex: number = 7;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
@@ -161,28 +161,28 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
 
   private translateTemperatureToColorIndex(averageTemperature: number): number {
     switch (true) {
-      case averageTemperature <= -40:
+      case averageTemperature <= -20:
         return 0;
-      case averageTemperature < -33:
+      case averageTemperature < -15:
         return 1;
-      case averageTemperature < -30:
-        return 2;
-      case averageTemperature < -20:
-        return 3;
       case averageTemperature < -10:
-        return 4;
+        return 2;
       case averageTemperature < 0:
-        return 5;
+        return 3;
+      case averageTemperature < 5:
+        return 4;
       case averageTemperature < 10:
+        return 5;
+      case averageTemperature < 15:
         return 6;
       case averageTemperature < 20:
         return 7;
-      case averageTemperature >= 30:
+      case averageTemperature < 25:
         return 8;
-      case averageTemperature >= 40:
+      case averageTemperature >= 25:
         return 9;
       default:
-        return 6;
+        return 7;
     }
   }
 }
