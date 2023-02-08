@@ -10,6 +10,7 @@ import { TemperatureCardComponent } from './components/temperature-card/temperat
 import { of } from 'rxjs';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
+import { WeatherTodayComponent } from './components/weather-today/weather-today.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -22,7 +23,8 @@ describe('AppComponent', () => {
         AppComponent,
         MockComponents(
           TemperatureCardComponent,
-          LocationPickerComponent
+          LocationPickerComponent,
+          WeatherTodayComponent
         ),
       ],
       providers: [
@@ -56,27 +58,8 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a section with class location-selection', () => {
-    expect(fixture.nativeElement.querySelector('section.location-selection')).toBeTruthy();
-  });
-
-  it('Should NOT show average-temperature if NO weather data is available', () => {
-    component.averageTempForecast$ = of({ title: '', temperatureValue: 0 });
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('section.average-temperature')).toEqual(null);
-  });
-
-  it('Should NOT show next-week-temperatures if no weather data is available', () => {
-    component.nextWeekForecast$ = of([]);
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('section.next-week-temperatures')).toEqual(null);
-  });
-
-  it('should have a section with class next-week-temperatures if averageTempForecast$ has resolved',() => {
-    expect(fixture.nativeElement.querySelector('.next-week-temperatures')).toBeTruthy();
-  });
-
-  it('should have a section with class average-temperature if averageTemp is available and has a title', () => {
-    expect(fixture.nativeElement.querySelector('.average-temperature')).toBeTruthy();
+  it('should render a app-weather-today component', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-weather-today')).toBeTruthy();
   });
 });

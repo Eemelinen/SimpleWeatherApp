@@ -19,6 +19,8 @@ import { AbstractAverageTemperatureService } from './services/average-temperatur
 import { AverageTemperatureService } from './services/average-temperature/average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
+import { WeatherTodayComponent } from './components/weather-today/weather-today.component';
+import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -36,6 +38,8 @@ const production = [
     ClickOutsideDirective,
     ReactiveFormComponent,
     TemperatureCardComponent,
+    WeatherTodayComponent,
+    ExtraDataCardComponent,
   ],
   imports: [
     ReactiveFormsModule,

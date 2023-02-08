@@ -1,0 +1,26 @@
+.extra-data-card {
+  display: flex;
+  margin: .6rem;
+  background-color: var(--white-1);
+  padding: .6rem 1.1rem .6rem 1.1rem;
+  border-radius: 1rem;
+  gap: 1rem;
+
+  .weather-icon {
+    width: 3.5rem;
+  }
+
+  .text-content {
+    display: flex;
+    line-height: 1.6;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .data-type {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+  }
+}
