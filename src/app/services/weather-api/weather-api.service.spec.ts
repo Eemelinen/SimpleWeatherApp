@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { WeatherApiService } from './weather-api.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,7 +8,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { defaultWeatherData } from './default-weather-data';
 import { WeatherApiResponse } from './weather-api-response';
 
-fdescribe('WeatherApiService', () => {
+describe('WeatherApiService', () => {
   let service: WeatherApiService;
   let httpTestingController: HttpTestingController;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
