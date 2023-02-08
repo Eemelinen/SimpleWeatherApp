@@ -1,40 +1,74 @@
+$wrapper-element-height: 60vh;
+$wrapper-margin: 0 2rem 0 2rem;
+
 .app {
+  background: linear-gradient(150deg, #102F7E 0%, #0C8DD6 33%, #B4DEDA 77%, #FFD66B 100%);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 
-  .content {
-    width: 65.2rem;
-    display: flex;
+  @media only screen and (max-width: 900px) {
     flex-direction: column;
-    align-items: center;
+  }
 
-    @media only screen and (max-width: 900px) {
-      width: 50rem;
-    }
+  .left-side {
+    flex: 1;
+    height: $wrapper-element-height;
+    //background-color: red;
+    margin: $wrapper-margin;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 2rem 0;
+    width: 100%;
 
     @media only screen and (max-width: 600px) {
-      width: 40rem;
+      margin-top: 0;
+      padding: 0;
     }
 
-    @media only screen and (max-width: 400px) {
-      width: 32rem;
-    }
-
-    .location-selection {
-      width: 100%;
-    }
-
-    .next-week-temperatures {
+    .left-content {
+      width: 65.2rem;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      //align-items: center;
 
       @media only screen and (max-width: 900px) {
-        flex-wrap: wrap;
+        width: 95%;
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: 400px) {
+        //width: 32rem;
+      }
+
+      .location-selection {
+        width: 100%;
+      }
+
+      .next-week-temperatures {
+        display: flex;
+        align-items: center;
+
+        @media only screen and (max-width: 900px) {
+          flex-wrap: wrap;
+        }
       }
     }
   }
+
+  .right-side {
+    flex: 1;
+    height: $wrapper-element-height;
+    background-color: #000000;
+    opacity: 0.5;
+    margin: $wrapper-margin;
+    border-radius: 1.6rem;
+    width: 100%;
+  }
+
 }
 

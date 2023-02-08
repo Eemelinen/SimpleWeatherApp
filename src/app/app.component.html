@@ -1,30 +1,39 @@
-<div class="app" gradientBackground>
-  <div class="content">
-    <section class="location-selection">
-      <app-location-picker
-        (locationChanged)="updateForecast($event)"
-        [countries]="countries"
-        [loading]="loadingWeatherData"></app-location-picker>
-    </section>
+<div class="app">
 
-    <ng-container *ngIf="averageTempForecast$ | async as averageTemp">
-        <section *ngIf="averageTemp.title" class="average-temperature">
+  <div class="left-side">
+    <div class="left-content">
+      <section class="location-selection">
+        <app-location-picker
+          (locationChanged)="updateForecast($event)"
+          [countries]="countries"
+          [loading]="loadingWeatherData"></app-location-picker>
+      </section>
+
+      <ng-container *ngIf="averageTempForecast$ | async as averageTemp">
+          <section *ngIf="averageTemp.title" class="average-temperature">
+            <app-temperature-card
+              [bigCard]="true"
+              [title]="averageTemp.title"
+              [temperature]="averageTemp.temperatureValue">
+            </app-temperature-card>
+          </section>
+      </ng-container>
+
+      <ng-container *ngIf="nextWeekForecast$ | async as nextWeekForecast">
+        <section  *ngIf="nextWeekForecast.length" class="next-week-temperatures">
           <app-temperature-card
-            [bigCard]="true"
-            [title]="averageTemp.title"
-            [temperature]="averageTemp.temperatureValue">
+            *ngFor="let forecast of nextWeekForecast"
+            [title]="forecast.title"
+            [temperature]="forecast.temperatureValue">
           </app-temperature-card>
         </section>
-    </ng-container>
+      </ng-container>
+    </div>
 
-    <ng-container *ngIf="nextWeekForecast$ | async as nextWeekForecast">
-      <section  *ngIf="nextWeekForecast.length" class="next-week-temperatures">
-        <app-temperature-card
-          *ngFor="let forecast of nextWeekForecast"
-          [title]="forecast.title"
-          [temperature]="forecast.temperatureValue">
-        </app-temperature-card>
-      </section>
-    </ng-container>
+
+  </div>
+  <!--  Show if weather forecast has data-->
+  <div *ngIf="true" class="right-side">
+
   </div>
 </div>

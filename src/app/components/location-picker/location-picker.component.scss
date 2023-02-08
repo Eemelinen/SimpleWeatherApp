@@ -7,6 +7,11 @@
   align-items: center;
   gap: 1.2rem;
 
+  @media only screen and (max-width: 600px) {
+    border-radius: 0;
+
+  }
+
   .form-container {
     width: 100%;
   }
@@ -18,7 +23,7 @@
     padding-left: 2.2rem;
     height: 9.2rem;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
       padding-left: 1.5rem;
     }
 
