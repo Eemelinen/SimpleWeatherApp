@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { WeatherApiResponse } from '../weather-api/weather-api-response';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 
-fdescribe('NextWeekWeatherService', () => {
+describe('NextWeekWeatherService', () => {
   let service: NextWeekWeatherService;
 
   beforeEach(() => {
