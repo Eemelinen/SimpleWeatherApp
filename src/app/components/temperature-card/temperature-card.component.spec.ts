@@ -28,7 +28,7 @@ describe('TemperatureCardComponent', () => {
 
   it('should render the title received as input', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.info').textContent).toContain(title);
+    expect(compiled.querySelector('.title').textContent).toContain(title);
   });
 
   it('should render the temperature received as input', () => {

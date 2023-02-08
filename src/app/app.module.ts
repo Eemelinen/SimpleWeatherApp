@@ -21,6 +21,8 @@ import { AbstractNextWeekWeatherService } from './services/next-week-weather/abs
 import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
 import { WeatherTodayComponent } from './components/weather-today/weather-today.component';
 import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
+import { NextWeekComponent } from './components/next-week/next-week.component';
+import { GraphContainerComponent } from './components/graph-container/graph-container.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -40,6 +42,8 @@ const production = [
     TemperatureCardComponent,
     WeatherTodayComponent,
     ExtraDataCardComponent,
+    NextWeekComponent,
+    GraphContainerComponent,
   ],
   imports: [
     ReactiveFormsModule,

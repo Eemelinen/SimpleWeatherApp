@@ -1,8 +1,7 @@
 <div class="app">
 
   <section class="left-side">
-    <div class="left-content">
-
+    <div class="left-side-content">
       <div class="location-selection">
         <app-location-picker
           (locationChanged)="updateForecast($event)"
@@ -10,18 +9,15 @@
           [loading]="loadingWeatherData">
         </app-location-picker>
       </div>
-
       <app-weather-today></app-weather-today>
-
     </div>
   </section>
+
   <!--  Show if weather forecast has data-->
   <div *ngIf="true" class="right-side">
-
     <div class="right-side-content">
-      <h1>Right side</h1>
+      <app-next-week></app-next-week>
     </div>
-
   </div>
 </div>
 

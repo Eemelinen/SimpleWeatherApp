@@ -1,0 +1,24 @@
+<div class="next-week">
+  <h2 class="header">Next week</h2>
+
+  <div class="days">
+    <app-temperature-card *ngFor="let d of days" [title]="d"></app-temperature-card>
+  </div>
+
+  <app-graph-container></app-graph-container>
+
+  <div class="average-temperature">
+
+    <div class="result-container">
+      <span class="temperature">12</span>
+      <span class="unit">°C</span>
+    </div>
+
+    <div class="average-container">
+      <span>Average</span>
+      <img class="thermometer" src="assets/images/thermometer.svg" alt="thermometer">
+    </div>
+
+  </div>
+
+</div>

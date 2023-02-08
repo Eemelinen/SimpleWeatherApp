@@ -30,7 +30,7 @@ $content-max-width: 60rem;
       padding: 0;
     }
 
-    .left-content {
+    .left-side-content {
       width: $content-max-width;
       display: flex;
       flex-direction: column;
@@ -50,7 +50,6 @@ $content-max-width: 60rem;
     color: whitesmoke;
     flex: 1;
     height: $wrapper-element-height;
-    opacity: 0.5;
     display: flex;
     justify-content: start;
 
