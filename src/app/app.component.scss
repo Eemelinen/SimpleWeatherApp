@@ -1,5 +1,5 @@
 $wrapper-element-height: 60vh;
-$wrapper-margin: 0 2rem 0 2rem;
+$content-max-width: 60rem;
 
 .app {
   background: linear-gradient(150deg, #102F7E 0%, #0C8DD6 33%, #B4DEDA 77%, #FFD66B 100%);
@@ -7,20 +7,23 @@ $wrapper-margin: 0 2rem 0 2rem;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  gap: 4rem;
 
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1300px) {
     flex-direction: column;
   }
 
   .left-side {
     flex: 1;
     height: $wrapper-element-height;
-    //background-color: red;
-    margin: $wrapper-margin;
     display: flex;
-    justify-content: center;
-    padding: 2rem 0 2rem 0;
+    justify-content: end;
+    padding: 1rem 0 1rem 0;
     width: 100%;
+
+    @media only screen and (max-width: 1300px) {
+      justify-content: center;
+    }
 
     @media only screen and (max-width: 600px) {
       margin-top: 0;
@@ -28,22 +31,9 @@ $wrapper-margin: 0 2rem 0 2rem;
     }
 
     .left-content {
-      width: 65.2rem;
+      width: $content-max-width;
       display: flex;
       flex-direction: column;
-      //align-items: center;
-
-      @media only screen and (max-width: 900px) {
-        width: 95%;
-      }
-
-      @media only screen and (max-width: 600px) {
-        width: 100%;
-      }
-
-      .location-selection {
-        width: 100%;
-      }
 
       .next-week-temperatures {
         display: flex;
@@ -57,18 +47,27 @@ $wrapper-margin: 0 2rem 0 2rem;
   }
 
   .right-side {
+    color: whitesmoke;
     flex: 1;
     height: $wrapper-element-height;
-    background-color: #000000;
     opacity: 0.5;
-    margin: $wrapper-margin;
-    border-radius: 1.6rem;
-    width: 100%;
+    display: flex;
+    justify-content: start;
+
+    @media only screen and (max-width: 1300px) {
+      justify-content: center;
+    }
 
     @media only screen and (max-width: 1200px) {
       width: 95%;
     }
-  }
 
+    .right-side-content {
+      width: $content-max-width;
+      border-radius: 1.6rem;
+      background-color: #000000;
+      height: 80%;
+    }
+  }
 }
 
