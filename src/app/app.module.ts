@@ -23,8 +23,8 @@ import { WeatherTodayComponent } from './components/weather-today/weather-today.
 import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
 import { NextWeekComponent } from './components/next-week/next-week.component';
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
-import { HorizontalCardComponent } from './components/horizontal-card/horizontal-card.component';
 import { ExtraDataContainerComponent } from './components/extra-data-container/extra-data-container.component';
+import { HorizontalTemperatureCardComponent } from './components/horizontal-temperature-card/horizontal-temperature-card.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -46,8 +46,8 @@ const production = [
     ExtraDataCardComponent,
     NextWeekComponent,
     GraphContainerComponent,
-    HorizontalCardComponent,
     ExtraDataContainerComponent,
+    HorizontalTemperatureCardComponent,
   ],
   imports: [
     ReactiveFormsModule,
