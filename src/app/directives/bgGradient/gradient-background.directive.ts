@@ -161,28 +161,28 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
 
   private translateTemperatureToColorIndex(averageTemperature: number): number {
     switch (true) {
-      case averageTemperature <= -20:
+      case averageTemperature <= -40:
         return 0;
-      case averageTemperature < -15:
+      case averageTemperature < -33:
         return 1;
-      case averageTemperature < -10:
+      case averageTemperature < -30:
         return 2;
-      case averageTemperature < 0:
+      case averageTemperature < -20:
         return 3;
-      case averageTemperature < 5:
+      case averageTemperature < -10:
         return 4;
-      case averageTemperature < 10:
+      case averageTemperature < 0:
         return 5;
-      case averageTemperature < 15:
+      case averageTemperature < 10:
         return 6;
       case averageTemperature < 20:
         return 7;
-      case averageTemperature < 25:
+      case averageTemperature < 30:
         return 8;
-      case averageTemperature >= 25:
+      case averageTemperature >= 30:
         return 9;
       default:
-        return 7;
+        return 6;
     }
   }
 }

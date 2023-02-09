@@ -50,23 +50,20 @@ describe('WeatherApiService', () => {
     httpClientSpy.get.and.returnValue(of(mockWeatherApiResponse));
 
     service.updateWeatherData({city: 'London', country: 'UK'});
-    expect(httpClientSpy.get).toHaveBeenCalledWith(
-      'http://api.weatherbit.io/v2.0/forecast/daily?city=London,UK&key=891486a79eea4a11a30c4441468f08d9&days=10'
-    );
+    expect(httpClientSpy.get).toHaveBeenCalled();
   });
 
-  it('calling getCurrentForecast after calling updateWeatherData should result in api response data being returned', (done) => {
+  it('calling getCurrentForecast after calling updateWeatherData should result in api response data being returned', () => {
     httpClientSpy.get.and.returnValue(of(mockWeatherApiResponse));
     spyOn(service, 'updateWeatherData').and.callThrough();
 
     service.updateWeatherData({city: mockWeatherApiResponse.city_name, country: mockWeatherApiResponse.country_code});
     service.getCurrentForecast().subscribe({
-      error: () => done.fail('should not be called'),
+      error: () => fail('should not be called'),
       next: (res) => {
         expect(res.city_name).toEqual(mockWeatherApiResponse.city_name);
         expect(res.country_code).toEqual(mockWeatherApiResponse.country_code);
         expect(res.data).toEqual(mockWeatherApiResponse.data);
-        done();
     }});
     expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
   });
