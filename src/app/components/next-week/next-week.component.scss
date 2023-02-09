@@ -12,9 +12,15 @@
   .graph {
     position: relative;
     width: 100%;
+
+    @media only screen and (max-width: 900px) {
+      display: none;
+    }
+
   }
 
   .days {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
