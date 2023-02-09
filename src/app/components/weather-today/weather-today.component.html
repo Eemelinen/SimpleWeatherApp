@@ -1,15 +1,36 @@
-<div class="weather-today">
-  <p class="subheader">Today's weather forecast</p>
-  <span class="header">Amsterdam</span>
-  <div class="weather-content">
+<ng-container *ngIf="weatherData$ | async as data">
+  <div *ngIf="data.city_name" class="weather-today">
+    <p class="subheader">Today's weather forecast</p>
+    <span class="header">{{data.city_name}}</span>
+    <div class="weather-content">
 
-    <app-horizontal-temperature-card></app-horizontal-temperature-card>
+      <app-horizontal-temperature-card
+        [temperature]="data.data[0].temp"
+      >
+      </app-horizontal-temperature-card>
 
-    <app-extra-data-container>
-      <app-extra-data-card></app-extra-data-card>
-      <app-extra-data-card></app-extra-data-card>
-      <app-extra-data-card></app-extra-data-card>
-    </app-extra-data-container>
+      <app-extra-data-container>
+        <app-extra-data-card></app-extra-data-card>
+        <app-extra-data-card></app-extra-data-card>
+        <app-extra-data-card></app-extra-data-card>
+      </app-extra-data-container>
 
+    </div>
   </div>
-</div>
+</ng-container>
+
+<!--<div *ngIf="weatherData$ | async as data" class="weather-today">-->
+<!--  <p class="subheader">Today's weather forecast</p>-->
+<!--  <span class="header">{{data.city_name}}</span>-->
+<!--  <div class="weather-content">-->
+
+<!--    <app-horizontal-temperature-card></app-horizontal-temperature-card>-->
+
+<!--    <app-extra-data-container>-->
+<!--      <app-extra-data-card></app-extra-data-card>-->
+<!--      <app-extra-data-card></app-extra-data-card>-->
+<!--      <app-extra-data-card></app-extra-data-card>-->
+<!--    </app-extra-data-container>-->
+
+<!--  </div>-->
+<!--</div>-->

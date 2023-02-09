@@ -23,13 +23,13 @@ export class NextWeekWeatherService extends AbstractNextWeekWeatherService {
     );
   }
 
-  private createOneWeekForecast(res: WeatherData[]): WeatherCardData[] {
+  private createOneWeekForecast(res: FullWeatherData[]): WeatherCardData[] {
     return res
       .slice(0, 7)
-      .map((day: WeatherData) => {
+      .map((day: FullWeatherData) => {
         return {
-          title: this.getDayName(day.datetime),
-          temperatureValue: Math.round(day.temp)
+          date: this.getDayName(day.datetime),
+          temperature: Math.round(day.temp)
         }
       });
   }

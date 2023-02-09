@@ -28,8 +28,8 @@ describe('NextWeekWeatherService', () => {
   it('get should return a valid observable array of WeatherCard objects', () => {
     service.get().subscribe((data) => {
       expect(data.length).toBe(2);
-      expect(data[0].title).toBe('THURSDAY');
-      expect(data[0].temperatureValue).toBe(Math.round(mockStoredWeatherData.data[0].temp));
+      expect(data[0].date).toBe('THURSDAY');
+      expect(data[0].temperature).toBe(Math.round(mockStoredWeatherData.data[0].temp));
     });
   });
 });

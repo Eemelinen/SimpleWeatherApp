@@ -20,33 +20,32 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     return this.apiService.getCurrentForecast().pipe(
       map((forecast: WeatherApiResponse) => {
         if (!forecast.city_name || !forecast.country_code || !forecast.data.length) {
-          return { title: '', temperatureValue: 0 };
+          return { date: '', temperature: 0 };
         }
         return this.createAverageTempValue(forecast.data);
       })
     );
   }
 
-  private createAverageTempValue(forecasts: WeatherData[]): WeatherCardData
+  private createAverageTempValue(forecasts: FullWeatherData[]): WeatherCardData
   {
     const dateRange = this.getDates(forecasts);
     const averageTemp = this.calculateAverageTemperature(forecasts);
     return {
-      title: dateRange,
-      temperatureValue: averageTemp
+      date: dateRange,
+      temperature: averageTemp
     };
   }
 
-  private getDates(forecasts: WeatherData[]): string {
+  private getDates(forecasts: FullWeatherData[]): string {
     const dateRange = this.getDateRange(forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private calculateAverageTemperature(forecasts: WeatherData[]): number {
-    const total = forecasts.reduce((acc: number, day: WeatherData) => acc + day.temp, 0);
+  private calculateAverageTemperature(forecasts: FullWeatherData[]): number {
+    const total = forecasts.reduce((acc: number, day: FullWeatherData) => acc + day.temp, 0);
     return Math.round((total / forecasts.length));
   }
-
 
   private getMonthName(month: number): string {
     return months[month];
@@ -56,7 +55,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     return str && str[0] === '0' ? str.slice(1) : str;
   }
 
-  private getDateRange(forecasts: WeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+  private getDateRange(forecasts: FullWeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
     const [firstDateObj, lastDateObj] = [
       forecasts[0].datetime,
       forecasts[forecasts.length - 1].datetime

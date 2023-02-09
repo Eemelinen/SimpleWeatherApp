@@ -6,7 +6,7 @@ import { AbstractWeatherApiService } from './services/weather-api/abstract-weath
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 
-const defaultAverageTemp: WeatherCardData = { title: '', temperatureValue: 0 };
+const defaultAverageTemp: WeatherCardData = { date: '', temperature: 0 };
 
 @Component({
   selector: 'app-root',
@@ -43,9 +43,9 @@ export class AppComponent implements OnInit {
   }
 
   private updateBackgroundGradient(data: WeatherCardData): void {
-    if (data.title) {
+    if (data.date) {
       try {
-        this.directive.changeEndpointColor(data.temperatureValue);
+        this.directive.changeEndpointColor(data.temperature);
       } catch (e) {
         return;
       }

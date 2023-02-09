@@ -3,10 +3,10 @@ import { WeatherApiResponse } from './weather-api-response';
 export class WeatherApiData implements WeatherApiResponse {
   constructor(public city_name: string,
               public country_code: string,
-              public data: WeatherData[]) {
+              public data: FullWeatherData[]) {
   }
 
-  public static parseData(data: WeatherData[]): WeatherData[] {
+  public static parseData(data: FullWeatherData[]): FullWeatherData[] {
     return data.map((data) => {
       return {
         datetime: data.datetime,
@@ -20,5 +20,10 @@ export class WeatherApiData implements WeatherApiResponse {
         }
       };
     });
+  }
+
+  public static isValid(data: WeatherApiData): boolean {
+    return !(!data.city_name || !data.country_code || !data.data.length);
+
   }
 }

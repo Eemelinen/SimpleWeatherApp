@@ -31,8 +31,8 @@ describe('AverageTemperatureService', () => {
 
     service.get().subscribe((res) => {
       expect(res).toEqual({
-        title: 'FEB 2 - 3 2023',
-        temperatureValue: 9,
+        date: 'FEB 2 - 3 2023',
+        temperature: 9,
       });
     });
   });

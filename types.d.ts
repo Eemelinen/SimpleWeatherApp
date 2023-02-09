@@ -4,14 +4,6 @@ type weather = {
   description: string
 }
 
-type WeatherData = {
-  datetime: string;
-  temp: number;
-  uv: number;
-  wind_spd: number;
-  weather: weather;
-};
-
 type LocationData = {
   country: string,
   city: string
@@ -22,7 +14,15 @@ type SimpleFormOutput = {
   textInputValue: string
 };
 
+type FullWeatherData = {
+  datetime: string;
+  temp: number;
+  uv: number;
+  wind_spd: number;
+  weather: weather;
+};
+
 type WeatherCardData = {
-  title: string,
-  temperatureValue: number,
+  date: string,
+  temperature: number,
 };
