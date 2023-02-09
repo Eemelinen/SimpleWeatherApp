@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { defaultWeatherData } from './default-weather-data';
+import { emptyWeatherData } from './empty-weather-data';
 import { WeatherApiResponse } from './weather-api-response';
 
 describe('WeatherApiService', () => {
@@ -41,7 +41,7 @@ describe('WeatherApiService', () => {
 
   it('should return a default weather data if updateWeatherData has not been run', (done) => {
     service.getCurrentForecast().subscribe((res) => {
-      expect(res).toEqual(defaultWeatherData);
+      expect(res).toEqual(emptyWeatherData);
       done();
     });
   });

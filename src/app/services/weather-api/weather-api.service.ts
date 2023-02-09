@@ -6,7 +6,8 @@ import { LocationDataModel } from '../../components/location-picker/location-dat
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { defaultWeatherData } from './default-weather-data';
+import { emptyWeatherData } from './empty-weather-data';
+import { WeatherApiData } from './weather-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
 
   updateWeatherData(location: LocationDataModel, days = 10): void {
     if (!location.city || !location.country) {
-      this.currentForecast$$.next(defaultWeatherData);
+      this.currentForecast$$.next(emptyWeatherData);
       return;
     }
 
@@ -41,24 +42,44 @@ export class WeatherApiService extends AbstractWeatherApiService {
   }
 
   private handleSuccess(res: WeatherApiResponse, location: LocationDataModel): void {
-    if (
-      res
-      && res.city_name.toLowerCase() === location.city.toLowerCase()
-      && res.country_code.toLowerCase() === location.country.toLowerCase()) {
-      this.currentForecast$$.next({city_name: res.city_name, country_code: res.country_code, data: res.data});
-    } else {
-      this.currentForecast$$.next(defaultWeatherData);
+    if (!this.responseHasNeededData(res) || !this.queryArgsMatchResponse(location, res)) {
+      this.currentForecast$$.next(emptyWeatherData);
+      return;
+    }
+
+    try {
+      const parsedData = WeatherApiData.parseData(res.data);
+      this.currentForecast$$.next({city_name: res.city_name, country_code: res.country_code, data: parsedData});
+    } catch(e) {
+      this.handleError();
     }
   }
 
   private handleError(): void {
     this.openSnackbar("Hmm. Something unexpected happened while fetching your weather. Please try again");
-    this.currentForecast$$.next(defaultWeatherData);
+    this.currentForecast$$.next(emptyWeatherData);
   }
 
   private openSnackbar(message: string): void {
     this.snackbar.open(message, 'Close', {
       duration: 2000,
     });
+  }
+
+  private responseHasNeededData(res: WeatherApiResponse): boolean {
+    return !!(
+      res &&
+      res.city_name &&
+      res.country_code &&
+      res.data &&
+      res.data.length > 0
+    );
+  }
+
+  private queryArgsMatchResponse(location: LocationDataModel, res: WeatherApiResponse): boolean {
+    return (
+      location.city.toLowerCase() === res.city_name.toLowerCase() &&
+      location.country.toLowerCase() === res.country_code.toLowerCase()
+    );
   }
 }
