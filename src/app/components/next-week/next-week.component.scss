@@ -20,28 +20,4 @@
 
   }
 
-  .average-temperature {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.4rem;
-    line-height: 3.2rem;
-    gap: 2rem;
-
-    .result-container {
-      .temperature {
-        font-size: 4rem;
-        line-height: 10.6rem;
-      }
-    }
-
-
-    .averages-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-  }
-
 }
