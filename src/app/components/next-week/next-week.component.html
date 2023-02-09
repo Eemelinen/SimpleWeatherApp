@@ -2,7 +2,7 @@
   <span class="header">Next week</span>
 
   <div class="days">
-    <app-temperature-card *ngFor="let d of days" [title]="d"></app-temperature-card>
+    <app-temperature-card *ngFor="let day of days" [day]="day"></app-temperature-card>
   </div>
 
   <div class="graph">

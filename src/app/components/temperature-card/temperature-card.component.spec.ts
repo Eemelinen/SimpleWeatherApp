@@ -17,7 +17,7 @@ describe('TemperatureCardComponent', () => {
 
     fixture = TestBed.createComponent(TemperatureCardComponent);
     component = fixture.componentInstance;
-    component.title = title;
+    component.day = title;
     component.temperature = temp;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-extra-data-card',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./extra-data-card.component.scss']
 })
 export class ExtraDataCardComponent {
-
+  @Input() imageUrl: string = '';
+  @Input() title: string = '';
+  @Input() data: string = '';
 }
