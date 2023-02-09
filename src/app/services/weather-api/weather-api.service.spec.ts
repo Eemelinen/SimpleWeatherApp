@@ -7,6 +7,7 @@ import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { emptyWeatherData } from './empty-weather-data';
 import { WeatherApiResponse } from './weather-api-response';
+import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 
 describe('WeatherApiService', () => {
   let service: WeatherApiService;
@@ -48,7 +49,6 @@ describe('WeatherApiService', () => {
 
   it('should call httpClient get method when updateWeatherData with correct url based on location parameters', () => {
     httpClientSpy.get.and.returnValue(of(mockWeatherApiResponse));
-
     service.updateWeatherData({city: 'London', country: 'UK'});
     expect(httpClientSpy.get).toHaveBeenCalled();
   });
@@ -63,12 +63,12 @@ describe('WeatherApiService', () => {
       next: (res) => {
         expect(res.city_name).toEqual(mockWeatherApiResponse.city_name);
         expect(res.country_code).toEqual(mockWeatherApiResponse.country_code);
-        expect(res.data).toEqual(mockWeatherApiResponse.data);
+        expect(res.data).toEqual(mockStoredWeatherData.data);
     }});
     expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
   });
 
-  it('if api returns an error snackbar.open should be shown and getCurrentForecast should return defaultWeatherData', () => {
+  it('if api returns an error snackbar open method should be shown and getCurrentForecast should return defaultWeatherData', () => {
     const error = new HttpErrorResponse({status: 404, statusText: 'Not Found'});
     httpClientSpy.get.and.returnValue(throwError(() => error));
     service.updateWeatherData({city: mockWeatherApiResponse.city_name, country: mockWeatherApiResponse.country_code});

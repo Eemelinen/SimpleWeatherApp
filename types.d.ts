@@ -1,7 +1,7 @@
 type weather = {
-  icon: "c03d",
-  code: 803,
-  description: "Broken clouds"
+  icon: string,
+  code: number,
+  description: string
 }
 
 type WeatherData = {

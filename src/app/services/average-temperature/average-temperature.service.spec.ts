@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { AverageTemperatureService } from './average-temperature.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { of } from 'rxjs';
-import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
+import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 
 describe('AverageTemperatureService', () => {
   let service: AverageTemperatureService;
@@ -27,12 +27,12 @@ describe('AverageTemperatureService', () => {
   });
 
   it('get method should return a valid weatherCardData observable', () => {
-    weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(mockWeatherApiResponse));
+    weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(mockStoredWeatherData));
 
     service.get().subscribe((res) => {
       expect(res).toEqual({
-        title: 'FEB 2 - 11 2023',
-        temperatureValue: 4,
+        title: 'FEB 2 - 3 2023',
+        temperatureValue: 9,
       });
     });
   });

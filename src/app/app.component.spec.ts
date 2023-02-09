@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 import { WeatherTodayComponent } from './components/weather-today/weather-today.component';
+import {NextWeekComponent} from './components/next-week/next-week.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -22,9 +23,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         MockComponents(
-          TemperatureCardComponent,
           LocationPickerComponent,
-          WeatherTodayComponent
+          WeatherTodayComponent,
+          NextWeekComponent
         ),
       ],
       providers: [

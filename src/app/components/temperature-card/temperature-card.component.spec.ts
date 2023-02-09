@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TemperatureCardComponent } from './temperature-card.component';
 
 const title = 'Monday';
@@ -36,17 +35,4 @@ describe('TemperatureCardComponent', () => {
     expect(compiled.querySelector('.temperature').textContent).toContain(temp);
   });
 
-  it('if input bigCard is true should add the class big-card', () => {
-    const compiled = fixture.nativeElement;
-    component.bigCard = true;
-    fixture.detectChanges();
-    expect(compiled.querySelector('.card').classList).toContain('big-card');
-  });
-
-  it('if input bigCard is false should not add the class big-card', () => {
-    const compiled = fixture.nativeElement;
-    component.bigCard = false;
-    fixture.detectChanges();
-    expect(compiled.querySelector('.card').classList).not.toContain('big-card');
-  });
 });

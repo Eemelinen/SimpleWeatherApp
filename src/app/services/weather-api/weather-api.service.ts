@@ -13,7 +13,7 @@ import { WeatherApiData } from './weather-data.model';
   providedIn: 'root'
 })
 export class WeatherApiService extends AbstractWeatherApiService {
-  private currentForecast$$ = new BehaviorSubject<WeatherApiResponse>({city_name: '', country_code: '', data: []});
+  private currentForecast$$ = new BehaviorSubject<WeatherApiData>({city_name: '', country_code: '', data: []});
   private currentForecast$ = this.currentForecast$$.asObservable();
 
   constructor(
@@ -23,7 +23,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  getCurrentForecast(): Observable<WeatherApiResponse> {
+  getCurrentForecast(): Observable<WeatherApiData> {
     return this.currentForecast$;
   }
 

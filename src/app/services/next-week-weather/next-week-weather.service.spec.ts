@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { NextWeekWeatherService } from './next-week-weather.service';
-import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
 import { of } from 'rxjs';
-import { WeatherApiResponse } from '../weather-api/weather-api-response';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
+import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 
 describe('NextWeekWeatherService', () => {
   let service: NextWeekWeatherService;
@@ -14,7 +13,7 @@ describe('NextWeekWeatherService', () => {
         {
           provide: AbstractWeatherApiService,
           useValue: {
-            getCurrentForecast: () => of(mockWeatherApiResponse as WeatherApiResponse)
+            getCurrentForecast: () => of(mockStoredWeatherData)
           }
         }
       ]
@@ -28,9 +27,9 @@ describe('NextWeekWeatherService', () => {
 
   it('get should return a valid observable array of WeatherCard objects', () => {
     service.get().subscribe((data) => {
-      expect(data.length).toBe(7);
+      expect(data.length).toBe(2);
       expect(data[0].title).toBe('THURSDAY');
-      expect(data[0].temperatureValue).toBe(Math.round(mockWeatherApiResponse.data[0].temp));
+      expect(data[0].temperatureValue).toBe(Math.round(mockStoredWeatherData.data[0].temp));
     });
   });
 });
