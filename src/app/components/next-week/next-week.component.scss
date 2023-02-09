@@ -4,19 +4,13 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  padding-bottom: 2rem;
 
   .header {
+    color: var(--white-1);
+    margin-top: 1rem;
     font-size: 4rem;
-  }
-
-  .graph {
-    position: relative;
-    width: 100%;
-
-    @media only screen and (max-width: 900px) {
-      display: none;
-    }
-
+    line-height: 1.6;
   }
 
   .days {
@@ -24,11 +18,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: -3rem;
+    z-index: 100;
 
     @media only screen and (max-width: 900px) {
       flex-wrap: wrap;
     }
 
+    @media only screen and (max-width: 700px) {
+      margin-bottom: .7rem;
+    }
   }
 
+  .graph {
+    position: relative;
+    width: 100%;
+
+    @media only screen and (max-width: 700px) {
+      display: none;
+    }
+
+  }
 }

@@ -24,6 +24,7 @@ import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-
 import { NextWeekComponent } from './components/next-week/next-week.component';
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
 import { HorizontalCardComponent } from './components/horizontal-card/horizontal-card.component';
+import { ExtraDataContainerComponent } from './components/extra-data-container/extra-data-container.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -46,6 +47,7 @@ const production = [
     NextWeekComponent,
     GraphContainerComponent,
     HorizontalCardComponent,
+    ExtraDataContainerComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -7,10 +7,7 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./graph-container.component.scss']
 })
 export class GraphContainerComponent implements OnInit {
-  public chart: Chart = new Chart("lineChart", {
-    type: 'line',
-    data: { datasets: [] }
-  });
+  public chart!: Chart
 
   ngOnInit(): void {
     this.createChart();
