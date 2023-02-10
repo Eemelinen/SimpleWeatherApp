@@ -5,7 +5,7 @@ import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-s
 import { WeatherApiData} from '../weather-api/weather-data.model';
 import { emptyWeatherToday } from './empty-weather-today';
 
-const imageBaseUrl = 'assets/images';
+const imageBaseUrl = 'assets/images/';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class WeatherTodayService extends AbstractWeatherTodayService {
   private formatWindSpeed(wind: number): extraData {
     return {
       title: 'Wind',
-      imgUrl: `${imageBaseUrl}/wind.svg`,
+      imgUrl: `${imageBaseUrl}Wind.svg`,
       value: `${wind} m/s`
     }
   }
@@ -50,7 +50,7 @@ export class WeatherTodayService extends AbstractWeatherTodayService {
   private formatUv(uvIndex: number): extraData {
     return {
       title: 'UV',
-      imgUrl: `${imageBaseUrl}/wind.svg`,
+      imgUrl: `${imageBaseUrl}Wind.svg`,
       value: uvIndex <= 2 ? 'Low' : uvIndex <= 6 ? 'Moderate' : 'High'
     }
   }
@@ -58,7 +58,7 @@ export class WeatherTodayService extends AbstractWeatherTodayService {
   private formatHumidity(humidity: number): extraData {
     return {
       title: 'Humidity',
-      imgUrl: `${imageBaseUrl}/wind.svg`,
+      imgUrl: `${imageBaseUrl}Wind.svg`,
       value: `${humidity}%`
     }
   }

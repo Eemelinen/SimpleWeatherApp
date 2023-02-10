@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./extra-data-card.component.scss']
 })
 export class ExtraDataCardComponent {
-  @Input() imageUrl: string = '';
+  @Input() imgUrl: string = '';
   @Input() title: string = '';
   @Input() data: string | number = '';
 }

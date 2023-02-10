@@ -11,7 +11,7 @@
 
       <app-extra-data-container>
         <app-extra-data-card *ngFor="let extraData of today.extraData"
-          [imageUrl]="'assets/images/wind.svg'"
+          [imgUrl]="extraData.imgUrl"
           [title]="extraData.title"
           [data]="extraData.value">
         </app-extra-data-card>
