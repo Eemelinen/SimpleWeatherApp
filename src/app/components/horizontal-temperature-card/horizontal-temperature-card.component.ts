@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./horizontal-temperature-card.component.scss']
 })
 export class HorizontalTemperatureCardComponent {
-  @Input() imageUrl: string = '';
+  @Input() imgUrl: string = '';
   @Input() temperature: number = 0;
 }

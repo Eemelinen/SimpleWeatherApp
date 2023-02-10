@@ -38,7 +38,7 @@ type WeatherTodayData = {
   city_name: string;
   temperature: number;
   weatherDescription: string;
-  weatherIcon: string;
+  weatherIconUrl: string;
   extraData: extraData[]
 
 }

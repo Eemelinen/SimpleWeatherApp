@@ -2,7 +2,7 @@ export const mockWeatherTodayData: WeatherTodayData = {
   city_name: 'London',
   temperature: 10,
   weatherDescription: 'Cloudy',
-  weatherIcon: 'c03d',
+  weatherIconUrl: 'c03d',
   extraData: [
     {
       title: 'WS',
