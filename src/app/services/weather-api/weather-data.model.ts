@@ -1,6 +1,8 @@
-import { WeatherApiResponse } from './weather-api-response';
-
-export class WeatherApiData implements WeatherApiResponse {
+/**
+ * Weather api response gets parsed into a common format within application
+ * This way for example api can be changed and new results parsed to this model
+ */
+export class WeatherApiData {
   constructor(public city_name: string,
               public country_code: string,
               public data: FullWeatherData[]) {

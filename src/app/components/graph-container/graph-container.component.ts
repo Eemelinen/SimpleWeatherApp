@@ -8,13 +8,14 @@ import Chart from 'chart.js/auto';
 })
 export class GraphContainerComponent implements OnInit {
   @Input() values: number[] = [];
+  @Input() label: string = 'value';
   public chart!: Chart
 
   ngOnInit(): void {
     this.createChart();
   }
 
-  createChart(){
+  createChart() {
 
     this.chart = new Chart("lineChart", {
       type: 'line', //this denotes tha type of chart
@@ -23,7 +24,7 @@ export class GraphContainerComponent implements OnInit {
         labels: ['', '', '', '', '', '', ''],
         datasets: [
           {
-            label: "value",
+            label: this.label,
             data: this.values,
           },
         ]

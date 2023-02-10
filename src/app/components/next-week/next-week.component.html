@@ -1,6 +1,9 @@
 <ng-container *ngIf="nextWeekData$ | async as nextWeekData">
   <div *ngIf="nextWeekData.dateRange" class="next-week">
-    <span class="header">Next week</span>
+    <div class="header-container">
+      <span class="date-range">{{nextWeekData.dateRange}}</span>
+      <span class="header">Next week</span>
+    </div>
 
     <div class="days">
       <app-temperature-card
@@ -17,10 +20,22 @@
       </app-graph-container>
     </div>
 
-    <app-extra-data-container>
-      <app-extra-data-card></app-extra-data-card>
-      <app-extra-data-card></app-extra-data-card>
-      <app-extra-data-card></app-extra-data-card>
+    <app-extra-data-container *ngIf="averageHumidity$ | async as averageHumidity">
+      <app-extra-data-card
+        [title]="'avg HR'"
+        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
+        [data]="averageHumidity + '%'">
+      ></app-extra-data-card>
+      <app-extra-data-card
+        [title]="'avg HR'"
+        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
+        [data]="averageHumidity + '%'">
+        ></app-extra-data-card>
+      <app-extra-data-card
+        [title]="'avg HR'"
+        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
+        [data]="averageHumidity + '%'">
+        ></app-extra-data-card>
     </app-extra-data-container>
 
   </div>

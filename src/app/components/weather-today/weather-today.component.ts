@@ -6,7 +6,7 @@ import { emptyWeatherToday } from '../../services/weather-today/empty-weather-to
 @Component({
   selector: 'app-weather-today',
   templateUrl: './weather-today.component.html',
-  styleUrls: ['./weather-today.component.scss']
+  styleUrls: ['./weather-today.component.scss'],
 })
 export class WeatherTodayComponent implements OnInit {
   weatherData$: Observable<WeatherTodayData> = of(emptyWeatherToday);

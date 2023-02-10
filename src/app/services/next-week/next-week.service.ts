@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractNextWeekService } from './abstract-next-week.service';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { WeatherApiData } from '../weather-api/weather-data.model';
 import { environment } from '../../../environments/environment';
@@ -29,37 +29,36 @@ export class NextWeekService extends AbstractNextWeekService {
     super(apiService);
   }
 
-  get(): Observable<any> {
+  get(): Observable<WeatherNextWeekData> {
     return this.apiService.getCurrentForecast().pipe(
       map((forecast: WeatherApiData) => {
         if (!WeatherApiData.isValid(forecast)) {
           return emptyNextWeekData
         }
 
+        const nextWeekData = forecast.data.slice(1, 8);
         return {
-          dateRange: this.getNextWeekDataRange(forecast.data),
-          averageTemperature: this.calculateAverageTemperature(forecast.data),
-          weatherCards: this.createOneWeekForecast(forecast.data)
+          dateRange: this.getNextWeekDataRange(nextWeekData),
+          averageTemperature: this.calculateAverageTemperature(nextWeekData),
+          weatherCards: this.createWeatherCardData(nextWeekData)
         }
       }
     ));
   }
 
-  private calculateAverageTemperature(data: FullWeatherData[]): number {
-    const temperatures = data.map((data) => data.temp);
+  private calculateAverageTemperature(nextWeekData: FullWeatherData[]): number {
+    const temperatures = nextWeekData.map((data) => data.temp);
     const sum = temperatures.reduce((a, b) => a + b, 0);
     return Math.round(sum / temperatures.length);
   }
 
-  private getNextWeekDataRange(forecasts: FullWeatherData[]): string {
-    const nextWeekDays = forecasts.slice(1, 8);
-    const dateRange = this.getDateRange(nextWeekDays);
+  private getNextWeekDataRange(nextWeekData: FullWeatherData[]): string {
+    const dateRange = this.getDateRange(nextWeekData);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private createOneWeekForecast(res: FullWeatherData[]): SmallWeatherCardData[] {
-    return res
-      .slice(1, 8)
+  private createWeatherCardData(nextWeekData: FullWeatherData[]): SmallWeatherCardData[] {
+    return nextWeekData
       .map((day: FullWeatherData) => {
         return {
           dayOfWeek: this.getDayOfWeek(day.datetime),
@@ -67,28 +66,6 @@ export class NextWeekService extends AbstractNextWeekService {
           temperature: Math.round(day.temp)
         }
       });
-  }
-
-  private getDayOfWeek(date: string): string {
-    const dayOfWeek = new Date(date).getDay();
-    switch (dayOfWeek) {
-      case 0:
-        return 'Sun';
-      case 1:
-        return 'Mon';
-      case 2:
-        return 'Tue';
-      case 3:
-        return 'Wed';
-      case 4:
-        return 'Thu';
-      case 5:
-        return 'Fri';
-      case 6:
-        return 'Sat';
-        default:
-          return '';
-    }
   }
 
   private getMonthName(month: number): string {
@@ -128,6 +105,28 @@ export class NextWeekService extends AbstractNextWeekService {
     }
 
     return `${firstMonth} ${firstDate.day} - ${lastDate.day} ${lastDate.year}`;
+  }
+
+  private getDayOfWeek(date: string): string {
+    const dayOfWeek = new Date(date).getDay();
+    switch (dayOfWeek) {
+      case 0:
+        return 'Sun';
+      case 1:
+        return 'Mon';
+      case 2:
+        return 'Tue';
+      case 3:
+        return 'Wed';
+      case 4:
+        return 'Thu';
+      case 5:
+        return 'Fri';
+      case 6:
+        return 'Sat';
+      default:
+        return '';
+    }
   }
 
 }
