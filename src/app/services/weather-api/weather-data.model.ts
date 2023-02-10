@@ -13,6 +13,7 @@ export class WeatherApiData implements WeatherApiResponse {
         temp: data.temp,
         uv: data.uv,
         wind_spd: data.wind_spd,
+        rh: data.rh,
         weather: {
           icon: data.weather.icon,
           code: data.weather.code,

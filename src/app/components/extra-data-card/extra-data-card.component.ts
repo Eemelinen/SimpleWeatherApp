@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class ExtraDataCardComponent {
   @Input() imageUrl: string = '';
   @Input() title: string = '';
-  @Input() data: string = '';
+  @Input() data: string | number = '';
 }

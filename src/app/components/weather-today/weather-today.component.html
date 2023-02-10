@@ -1,18 +1,20 @@
-<ng-container *ngIf="weatherData$ | async as data">
-  <div *ngIf="data.city_name" class="weather-today">
+<ng-container *ngIf="weatherData$ | async as today">
+  <div *ngIf="today.city_name" class="weather-today">
     <p class="subheader">Today's weather forecast</p>
-    <span class="header">{{data.city_name}}</span>
+    <span class="header">{{today.city_name}}</span>
     <div class="weather-content">
 
       <app-horizontal-temperature-card
-        [temperature]="data.data[0].temp"
-      >
+        [temperature]="today.temperature"
+        [imageUrl]="today.weatherIcon">
       </app-horizontal-temperature-card>
 
       <app-extra-data-container>
-        <app-extra-data-card></app-extra-data-card>
-        <app-extra-data-card></app-extra-data-card>
-        <app-extra-data-card></app-extra-data-card>
+        <app-extra-data-card *ngFor="let extraData of today.extraData"
+          [imageUrl]="'assets/images/wind.svg'"
+          [title]="extraData.title"
+          [data]="extraData.value">
+        </app-extra-data-card>
       </app-extra-data-container>
 
     </div>

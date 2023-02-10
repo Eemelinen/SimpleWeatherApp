@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractWeatherTodayService } from '../../services/weather-today/abtract-weather-today.service';
 import { Observable, of } from 'rxjs';
-import { WeatherApiData } from '../../services/weather-api/weather-data.model';
-import { emptyWeatherData } from '../../services/weather-api/empty-weather-data';
+import { emptyWeatherToday } from '../../services/weather-today/empty-weather-today';
 
 @Component({
   selector: 'app-weather-today',
@@ -10,10 +9,9 @@ import { emptyWeatherData } from '../../services/weather-api/empty-weather-data'
   styleUrls: ['./weather-today.component.scss']
 })
 export class WeatherTodayComponent implements OnInit {
-  weatherData$: Observable<WeatherApiData> = of(emptyWeatherData);
+  weatherData$: Observable<WeatherTodayData> = of(emptyWeatherToday);
 
-  constructor(private WeatherTodayService: AbstractWeatherTodayService) {
-  }
+  constructor(private WeatherTodayService: AbstractWeatherTodayService) {}
 
   ngOnInit(): void {
     this.weatherData$ = this.WeatherTodayService.get();

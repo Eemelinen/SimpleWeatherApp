@@ -1,6 +1,5 @@
 import { AbstractWeatherWidgetService } from '../abstract-weather-widget.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
-import { WeatherApiData } from '../weather-api/weather-data.model';
 import { Observable } from 'rxjs';
 
 export abstract class AbstractWeatherTodayService extends AbstractWeatherWidgetService {
@@ -8,5 +7,5 @@ export abstract class AbstractWeatherTodayService extends AbstractWeatherWidgetS
     super(apiService);
   }
 
-  abstract get(): Observable<WeatherApiData>;
+  abstract get(): Observable<WeatherTodayData>;
 }

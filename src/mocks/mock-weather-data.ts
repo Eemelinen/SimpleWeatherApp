@@ -9,6 +9,7 @@ export const mockStoredWeatherData: WeatherApiData = new WeatherApiData(
       datetime: mockWeatherApiResponse['data'][0]['datetime'],
       temp: mockWeatherApiResponse['data'][0]['temp'],
       uv: mockWeatherApiResponse['data'][0]['uv'],
+      rh: mockWeatherApiResponse['data'][0]['rh'],
       wind_spd: mockWeatherApiResponse['data'][0]['wind_spd'],
       weather: {
         icon: mockWeatherApiResponse['data'][0]['weather']['icon'],
@@ -20,6 +21,7 @@ export const mockStoredWeatherData: WeatherApiData = new WeatherApiData(
       datetime: mockWeatherApiResponse['data'][1]['datetime'],
       temp: mockWeatherApiResponse['data'][1]['temp'],
       uv: mockWeatherApiResponse['data'][1]['uv'],
+      rh: mockWeatherApiResponse['data'][0]['rh'],
       wind_spd: mockWeatherApiResponse['data'][1]['wind_spd'],
       weather: {
         icon: mockWeatherApiResponse['data'][1]['weather']['icon'],
