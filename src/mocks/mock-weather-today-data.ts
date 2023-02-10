@@ -6,17 +6,17 @@ export const mockWeatherTodayData: WeatherTodayData = {
   extraData: [
     {
       title: 'WS',
-      imgUrl: 'assets/images/Wind.svg',
+      imgUrl: 'assets/images/windmill.png',
       value: '10 m/s'
     },
     {
       title: 'UV',
-      imgUrl: 'assets/images/Wind.svg',
+      imgUrl: 'assets/images/uv.png',
       value: 'Low'
     },
     {
       title: 'RH',
-      imgUrl: 'assets/images/Wind.svg',
+      imgUrl: 'assets/images/humidity.svg',
       value: '10%'
     }
   ]
