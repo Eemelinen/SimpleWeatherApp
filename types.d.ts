@@ -40,5 +40,17 @@ type WeatherTodayData = {
   weatherDescription: string;
   weatherIconUrl: string;
   extraData: extraData[]
+}
+
+type SmallWeatherCardData = {
+  dayOfWeek: string,
+  weatherImgUrl: string,
+  temperature: number
+}
+
+type WeatherNextWeekData = {
+  dateRange: string;
+  averageTemperature: number;
+  weatherCards: SmallWeatherCardData[]
 
 }

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  WEATHER_API_KEY: '',
-  FORECAST_URL_START: 'http://api.weatherbit.io/v2.0/forecast/daily',
+  weather_api_key: '',
+  forecast_url_start: 'http://api.weatherbit.io/v2.0/forecast/daily',
 };

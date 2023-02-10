@@ -2,6 +2,8 @@ import { apiKey } from './api-key';
 
 export const environment = {
   production: false,
-  WEATHER_API_KEY: apiKey,
-  FORECAST_URL_START: 'http://api.weatherbit.io/v2.0/forecast/daily',
+  weather_icon_folder: 'assets/images/weather-icons/',
+  extra_data_icon_folder: 'assets/images/extra-data-icons/',
+  weather_api_key: apiKey,
+  forecast_url_start: 'http://api.weatherbit.io/v2.0/forecast/daily',
 };

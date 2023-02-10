@@ -34,7 +34,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     }
 
     this.http.get<WeatherApiResponse>(
-      `${environment.FORECAST_URL_START}?city=${location.city},${location.country}&key=${environment.WEATHER_API_KEY}&days=${days}`)
+      `${environment.forecast_url_start}?city=${location.city},${location.country}&key=${environment.weather_api_key}&days=${days}`)
       .subscribe({
         next: (res: WeatherApiResponse) => this.handleSuccess(res, location),
         error: () => this.handleError()

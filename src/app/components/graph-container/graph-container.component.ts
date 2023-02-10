@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -7,6 +7,7 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./graph-container.component.scss']
 })
 export class GraphContainerComponent implements OnInit {
+  @Input() values: number[] = [];
   public chart!: Chart
 
   ngOnInit(): void {
@@ -22,8 +23,8 @@ export class GraphContainerComponent implements OnInit {
         labels: ['', '', '', '', '', '', ''],
         datasets: [
           {
-            label: "Temperature",
-            data: ['1','6', '7', '8', '11', '5', '3', '4'],
+            label: "value",
+            data: this.values,
           },
         ]
       },
@@ -33,7 +34,6 @@ export class GraphContainerComponent implements OnInit {
             display: false,
           },
         },
-        // aspectRatio: 2.5,
         responsive: true,
         maintainAspectRatio: false,
         scales: {
