@@ -45,9 +45,11 @@ export class WeatherApiService extends AbstractWeatherApiService {
   private handleSuccess(res: WeatherApiResponse, location: LocationDataModel): void {
     if (!this.responseHasNeededData(res) || !this.queryArgsMatchResponse(location, res)) {
       this.currentForecast$$.next(emptyWeatherData);
-      this.snackbar.open("We couldn't find the location you entered. Please double check that the country and city are correct.", 'Close', {
-        duration: 3000,
-      });
+      this.snackbar.open(
+        "We couldn't find the location you entered. Please double check that the country and city are correct.",
+        'Close',
+        { duration: 3000 }
+      );
       return;
     }
 
@@ -60,14 +62,12 @@ export class WeatherApiService extends AbstractWeatherApiService {
   }
 
   private handleError(): void {
-    this.openSnackbar("Hmm. Something unexpected happened while fetching your weather. Please try again");
+    this.snackbar.open(
+      'Sorry, we encountered an unexpected error while trying to retrieve the weather information. Please try again later.',
+      'Close',
+      { duration: 3000 }
+    );
     this.currentForecast$$.next(emptyWeatherData);
-  }
-
-  private openSnackbar(message: string): void {
-    this.snackbar.open(message, 'Close', {
-      duration: 2000,
-    });
   }
 
   private responseHasNeededData(res: WeatherApiResponse): boolean {
