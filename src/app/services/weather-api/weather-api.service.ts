@@ -45,6 +45,9 @@ export class WeatherApiService extends AbstractWeatherApiService {
   private handleSuccess(res: WeatherApiResponse, location: LocationDataModel): void {
     if (!this.responseHasNeededData(res) || !this.queryArgsMatchResponse(location, res)) {
       this.currentForecast$$.next(emptyWeatherData);
+      this.snackbar.open("We couldn't find the location you entered. Please double check that the country and city are correct.", 'Close', {
+        duration: 3000,
+      });
       return;
     }
 
