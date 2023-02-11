@@ -29,14 +29,17 @@ import { AbstractMultiDayForecastService } from './services/multi-day-forecast/a
 import { MultiDayForecastService } from './services/multi-day-forecast/multi-day-forecast.service';
 import { OneDayForecastComponent } from './components/one-day-forecast/one-day-forecast.component';
 import { AbstractOneDayForecastService } from './services/one-day-forecast/abtract-forecast-today.service';
+import { AbstractLoadingService } from './services/loading/abstract-loading-service';
+import { LoadingService } from './services/loading/loading-service';
 
-const production = [
+const providers = [
   { provide: AbstractLocationService, useClass: LocationService },
   { provide: AbstractWeatherApiService, useClass: WeatherApiService },
   { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
   { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
   { provide: AbstractOneDayForecastService, useClass: OneDayForecastService },
-  { provide: AbstractMultiDayForecastService, useClass: MultiDayForecastService }
+  { provide: AbstractMultiDayForecastService, useClass: MultiDayForecastService },
+  { provide: AbstractLoadingService, useClass: LoadingService }
 ];
 
 @NgModule({
@@ -63,7 +66,7 @@ const production = [
     MatSnackBarModule,
   ],
   providers: [
-    ...production,
+    ...providers,
   ],
   bootstrap: [AppComponent]
 })
