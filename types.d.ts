@@ -56,7 +56,7 @@ type WeatherNextWeekData = {
   weatherCards: SmallWeatherCardData[]
 }
 
-type WeatherTodayData = {
+type OneDayWeatherComponentData = {
   city_name: string;
   temperature: number;
   weatherDescription: string;

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractOneDayWeatherService } from '../../services/weather-today/abtract-weather-today.service';
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { emptyWeatherToday } from './empty-weather-today';
+import { emptyOneDayWeather } from './empty-one-day-weather';
 
 type ComponentData = {
   city_name: string;
@@ -20,7 +20,7 @@ type ComponentData = {
 export class OneDayWeatherComponent implements OnInit {
   @Input() daysFromNow: number = 0;
   @Input() subHeader: string = 'Today\'s weather forecast';
-  weatherData$: Observable<ComponentData> = of(emptyWeatherToday);
+  weatherData$: Observable<ComponentData> = of(emptyOneDayWeather);
 
   constructor(private WeatherTodayService: AbstractOneDayWeatherService) {}
 
