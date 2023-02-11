@@ -3,6 +3,9 @@ import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyOneDayWeather } from './empty-one-day-weather';
 import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
+import { extraDataHumidity } from '../../shared/extra-data-humidity';
+import { extraDataWindSpeed } from '../../shared/extra-data-wind-speed';
+import { extraDataUV } from '../../shared/extra-data-uv';
 
 @Component({
   selector: 'one-day-forecast',
@@ -23,36 +26,12 @@ export class OneDayForecastComponent implements OnInit {
           ...data,
           weatherIconUrl: `${environment.weather_icon_folder}${data.weatherIconUrl}.png`,
           extraData: [
-            this.formatHumidity(data.rh),
-            this.formatUv(data.uv),
-            this.formatWindSpeed(data.wind_spd),
+            extraDataHumidity(data.rh),
+            extraDataUV(data.uv),
+            extraDataWindSpeed(data.wind_spd),
           ]
         }
       })
     );
-  }
-
-  private formatWindSpeed(wind: number): ExtraData {
-    return {
-      title: 'WS',
-      imgUrl: `${environment.extra_data_icon_folder}wind.png`,
-      value: `${wind} m/s`
-    }
-  }
-
-  private formatUv(uvIndex: number): ExtraData {
-    return {
-      title: 'UV',
-      imgUrl: `${environment.extra_data_icon_folder}uv.png`,
-      value: uvIndex <= 2 ? 'Low' : uvIndex <= 6 ? 'Moderate' : 'High'
-    }
-  }
-
-  private formatHumidity(humidity: number): ExtraData {
-    return {
-      title: 'RH',
-      imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
-      value: `${humidity}%`
-    }
   }
 }

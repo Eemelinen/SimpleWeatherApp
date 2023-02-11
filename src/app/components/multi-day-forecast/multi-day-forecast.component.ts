@@ -3,6 +3,9 @@ import { AbstractMultiDayForecastService } from '../../services/multi-day-foreca
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyMultiDayComponentData } from './empty-multiday-component-data';
+import { calcAvgTemperature } from '../../shared/calc-avg-temp';
+import { calcTemperatureDiff } from '../../shared/calc-temp-diff';
+import { formatGraphData } from '../../shared/format-graph-data';
 
 @Component({
   selector: 'multi-day-forecast',
@@ -25,17 +28,17 @@ export class MultiDayForecastComponent implements OnInit {
       map((data) => {
         return {
           ...data,
-          graphData: this.getGraphData(data.forecasts),
+          graphData: formatGraphData(data.forecasts),
           averages: [
             {
               title: 'Avg. Temp',
               imgUrl: `${environment.extra_data_icon_folder}thermometer.png`,
-              value: `${this.calcAvgTemperature(data.forecasts)}°C`
+              value: `${calcAvgTemperature(data.forecasts)}°C`
             },
             {
               title: 'Diff. Temp',
               imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
-              value: this.calcTemperatureDiff(data.forecasts) + '°C'
+              value: calcTemperatureDiff(data.forecasts) + '°C'
             },
           ],
           forecasts: data.forecasts.map((forecast) => {
@@ -48,24 +51,5 @@ export class MultiDayForecastComponent implements OnInit {
         }
       })
     );
-  }
-
-  private calcTemperatureDiff(nextWeekData: WeekdayWeather[]): number {
-    let temperatures = nextWeekData.map((data) => data.temperature)
-    let minTemperature = Math.min(...temperatures);
-    let maxTemperature = Math.max(...temperatures);
-    let temperatureDifference = maxTemperature - minTemperature;
-
-    return Math.round(temperatureDifference);
-  }
-
-  private calcAvgTemperature(nextWeekData: WeekdayWeather[]): number {
-    const avgTemperature = nextWeekData.reduce(
-      (sum, data) => sum + data.temperature, 0) / nextWeekData.length;
-    return +avgTemperature.toFixed(1);
-  }
-
-  private getGraphData(dailyData: WeekdayWeather[]): number[] {
-    return dailyData.map((data) => data.temperature);
   }
 }
