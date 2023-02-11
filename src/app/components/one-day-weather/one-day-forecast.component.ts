@@ -4,23 +4,15 @@ import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyOneDayWeather } from './empty-one-day-weather';
 
-type ComponentData = {
-  city_name: string;
-  temperature: number;
-  weatherDescription: string;
-  weatherIconUrl: string;
-  extraData: ExtraData[]
-}
-
 @Component({
-  selector: 'one-day-weather',
-  templateUrl: './one-day-weather.component.html',
-  styleUrls: ['./one-day-weather.component.scss'],
+  selector: 'one-day-forecast',
+  templateUrl: './one-day-forecast.component.html',
+  styleUrls: ['./one-day-forecast.component.scss'],
 })
-export class OneDayWeatherComponent implements OnInit {
+export class OneDayForecastComponent implements OnInit {
   @Input() daysFromNow: number = 0;
   @Input() subHeader: string = 'Today\'s weather forecast';
-  weatherData$: Observable<ComponentData> = of(emptyOneDayWeather);
+  weatherData$: Observable<OneDayForecastComponentData> = of(emptyOneDayWeather);
 
   constructor(private WeatherTodayService: AbstractOneDayWeatherService) {}
 
@@ -40,7 +32,6 @@ export class OneDayWeatherComponent implements OnInit {
     );
   }
 
-  // Todo: this formatting logic is more presentational and should be moved to component
   private formatWindSpeed(wind: number): ExtraData {
     return {
       title: 'WS',

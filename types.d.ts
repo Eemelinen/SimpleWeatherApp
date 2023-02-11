@@ -63,7 +63,7 @@ type MultiDayComponentData = {
   graphData: number[];
 }
 
-type OneDayWeatherComponentData = {
+type OneDayForecastComponentData = {
   city_name: string;
   temperature: number;
   weatherDescription: string;

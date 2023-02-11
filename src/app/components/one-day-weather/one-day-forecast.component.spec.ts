@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OneDayWeatherComponent } from './one-day-weather.component';
+import { OneDayForecastComponent } from './one-day-forecast.component';
 import { MockComponents } from 'ng-mocks';
 import { HorizontalTemperatureCardComponent } from '../horizontal-temperature-card/horizontal-temperature-card.component';
 import { ExtraDataContainerComponent } from '../extra-data-container/extra-data-container.component';
@@ -12,14 +12,14 @@ const currentDayForecast = JSON.parse(JSON.stringify(mockStoredWeatherData));
 const weatherData = currentDayForecast.data[0];
 currentDayForecast.data = [weatherData];
 
-describe('WeatherTodayComponent', () => {
-  let component: OneDayWeatherComponent;
-  let fixture: ComponentFixture<OneDayWeatherComponent>;
+describe('OneDayForecast', () => {
+  let component: OneDayForecastComponent;
+  let fixture: ComponentFixture<OneDayForecastComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        OneDayWeatherComponent,
+        OneDayForecastComponent,
         MockComponents(
           HorizontalTemperatureCardComponent,
           ExtraDataContainerComponent,
@@ -37,7 +37,7 @@ describe('WeatherTodayComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OneDayWeatherComponent);
+    fixture = TestBed.createComponent(OneDayForecastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
