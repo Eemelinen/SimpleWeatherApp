@@ -1,4 +1,4 @@
-export const emptyOneDayWeather: oneDayWeather = {
+export const emptyOneDayWeather: OneDayWeather = {
   city_name: '',
   temperature: 0,
   weatherDescription: '',

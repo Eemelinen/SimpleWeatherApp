@@ -1,11 +1,8 @@
-import { AbstractWeatherWidgetService } from '../abstract-weather-widget.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { Observable } from 'rxjs';
 
-export abstract class AbstractWeatherTodayService extends AbstractWeatherWidgetService {
-  constructor(protected override apiService: AbstractWeatherApiService) {
-    super(apiService);
-  }
+export abstract class AbstractOneDayWeatherService {
+  constructor(protected apiService: AbstractWeatherApiService) {}
 
-  abstract get(): Observable<oneDayWeather>;
+  abstract get(daysFromNow?: number): Observable<OneDayWeather>;
 }

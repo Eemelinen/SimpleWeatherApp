@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { WeatherTodayService } from './weather-today.service';
+import { OneDayWeatherService } from './one-day-weather.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { of } from 'rxjs';
 import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 import { emptyWeatherData } from '../weather-api/empty-weather-data';
 
 describe('WeatherTodayService', () => {
-  let service: WeatherTodayService;
+  let service: OneDayWeatherService;
   let weatherApiServiceSpy: jasmine.SpyObj<AbstractWeatherApiService>;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('WeatherTodayService', () => {
         }
       ]
     });
-    service = TestBed.inject(WeatherTodayService);
+    service = TestBed.inject(OneDayWeatherService);
   });
 
   it('should be created', () => {
