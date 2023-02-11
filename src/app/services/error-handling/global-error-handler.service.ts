@@ -9,7 +9,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
   ) {}
 
   handleError(error: Error): void {
-    this.snackBar.open('Something funky happened. Let\'s keep moving.', 'Close', {
+    this.snackBar.open('Something funky happened. Please try refreshing the page.', 'Close', {
       duration: 5000,
     });
   }
