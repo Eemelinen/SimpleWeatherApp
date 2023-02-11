@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { OneDayForecastService } from './one-day-forecast.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { of } from 'rxjs';
-import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
+import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
 import { emptyWeatherData } from '../weather-api/empty-weather-data';
 import {emptyOneDayForecast} from './empty-one-day-forecast';
 

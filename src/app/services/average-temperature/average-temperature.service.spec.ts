@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { AverageTemperatureService } from './average-temperature.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { of } from 'rxjs';
-import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
+import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
 
 describe('AverageTemperatureService', () => {
   let service: AverageTemperatureService;

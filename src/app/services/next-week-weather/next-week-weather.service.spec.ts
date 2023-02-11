@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { NextWeekWeatherService } from './next-week-weather.service';
 import { of } from 'rxjs';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
-import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
+import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
 
 describe('NextWeekWeatherService', () => {
   let service: NextWeekWeatherService;

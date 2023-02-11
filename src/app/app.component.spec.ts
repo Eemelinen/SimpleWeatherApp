@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 import { MockComponents } from 'ng-mocks';
-import { mockForecasts } from '../mocks/mock-forecasts';
+import { mockForecasts } from '../assets/mocks/mock-forecasts';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
 import { SmallWeatherCardComponent } from './components/small-weather-card/small-weather-card.component';

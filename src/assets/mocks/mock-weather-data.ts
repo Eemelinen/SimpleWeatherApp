@@ -1,4 +1,4 @@
-import { WeatherApiData } from '../app/services/weather-api/weather-data.model';
+import { WeatherApiData } from '../../app/services/weather-api/weather-data.model';
 import { mockWeatherApiResponse } from './mock-weather-api-response';
 
 export const mockStoredWeatherData: WeatherApiData = new WeatherApiData(

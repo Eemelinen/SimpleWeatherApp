@@ -5,7 +5,7 @@ import { HorizontalTemperatureCardComponent } from '../horizontal-temperature-ca
 import { ExtraDataContainerComponent } from '../extra-data-container/extra-data-container.component';
 import { ExtraDataCardComponent } from '../extra-data-card/extra-data-card.component';
 import { of } from 'rxjs';
-import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
+import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
 import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
 
 const currentDayForecast = JSON.parse(JSON.stringify(mockStoredWeatherData));

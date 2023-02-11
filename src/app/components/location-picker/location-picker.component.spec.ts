@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationPickerComponent } from './location-picker.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {mockAvailableCountries} from '../../../mocks/mock-available-countries';
+import {mockAvailableCountries} from '../../../assets/mocks/mock-available-countries';
 import {MockComponents} from 'ng-mocks';
 import {CustomSelectComponent} from '../generics/custom-select/custom-select.component';
 import {ReactiveFormComponent} from '../generics/reactive-form/reactive-form.component';

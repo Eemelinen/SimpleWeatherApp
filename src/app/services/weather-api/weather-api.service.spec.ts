@@ -3,11 +3,11 @@ import { WeatherApiService } from './weather-api.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
-import { mockWeatherApiResponse } from '../../../mocks/mock-weather-api-response';
+import { mockWeatherApiResponse } from '../../../assets/mocks/mock-weather-api-response';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { emptyWeatherData } from './empty-weather-data';
 import { WeatherApiResponse } from './weather-api-response';
-import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
+import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
 
 describe('WeatherApiService', () => {
   let service: WeatherApiService;

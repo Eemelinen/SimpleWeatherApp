@@ -27,7 +27,13 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/fonts",
+              "src/assets/mocks",
+              "src/assets/images",
+              "src/assets/images/extra-data-icons",
+              "src/assets/images/flags",
+              "src/assets/images/weather-icons"
             ],
             "styles": [
               "src/styles.scss"
