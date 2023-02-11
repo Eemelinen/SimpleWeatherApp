@@ -28,7 +28,7 @@ import { AbstractOneDayWeatherService } from './services/one-day-weather/abtract
 import { OneDayWeatherService } from './services/one-day-weather/one-day-weather.service';
 import { AbstractMultiDayForecastService } from './services/next-week/abstract-multi-day-forecast.service';
 import { MultiDayForecastService } from './services/next-week/multi-day-forecast.service';
-import { OneDayForecastComponent } from './components/one-day-weather/one-day-forecast.component';
+import { OneDayForecastComponent } from './components/one-day-forecast/one-day-forecast.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },

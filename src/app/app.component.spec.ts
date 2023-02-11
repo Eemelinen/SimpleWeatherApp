@@ -10,7 +10,7 @@ import { SmallWeatherCardComponent } from './components/small-weather-card/small
 import { of } from 'rxjs';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
-import { OneDayForecastComponent } from './components/one-day-weather/one-day-forecast.component';
+import { OneDayForecastComponent } from './components/one-day-forecast/one-day-forecast.component';
 import {MultiDayForecastComponent} from './components/multi-day-forecast/multi-day-forecast.component';
 
 describe('AppComponent', () => {
