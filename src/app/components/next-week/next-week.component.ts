@@ -6,13 +6,15 @@ import { environment } from '../../../environments/environment';
 type MultiDayComponentData = {
   dateRange: string;
   forecasts: WeekdayWeather[];
-  averages: ExtraData[]
+  averages: ExtraData[],
+  graphData: number[];
 }
 
 const emptyMultiDayComponentData: MultiDayComponentData = {
   dateRange: '',
   forecasts: [],
-  averages: []
+  averages: [],
+  graphData: [],
 }
 
 @Component({
@@ -36,22 +38,18 @@ export class NextWeekComponent implements OnInit {
       map((data) => {
         return {
           ...data,
+          graphData: this.getGraphData(data.forecasts),
           averages: [
             {
               title: 'Avg. Temp',
               imgUrl: `${environment.extra_data_icon_folder}thermometer.png`,
               value: `${this.calcAvgTemperature(data.forecasts)}°C`
             },
-            // {
-            //   title: 'Avg. Humidity',
-            //   imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
-            //   value: `${data.averages.rh}%`
-            // },
-            // {
-            //   title: 'Avg. UV',
-            //   imgUrl: `${environment.extra_data_icon_folder}uv.png`,
-            //   value: data.averages.uv <= 2 ? 'Low' : data.averages.uv <= 6 ? 'Moderate' : 'High'
-            // }
+            {
+              title: 'Diff. Temp',
+              imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
+              value: this.calcTemperatureDiff(data.forecasts) + '°C'
+            },
           ],
           forecasts: data.forecasts.map((forecast) => {
             return {
@@ -65,13 +63,22 @@ export class NextWeekComponent implements OnInit {
     );
   }
 
-  public calcAvgTemperature(nextWeekData: WeekdayWeather[]): number {
+  private calcTemperatureDiff(nextWeekData: WeekdayWeather[]): number {
+    let temperatures = nextWeekData.map((data) => data.temperature)
+    let minTemperature = Math.min(...temperatures);
+    let maxTemperature = Math.max(...temperatures);
+    let temperatureDifference = maxTemperature - minTemperature;
+
+    return Math.round(temperatureDifference);
+  }
+
+  private calcAvgTemperature(nextWeekData: WeekdayWeather[]): number {
     const avgTemperature = nextWeekData.reduce(
       (sum, data) => sum + data.temperature, 0) / nextWeekData.length;
     return +avgTemperature.toFixed(1);
   }
 
-  getGraphData(dailyData: WeekdayWeather[]): number[] {
+  private getGraphData(dailyData: WeekdayWeather[]): number[] {
     return dailyData.map((data) => data.temperature);
   }
 }
