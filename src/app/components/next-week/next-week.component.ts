@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractNextWeekService } from '../../services/next-week/abstract-next-week.service';
-import { combineLatest, forkJoin, map, Observable, of } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { emptyNextWeekData } from '../../services/next-week/next-week.service';
 import { AverageHumidityService } from '../../services/weather-data-average/average-humidity.service';
 @Component({

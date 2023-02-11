@@ -19,7 +19,6 @@ import { AbstractAverageTemperatureService } from './services/average-temperatur
 import { AverageTemperatureService } from './services/average-temperature/average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
-import { WeatherTodayComponent } from './components/weather-today/weather-today.component';
 import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
 import { NextWeekComponent } from './components/next-week/next-week.component';
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
@@ -29,6 +28,7 @@ import { AbstractOneDayWeatherService } from './services/weather-today/abtract-w
 import { OneDayWeatherService } from './services/weather-today/one-day-weather.service';
 import { AbstractNextWeekService } from './services/next-week/abstract-next-week.service';
 import { NextWeekService } from './services/next-week/next-week.service';
+import {OneDayWeatherComponent} from './components/one-day-weather/one-day-weather.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -48,7 +48,7 @@ const production = [
     ClickOutsideDirective,
     ReactiveFormComponent,
     TemperatureCardComponent,
-    WeatherTodayComponent,
+    OneDayWeatherComponent,
     ExtraDataCardComponent,
     NextWeekComponent,
     GraphContainerComponent,

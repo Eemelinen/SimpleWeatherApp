@@ -10,7 +10,7 @@ import { TemperatureCardComponent } from './components/temperature-card/temperat
 import { of } from 'rxjs';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
-import { WeatherTodayComponent } from './components/weather-today/weather-today.component';
+import { OneDayWeatherComponent } from './components/one-day-weather/one-day-weather.component';
 import {NextWeekComponent} from './components/next-week/next-week.component';
 
 describe('AppComponent', () => {
@@ -24,7 +24,7 @@ describe('AppComponent', () => {
         AppComponent,
         MockComponents(
           LocationPickerComponent,
-          WeatherTodayComponent,
+          OneDayWeatherComponent,
           NextWeekComponent
         ),
       ],
@@ -61,6 +61,6 @@ describe('AppComponent', () => {
 
   it('should render a app-weather-today component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('app-weather-today')).toBeTruthy();
+    expect(compiled.querySelector('one-day-weather')).toBeTruthy();
   });
 });

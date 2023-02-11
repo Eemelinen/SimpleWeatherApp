@@ -1,6 +1,6 @@
 <ng-container *ngIf="weatherData$ | async as today">
-  <div *ngIf="today.city_name" class="weather-today">
-    <p class="subheader">Today's weather forecast</p>
+  <div *ngIf="today.city_name" class="one-day-weather">
+    <p class="subheader">{{subHeader}}</p>
     <span class="header">{{today.city_name}}</span>
     <div class="weather-content">
 
