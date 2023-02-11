@@ -88,7 +88,7 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(
       this.el.nativeElement,
       'background',
-      `linear-gradient(150deg, ${renderValue[0]} 0%, ${renderValue[1]} 50%, ${renderValue[2]} 100%)`
+      `linear-gradient(60deg, ${renderValue[0]} 0%, ${renderValue[1]} 50%, ${renderValue[2]} 100%)`
     );
   }
 
