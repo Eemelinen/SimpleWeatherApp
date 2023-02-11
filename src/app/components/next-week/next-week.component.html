@@ -20,21 +20,21 @@
       </app-graph-container>
     </div>
 
-    <app-extra-data-container *ngIf="averageHumidity$ | async as averageHumidity">
+    <app-extra-data-container>
       <app-extra-data-card
         [title]="'avg HR'"
         [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
-        [data]="averageHumidity + '%'">
+        [data]="nextWeekData.averageHumidity + '%'">
       ></app-extra-data-card>
       <app-extra-data-card
         [title]="'avg HR'"
         [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
-        [data]="averageHumidity + '%'">
+        [data]="1 + '%'">
         ></app-extra-data-card>
       <app-extra-data-card
         [title]="'avg HR'"
         [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
-        [data]="averageHumidity + '%'">
+        [data]="1 + '%'">
         ></app-extra-data-card>
     </app-extra-data-container>
 

@@ -7,5 +7,5 @@ export abstract class AbstractWeatherTodayService extends AbstractWeatherWidgetS
     super(apiService);
   }
 
-  abstract get(): Observable<WeatherTodayData>;
+  abstract get(): Observable<oneDayWeather>;
 }

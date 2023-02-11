@@ -34,12 +34,14 @@ type extraData = {
   value: string
 }
 
-type WeatherTodayData = {
+type oneDayWeather = {
   city_name: string;
   temperature: number;
   weatherDescription: string;
   weatherIconUrl: string;
-  extraData: extraData[]
+  rh : number;
+  wind_spd : number;
+  uv : number;
 }
 
 type SmallWeatherCardData = {
@@ -52,5 +54,13 @@ type WeatherNextWeekData = {
   dateRange: string;
   averageTemperature: number;
   weatherCards: SmallWeatherCardData[]
-
 }
+
+type WeatherTodayData = {
+  city_name: string;
+  temperature: number;
+  weatherDescription: string;
+  weatherIconUrl: string;
+  extraData: extraData[]
+}
+
