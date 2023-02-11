@@ -35,7 +35,7 @@ export class LoadingService implements AbstractLoadingService {
       this.loadingMap.delete(url);
     }
     // Todo: should be just false check
-    if (this.loadingMap.size === 0) {
+    if (!this.loadingMap.size) {
       this.loadingWeatherData$$.next(false);
     }
   }

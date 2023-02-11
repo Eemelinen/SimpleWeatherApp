@@ -5,6 +5,7 @@ import { GradientBackgroundDirective } from './directives/bgGradient/gradient-ba
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
 import { calcAvgTemperature } from './shared/calc-avg-temp';
+import { AbstractLoadingService } from './services/loading/abstract-loading-service';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +14,27 @@ import { calcAvgTemperature } from './shared/calc-avg-temp';
 })
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
-  countries: string[] = [];
   loadingWeatherData = false;
+  countries: string[] = [];
   subscriptions: Subscription[] = [];
 
   constructor(
     private locationService: AbstractLocationService,
     private weatherApiService: AbstractWeatherApiService,
     private multiDayForecast: AbstractMultiDayForecastService,
+    private loadingService: AbstractLoadingService,
   ) {}
 
   ngOnInit(): void {
     this.countries = this.locationService.getAvailableCountries();
-    this.subscriptions.push(this.multiDayForecast.get()
-      .subscribe((data: MultiDayWeatherForecast) => {
+    this.subscriptions.push(
+      this.multiDayForecast.get().subscribe((data: MultiDayWeatherForecast) => {
         this.updateBackgroundGradient(
           Math.round(calcAvgTemperature(data.forecasts))
         );
+      }),
+      this.loadingService.getLoading().subscribe(l => {
+        this.loadingWeatherData = l;
       })
     );
   }
@@ -39,7 +44,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateForecast(location: LocationData): void {
-    this.loadingWeatherData = true;
     this.weatherApiService.updateWeatherData(location);
   }
 

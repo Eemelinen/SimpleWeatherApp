@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { LocationService } from './services/location/location.service';
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
@@ -31,6 +31,7 @@ import { OneDayForecastComponent } from './components/one-day-forecast/one-day-f
 import { AbstractOneDayForecastService } from './services/one-day-forecast/abtract-forecast-today.service';
 import { AbstractLoadingService } from './services/loading/abstract-loading-service';
 import { LoadingService } from './services/loading/loading-service';
+import { WeatherDataInterceptor } from './interceptors/weather-data.interceptor';
 
 const providers = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -67,6 +68,11 @@ const providers = [
   ],
   providers: [
     ...providers,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WeatherDataInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })
