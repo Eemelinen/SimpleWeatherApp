@@ -1,6 +1,7 @@
 import { apiKey } from './api-key';
+import { IEnvironment } from './environment.interface';
 
-export const environment = {
+export const environment: IEnvironment = {
   production: false,
   weather_icon_folder: 'assets/images/weather-icons/',
   extra_data_icon_folder: 'assets/images/extra-data-icons/',

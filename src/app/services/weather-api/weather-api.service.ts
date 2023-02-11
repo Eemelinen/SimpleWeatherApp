@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AbstractWeatherApiService } from './abstract-weather-api-service';
 import { LocationDataModel } from '../../components/location-picker/location-data.model';
@@ -8,6 +7,7 @@ import { WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { emptyWeatherData } from './empty-weather-data';
 import { WeatherApiData } from './weather-data.model';
+import { EnvironmentService } from '../environment/environment.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,8 @@ export class WeatherApiService extends AbstractWeatherApiService {
 
   constructor(
     private http: HttpClient,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private environment: EnvironmentService
   ) {
     super();
   }
@@ -34,7 +35,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     }
 
     this.http.get<WeatherApiResponse>(
-      `${environment.forecast_url_start}?city=${location.city},${location.country}&key=${environment.weather_api_key}&days=${days}`)
+      `${this.environment.forecast_url_start}?city=${location.city},${location.country}&key=${this.environment.weather_api_key}&days=${days}`)
       .subscribe({
         next: (res: WeatherApiResponse) => this.handleSuccess(res, location),
         error: () => this.handleError()

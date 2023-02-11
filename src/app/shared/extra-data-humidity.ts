@@ -1,9 +1,7 @@
-import { environment } from '../../environments/environment';
-
-export const extraDataHumidity = (humidity: number): ExtraData => {
+export const extraDataHumidity = (humidity: number, imgUrl: string): ExtraData => {
   return {
     title: 'RH',
-    imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
+    imgUrl: `${imgUrl}humidity.png`,
     value: `${humidity}%`
   }
 }

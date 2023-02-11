@@ -8,6 +8,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { emptyWeatherData } from './empty-weather-data';
 import { WeatherApiResponse } from './weather-api-response';
 import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
+import { EnvironmentService } from '../environment/environment.service';
+
+const mockApiKey = 'mockkey';
 
 describe('WeatherApiService', () => {
   let service: WeatherApiService;
@@ -29,6 +32,14 @@ describe('WeatherApiService', () => {
         {
           provide: HttpClient,
           useValue: httpClientSpy
+        },
+        {
+          provide: EnvironmentService,
+          useValue: {
+            forecast_url_start: 'https://mockurl/',
+            forecast_url_end: '/mockurl',
+            weather_api_key: mockApiKey
+          }
         }
       ]
     });
@@ -40,10 +51,9 @@ describe('WeatherApiService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a default weather data if updateWeatherData has not been run', (done) => {
+  it('should return a default weather data if updateWeatherData has not been run', () => {
     service.getCurrentForecast().subscribe((res) => {
       expect(res).toEqual(emptyWeatherData);
-      done();
     });
   });
 
@@ -53,7 +63,7 @@ describe('WeatherApiService', () => {
     expect(httpClientSpy.get).toHaveBeenCalled();
   });
 
-  it('calling getCurrentForecast after calling updateWeatherData should result in api response data being returned', () => {
+  it('getCurrentForecast after calling updateWeatherData should result in correctly filled data being returned', () => {
     httpClientSpy.get.and.returnValue(of(mockWeatherApiResponse));
     spyOn(service, 'updateWeatherData').and.callThrough();
 
@@ -66,9 +76,10 @@ describe('WeatherApiService', () => {
         expect(res.data).toEqual(mockStoredWeatherData.data);
     }});
     expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
+    expect(httpClientSpy.get).toHaveBeenCalledWith(`https://mockurl/?city=${mockWeatherApiResponse.city_name},${mockWeatherApiResponse.country_code}&key=${mockApiKey}&days=10`);
   });
 
-  it('if api returns an error snackbar open method should be shown and getCurrentForecast should return defaultWeatherData', () => {
+  it('if api returns an error snackbar open method should be called and getCurrentForecast should return defaultWeatherData', () => {
     const error = new HttpErrorResponse({status: 404, statusText: 'Not Found'});
     httpClientSpy.get.and.returnValue(throwError(() => error));
     service.updateWeatherData({city: mockWeatherApiResponse.city_name, country: mockWeatherApiResponse.country_code});

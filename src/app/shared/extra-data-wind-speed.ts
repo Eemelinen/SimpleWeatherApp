@@ -1,9 +1,7 @@
-import {environment} from '../../environments/environment';
-
-export const  extraDataWindSpeed = (wind: number): ExtraData => {
+export const  extraDataWindSpeed = (wind: number, imgUrl: string): ExtraData => {
   return {
     title: 'WS',
-    imgUrl: `${environment.extra_data_icon_folder}wind.png`,
+    imgUrl: `${imgUrl}wind.png`,
     value: `${wind} m/s`
   }
 }

@@ -6,6 +6,7 @@ import { AbstractOneDayForecastService } from '../../services/one-day-forecast/a
 import { extraDataHumidity } from '../../shared/extra-data-humidity';
 import { extraDataWindSpeed } from '../../shared/extra-data-wind-speed';
 import { extraDataUV } from '../../shared/extra-data-uv';
+import { EnvironmentService } from '../../services/environment/environment.service';
 
 @Component({
   selector: 'one-day-forecast',
@@ -17,18 +18,21 @@ export class OneDayForecastComponent implements OnInit {
   @Input() subHeader: string = 'Today\'s weather forecast';
   weatherData$: Observable<OneDayForecastComponentData> = of(emptyOneDayWeather);
 
-  constructor(private WeatherTodayService: AbstractOneDayForecastService) {}
+  constructor(
+    private environment: EnvironmentService,
+    private forecast: AbstractOneDayForecastService
+  ) {}
 
   ngOnInit(): void {
-    this.weatherData$ = this.WeatherTodayService.get(this.daysFromNow).pipe(
+    this.weatherData$ = this.forecast.get(this.daysFromNow).pipe(
       map((data) => {
         return {
           ...data,
           weatherIconUrl: `${environment.weather_icon_folder}${data.weatherIconUrl}.png`,
           extraData: [
-            extraDataHumidity(data.rh),
-            extraDataUV(data.uv),
-            extraDataWindSpeed(data.wind_spd),
+            extraDataHumidity(data.rh, environment.extra_data_icon_folder),
+            extraDataUV(data.uv, environment.extra_data_icon_folder),
+            extraDataWindSpeed(data.wind_spd, environment.extra_data_icon_folder),
           ]
         }
       })
