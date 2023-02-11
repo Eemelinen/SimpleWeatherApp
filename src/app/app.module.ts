@@ -14,7 +14,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormComponent } from './components/generics/reactive-form/reactive-form.component';
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { WeatherApiService } from './services/weather-api/weather-api.service';
-import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
+import { SmallWeatherCardComponent } from './components/small-weather-card/small-weather-card.component';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AverageTemperatureService } from './services/average-temperature/average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
@@ -28,7 +28,7 @@ import { AbstractOneDayWeatherService } from './services/weather-today/abtract-w
 import { OneDayWeatherService } from './services/weather-today/one-day-weather.service';
 import { AbstractMultiDayForecastService } from './services/next-week/abstract-multi-day-forecast.service';
 import { MultiDayForecastService } from './services/next-week/multi-day-forecast.service';
-import {OneDayWeatherComponent} from './components/one-day-weather/one-day-weather.component';
+import { OneDayWeatherComponent } from './components/one-day-weather/one-day-weather.component';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
@@ -47,7 +47,7 @@ const production = [
     CustomSelectComponent,
     ClickOutsideDirective,
     ReactiveFormComponent,
-    TemperatureCardComponent,
+    SmallWeatherCardComponent,
     OneDayWeatherComponent,
     ExtraDataCardComponent,
     NextWeekComponent,

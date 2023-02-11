@@ -6,7 +6,7 @@ import { MockComponents } from 'ng-mocks';
 import { mockForecasts } from '../mocks/mock-forecasts';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
-import { TemperatureCardComponent } from './components/temperature-card/temperature-card.component';
+import { SmallWeatherCardComponent } from './components/small-weather-card/small-weather-card.component';
 import { of } from 'rxjs';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';

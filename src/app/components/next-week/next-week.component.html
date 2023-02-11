@@ -6,13 +6,13 @@
     </div>
 
     <div class="days">
-      <app-temperature-card
+      <small-weather-card
         *ngFor="let f of weather.forecasts"
-        [day]="f.dayOfWeek"
+        [title]="f.dayOfWeek"
         [imgUrl]="f.weatherImg"
-        [description]="f.weatherDescription"
+        [weatherDescription]="f.weatherDescription"
         [temperature]="f.temperature">
-      </app-temperature-card>
+      </small-weather-card>
     </div>
 
 <!--    <div class="graph">-->
