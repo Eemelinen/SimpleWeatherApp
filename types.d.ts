@@ -28,7 +28,7 @@ type WeatherCardData = {
   temperature: number,
 };
 
-type extraData = {
+type ExtraData = {
   title: string,
   imgUrl: string,
   value: string
@@ -48,7 +48,7 @@ type WeekdayWeather = {
   dayOfWeek: string,
   weatherImg: string,
   weatherDescription: string,
-  temperature: number
+  temperature: number,
 }
 
 type MultiDayWeatherForecast = {
@@ -61,6 +61,6 @@ type OneDayWeatherComponentData = {
   temperature: number;
   weatherDescription: string;
   weatherIconUrl: string;
-  extraData: extraData[]
+  extraData: ExtraData[]
 }
 

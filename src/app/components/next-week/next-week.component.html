@@ -15,29 +15,19 @@
       </small-weather-card>
     </div>
 
-<!--    <div class="graph">-->
-<!--      <app-graph-container-->
-<!--        [values]="getGraphData(nextWeekData.weatherCards)">-->
-<!--      </app-graph-container>-->
-<!--    </div>-->
+    <div *ngIf="showGraph" class="graph">
+      <app-graph-container
+        [values]="getGraphData(weather.forecasts)">
+      </app-graph-container>
+    </div>
 
-<!--    <app-extra-data-container>-->
-<!--      <app-extra-data-card-->
-<!--        [title]="'avg HR'"-->
-<!--        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"-->
-<!--        [data]="nextWeekData.averageHumidity + '%'">-->
-<!--      ></app-extra-data-card>-->
-<!--      <app-extra-data-card-->
-<!--        [title]="'avg HR'"-->
-<!--        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"-->
-<!--        [data]="1 + '%'">-->
-<!--        ></app-extra-data-card>-->
-<!--      <app-extra-data-card-->
-<!--        [title]="'avg HR'"-->
-<!--        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"-->
-<!--        [data]="1 + '%'">-->
-<!--        ></app-extra-data-card>-->
-<!--    </app-extra-data-container>-->
+    <app-extra-data-container *ngIf="showAverages">
+      <app-extra-data-card *ngFor="let avg of weather.averages"
+        [title]="avg.title"
+        [imgUrl]="avg.imgUrl"
+        [data]="avg.value">
+      </app-extra-data-card>
+    </app-extra-data-container>
 
   </div>
 </ng-container>

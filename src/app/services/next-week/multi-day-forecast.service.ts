@@ -45,7 +45,7 @@ export class MultiDayForecastService extends AbstractMultiDayForecastService {
           dayOfWeek: this.getDayOfWeek(day.datetime),
           weatherImg: day.weather.icon,
           weatherDescription: day.weather.description,
-          temperature: day.temp
+          temperature: day.temp,
         }
       });
   }

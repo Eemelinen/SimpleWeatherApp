@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractOneDayWeatherService } from '../../services/weather-today/abtract-weather-today.service';
+import { AbstractOneDayWeatherService } from '../../services/one-day-weather/abtract-weather-today.service';
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyOneDayWeather } from './empty-one-day-weather';
@@ -9,7 +9,7 @@ type ComponentData = {
   temperature: number;
   weatherDescription: string;
   weatherIconUrl: string;
-  extraData: extraData[]
+  extraData: ExtraData[]
 }
 
 @Component({
@@ -41,7 +41,7 @@ export class OneDayWeatherComponent implements OnInit {
   }
 
   // Todo: this formatting logic is more presentational and should be moved to component
-  private formatWindSpeed(wind: number): extraData {
+  private formatWindSpeed(wind: number): ExtraData {
     return {
       title: 'WS',
       imgUrl: `${environment.extra_data_icon_folder}wind.png`,
@@ -49,7 +49,7 @@ export class OneDayWeatherComponent implements OnInit {
     }
   }
 
-  private formatUv(uvIndex: number): extraData {
+  private formatUv(uvIndex: number): ExtraData {
     return {
       title: 'UV',
       imgUrl: `${environment.extra_data_icon_folder}uv.png`,
@@ -57,7 +57,7 @@ export class OneDayWeatherComponent implements OnInit {
     }
   }
 
-  private formatHumidity(humidity: number): extraData {
+  private formatHumidity(humidity: number): ExtraData {
     return {
       title: 'RH',
       imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
