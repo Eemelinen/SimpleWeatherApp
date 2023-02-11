@@ -1,5 +1,4 @@
 <div class="app">
-
   <section class="left-side">
     <div class="left-side-content">
       <div class="location-selection">
@@ -13,30 +12,9 @@
     </div>
   </section>
 
-<!--    Show if weather forecast has data-->
   <div class="right-side">
     <div class="right-side-content">
-      <app-next-week></app-next-week>
+      <multi-day-forecast></multi-day-forecast>
     </div>
   </div>
 </div>
-
-<!--      <ng-container *ngIf="averageTempForecast$ | async as averageTemp">-->
-<!--          <section *ngIf="averageTemp.title" class="average-temperature">-->
-<!--            <app-temperature-card-->
-<!--              [bigCard]="true"-->
-<!--              [title]="averageTemp.title"-->
-<!--              [temperature]="averageTemp.temperatureValue">-->
-<!--            </app-temperature-card>-->
-<!--          </section>-->
-<!--      </ng-container>-->
-
-<!--      <ng-container *ngIf="nextWeekForecast$ | async as nextWeekForecast">-->
-<!--        <section  *ngIf="nextWeekForecast.length" class="next-week-temperatures">-->
-<!--          <app-temperature-card-->
-<!--            *ngFor="let forecast of nextWeekForecast"-->
-<!--            [title]="forecast.title"-->
-<!--            [temperature]="forecast.temperatureValue">-->
-<!--          </app-temperature-card>-->
-<!--        </section>-->
-<!--      </ng-container>-->

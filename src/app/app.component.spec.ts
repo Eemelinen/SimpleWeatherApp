@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 import { OneDayWeatherComponent } from './components/one-day-weather/one-day-weather.component';
-import {NextWeekComponent} from './components/next-week/next-week.component';
+import {MultiDayForecastComponent} from './components/multi-day-forecast/multi-day-forecast.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -25,7 +25,7 @@ describe('AppComponent', () => {
         MockComponents(
           LocationPickerComponent,
           OneDayWeatherComponent,
-          NextWeekComponent
+          MultiDayForecastComponent
         ),
       ],
       providers: [

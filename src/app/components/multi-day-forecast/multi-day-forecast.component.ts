@@ -2,27 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractMultiDayForecastService } from '../../services/next-week/abstract-multi-day-forecast.service';
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
-type MultiDayComponentData = {
-  dateRange: string;
-  forecasts: WeekdayWeather[];
-  averages: ExtraData[],
-  graphData: number[];
-}
-
-const emptyMultiDayComponentData: MultiDayComponentData = {
-  dateRange: '',
-  forecasts: [],
-  averages: [],
-  graphData: [],
-}
+import { emptyMultiDayComponentData } from './empty-multiday-component-data';
 
 @Component({
-  selector: 'app-next-week',
-  templateUrl: './next-week.component.html',
-  styleUrls: ['./next-week.component.scss'],
+  selector: 'multi-day-forecast',
+  templateUrl: './multi-day-forecast.component.html',
+  styleUrls: ['./multi-day-forecast.component.scss'],
 })
-export class NextWeekComponent implements OnInit {
+export class MultiDayForecastComponent implements OnInit {
   @Input() header: string = 'Next week';
   @Input() showGraph: boolean = true;
   @Input() showAverages: boolean = true;

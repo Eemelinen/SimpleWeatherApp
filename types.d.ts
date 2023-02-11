@@ -56,6 +56,13 @@ type MultiDayWeatherForecast = {
   forecasts: WeekdayWeather[]
 }
 
+type MultiDayComponentData = {
+  dateRange: string;
+  forecasts: WeekdayWeather[];
+  averages: ExtraData[],
+  graphData: number[];
+}
+
 type OneDayWeatherComponentData = {
   city_name: string;
   temperature: number;

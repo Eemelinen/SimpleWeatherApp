@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NextWeekComponent } from './next-week.component';
+import { MultiDayForecastComponent } from './multi-day-forecast.component';
 import { MockComponents } from 'ng-mocks';
 import { SmallWeatherCardComponent } from '../small-weather-card/small-weather-card.component';
 import { GraphContainerComponent } from '../graph-container/graph-container.component';
@@ -7,13 +7,13 @@ import { ExtraDataCardComponent } from '../extra-data-card/extra-data-card.compo
 import { ExtraDataContainerComponent } from '../extra-data-container/extra-data-container.component';
 
 describe('NextWeekComponent', () => {
-  let component: NextWeekComponent;
-  let fixture: ComponentFixture<NextWeekComponent>;
+  let component: MultiDayForecastComponent;
+  let fixture: ComponentFixture<MultiDayForecastComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        NextWeekComponent,
+        MultiDayForecastComponent,
         MockComponents(
           SmallWeatherCardComponent,
           GraphContainerComponent,
@@ -24,7 +24,7 @@ describe('NextWeekComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NextWeekComponent);
+    fixture = TestBed.createComponent(MultiDayForecastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

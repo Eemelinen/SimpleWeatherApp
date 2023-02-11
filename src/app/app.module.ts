@@ -20,7 +20,7 @@ import { AverageTemperatureService } from './services/average-temperature/averag
 import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
 import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
-import { NextWeekComponent } from './components/next-week/next-week.component';
+import { MultiDayForecastComponent } from './components/multi-day-forecast/multi-day-forecast.component';
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
 import { ExtraDataContainerComponent } from './components/extra-data-container/extra-data-container.component';
 import { HorizontalTemperatureCardComponent } from './components/horizontal-temperature-card/horizontal-temperature-card.component';
@@ -50,7 +50,7 @@ const production = [
     SmallWeatherCardComponent,
     OneDayWeatherComponent,
     ExtraDataCardComponent,
-    NextWeekComponent,
+    MultiDayForecastComponent,
     GraphContainerComponent,
     ExtraDataContainerComponent,
     HorizontalTemperatureCardComponent,
