@@ -32,4 +32,16 @@ describe('NextWeekComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Todo: Saved from old average-temp service
+  // it('get method should return a valid weatherCardData observable', () => {
+  //   weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(mockStoredWeatherData));
+  //
+  //   service.get().subscribe((res) => {
+  //     expect(res).toEqual({
+  //       date: 'FEB 2 - 3 2023',
+  //       temperature: 9,
+  //     });
+  //   });
+  // });
 });

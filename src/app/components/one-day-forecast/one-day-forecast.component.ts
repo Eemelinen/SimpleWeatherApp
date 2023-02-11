@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractOneDayWeatherService } from '../../services/one-day-weather/abtract-weather-today.service';
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyOneDayWeather } from './empty-one-day-weather';
+import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
 
 @Component({
   selector: 'one-day-forecast',
@@ -14,7 +14,7 @@ export class OneDayForecastComponent implements OnInit {
   @Input() subHeader: string = 'Today\'s weather forecast';
   weatherData$: Observable<OneDayForecastComponentData> = of(emptyOneDayWeather);
 
-  constructor(private WeatherTodayService: AbstractOneDayWeatherService) {}
+  constructor(private WeatherTodayService: AbstractOneDayForecastService) {}
 
   ngOnInit(): void {
     this.weatherData$ = this.WeatherTodayService.get(this.daysFromNow).pipe(

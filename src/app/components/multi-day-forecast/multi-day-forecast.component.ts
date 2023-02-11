@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractMultiDayForecastService } from '../../services/next-week/abstract-multi-day-forecast.service';
+import { AbstractMultiDayForecastService } from '../../services/multi-day-forecast/abstract-multi-day-forecast.service';
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyMultiDayComponentData } from './empty-multiday-component-data';

@@ -4,7 +4,7 @@ import { MockComponents } from 'ng-mocks';
 import { HorizontalTemperatureCardComponent } from '../horizontal-temperature-card/horizontal-temperature-card.component';
 import { ExtraDataContainerComponent } from '../extra-data-container/extra-data-container.component';
 import { ExtraDataCardComponent } from '../extra-data-card/extra-data-card.component';
-import { AbstractOneDayWeatherService } from '../../services/one-day-weather/abtract-weather-today.service';
+import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-weather-today.service';
 import { of } from 'rxjs';
 import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 
@@ -28,7 +28,7 @@ describe('OneDayForecast', () => {
       ],
       providers: [
         {
-          provide: AbstractOneDayWeatherService,
+          provide: AbstractOneDayForecastService,
           useValue: {
             get: () => of(currentDayForecast)
           }

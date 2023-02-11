@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { OneDayWeatherService } from './one-day-weather.service';
+import { OneDayForecastService } from './one-day-forecast.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { of } from 'rxjs';
 import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 import { emptyWeatherData } from '../weather-api/empty-weather-data';
-import {emptyOneDayWeather} from './empty-one-day-weather';
+import {emptyOneDayForecast} from './empty-one-day-forecast';
 
-describe('OneDayWeatherService', () => {
-  let service: OneDayWeatherService;
+describe('OneDayForecastService', () => {
+  let service: OneDayForecastService;
   let weatherApiServiceSpy: jasmine.SpyObj<AbstractWeatherApiService>;
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('OneDayWeatherService', () => {
         }
       ]
     });
-    service = TestBed.inject(OneDayWeatherService);
+    service = TestBed.inject(OneDayForecastService);
   });
 
   it('should be created', () => {
@@ -47,7 +47,7 @@ describe('OneDayWeatherService', () => {
 
     weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(weatherDataCopy));
     service.get().subscribe((res) => {
-      expect(res).toEqual(emptyOneDayWeather);
+      expect(res).toEqual(emptyOneDayForecast);
     });
   });
 });

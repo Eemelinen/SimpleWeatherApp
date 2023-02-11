@@ -24,18 +24,18 @@ import { MultiDayForecastComponent } from './components/multi-day-forecast/multi
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
 import { ExtraDataContainerComponent } from './components/extra-data-container/extra-data-container.component';
 import { HorizontalTemperatureCardComponent } from './components/horizontal-temperature-card/horizontal-temperature-card.component';
-import { AbstractOneDayWeatherService } from './services/one-day-weather/abtract-weather-today.service';
-import { OneDayWeatherService } from './services/one-day-weather/one-day-weather.service';
-import { AbstractMultiDayForecastService } from './services/next-week/abstract-multi-day-forecast.service';
-import { MultiDayForecastService } from './services/next-week/multi-day-forecast.service';
+import { OneDayForecastService } from './services/one-day-forecast/one-day-forecast.service';
+import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
+import { MultiDayForecastService } from './services/multi-day-forecast/multi-day-forecast.service';
 import { OneDayForecastComponent } from './components/one-day-forecast/one-day-forecast.component';
+import { AbstractOneDayForecastService } from './services/one-day-forecast/abtract-forecast-today.service';
 
 const production = [
   { provide: AbstractLocationService, useClass: LocationService },
   { provide: AbstractWeatherApiService, useClass: WeatherApiService },
   { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
   { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
-  { provide: AbstractOneDayWeatherService, useClass: OneDayWeatherService },
+  { provide: AbstractOneDayForecastService, useClass: OneDayForecastService },
   { provide: AbstractMultiDayForecastService, useClass: MultiDayForecastService }
 ];
 

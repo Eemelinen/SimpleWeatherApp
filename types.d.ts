@@ -34,7 +34,7 @@ type ExtraData = {
   value: string
 }
 
-type OneDayWeather = {
+type OneDayForecast = {
   city_name: string;
   temperature: number;
   weatherDescription: string;

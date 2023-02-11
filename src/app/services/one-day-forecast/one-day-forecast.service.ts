@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AbstractOneDayWeatherService } from './abtract-weather-today.service';
 import { map, Observable } from 'rxjs';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { WeatherApiData} from '../weather-api/weather-data.model';
-import { emptyOneDayWeather } from './empty-one-day-weather';
+import { emptyOneDayForecast } from './empty-one-day-forecast';
+import { AbstractOneDayForecastService } from './abtract-forecast-today.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OneDayWeatherService extends AbstractOneDayWeatherService {
+export class OneDayForecastService extends AbstractOneDayForecastService {
 
   constructor(protected override apiService: AbstractWeatherApiService) {
     super(apiService);
@@ -19,11 +19,11 @@ export class OneDayWeatherService extends AbstractOneDayWeatherService {
    * Returns emptyOneDayWeather if data is invalid or storage does not contain data
    * @param daysFromNow
    */
-  get(daysFromNow: number = 0): Observable<OneDayWeather> {
+  get(daysFromNow: number = 0): Observable<OneDayForecast> {
     return this.apiService.getCurrentForecast().pipe(
       map((forecast: WeatherApiData) => {
         if (!WeatherApiData.isValid(forecast) || forecast.data.length < daysFromNow + 1) {
-          return emptyOneDayWeather;
+          return emptyOneDayForecast;
         }
 
         return {

@@ -1,4 +1,4 @@
-export const mockWeatherTodayData: OneDayWeather = {
+export const mockWeatherTodayData: OneDayForecast = {
   city_name: 'London',
   temperature: 10,
   weatherDescription: 'Cloudy',
