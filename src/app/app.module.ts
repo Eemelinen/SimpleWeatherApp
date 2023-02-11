@@ -26,8 +26,8 @@ import { ExtraDataContainerComponent } from './components/extra-data-container/e
 import { HorizontalTemperatureCardComponent } from './components/horizontal-temperature-card/horizontal-temperature-card.component';
 import { AbstractOneDayWeatherService } from './services/weather-today/abtract-weather-today.service';
 import { OneDayWeatherService } from './services/weather-today/one-day-weather.service';
-import { AbstractNextWeekService } from './services/next-week/abstract-next-week.service';
-import { NextWeekService } from './services/next-week/next-week.service';
+import { AbstractMultiDayForecastService } from './services/next-week/abstract-multi-day-forecast.service';
+import { MultiDayForecastService } from './services/next-week/multi-day-forecast.service';
 import {OneDayWeatherComponent} from './components/one-day-weather/one-day-weather.component';
 
 const production = [
@@ -36,7 +36,7 @@ const production = [
   { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
   { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
   { provide: AbstractOneDayWeatherService, useClass: OneDayWeatherService },
-  { provide: AbstractNextWeekService, useClass: NextWeekService }
+  { provide: AbstractMultiDayForecastService, useClass: MultiDayForecastService }
 ];
 
 @NgModule({

@@ -1,42 +1,43 @@
-<ng-container *ngIf="nextWeekData$ | async as nextWeekData">
-  <div *ngIf="nextWeekData.dateRange" class="next-week">
+<ng-container *ngIf="forecast$ | async as weather">
+  <div *ngIf="weather.dateRange" class="multi-day-forecast">
     <div class="header-container">
-      <span class="date-range">{{nextWeekData.dateRange}}</span>
-      <span class="header">Next week</span>
+      <span class="date-range">{{weather.dateRange}}</span>
+      <span class="header">{{header}}</span>
     </div>
 
     <div class="days">
       <app-temperature-card
-        *ngFor="let day of nextWeekData.weatherCards"
-        [day]="day.dayOfWeek"
-        [imageUrl]="day.weatherImgUrl"
-        [temperature]="day.temperature">
+        *ngFor="let f of weather.forecasts"
+        [day]="f.dayOfWeek"
+        [imgUrl]="f.weatherImg"
+        [description]="f.weatherDescription"
+        [temperature]="f.temperature">
       </app-temperature-card>
     </div>
 
-    <div class="graph">
-      <app-graph-container
-        [values]="getGraphData(nextWeekData.weatherCards)">
-      </app-graph-container>
-    </div>
+<!--    <div class="graph">-->
+<!--      <app-graph-container-->
+<!--        [values]="getGraphData(nextWeekData.weatherCards)">-->
+<!--      </app-graph-container>-->
+<!--    </div>-->
 
-    <app-extra-data-container>
-      <app-extra-data-card
-        [title]="'avg HR'"
-        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
-        [data]="nextWeekData.averageHumidity + '%'">
-      ></app-extra-data-card>
-      <app-extra-data-card
-        [title]="'avg HR'"
-        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
-        [data]="1 + '%'">
-        ></app-extra-data-card>
-      <app-extra-data-card
-        [title]="'avg HR'"
-        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"
-        [data]="1 + '%'">
-        ></app-extra-data-card>
-    </app-extra-data-container>
+<!--    <app-extra-data-container>-->
+<!--      <app-extra-data-card-->
+<!--        [title]="'avg HR'"-->
+<!--        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"-->
+<!--        [data]="nextWeekData.averageHumidity + '%'">-->
+<!--      ></app-extra-data-card>-->
+<!--      <app-extra-data-card-->
+<!--        [title]="'avg HR'"-->
+<!--        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"-->
+<!--        [data]="1 + '%'">-->
+<!--        ></app-extra-data-card>-->
+<!--      <app-extra-data-card-->
+<!--        [title]="'avg HR'"-->
+<!--        [imgUrl]="'assets/images/extra-data-icons/humidity.png'"-->
+<!--        [data]="1 + '%'">-->
+<!--        ></app-extra-data-card>-->
+<!--    </app-extra-data-container>-->
 
   </div>
 </ng-container>

@@ -1,55 +1,36 @@
 import { Injectable } from '@angular/core';
-import { AbstractNextWeekService } from './abstract-next-week.service';
+import { AbstractMultiDayForecastService } from './abstract-multi-day-forecast.service';
 import { map, Observable } from 'rxjs';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { WeatherApiData } from '../weather-api/weather-data.model';
-import { environment } from '../../../environments/environment';
+import { emptyMultiDayForecast } from './empty-multi-day-forecast';
 
 type DateObject = { year: string; month: string; day: string };
 const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-export const emptyNextWeekData: WeatherNextWeekData = {
-  dateRange: '',
-  averageTemperature: 0,
-  weatherCards: [
-    {
-      dayOfWeek: '',
-      weatherImgUrl: '',
-      temperature: 0,
-    }
-  ]
-}
-
 @Injectable({
   providedIn: 'root'
 })
-export class NextWeekService extends AbstractNextWeekService {
+export class MultiDayForecastService extends AbstractMultiDayForecastService {
 
   constructor(protected override apiService: AbstractWeatherApiService) {
     super(apiService);
   }
 
-  get(): Observable<WeatherNextWeekData> {
+  get(startDay = 1, endDay = 8): Observable<MultiDayWeatherForecast> {
     return this.apiService.getCurrentForecast().pipe(
       map((forecast: WeatherApiData) => {
         if (!WeatherApiData.isValid(forecast)) {
-          return emptyNextWeekData
+          return emptyMultiDayForecast
         }
 
-        const nextWeekData = forecast.data.slice(1, 8);
+        const nextWeekData = forecast.data.slice(startDay, endDay);
         return {
           dateRange: this.getNextWeekDataRange(nextWeekData),
-          averageTemperature: this.calculateAverageTemperature(nextWeekData),
-          weatherCards: this.createWeatherCardData(nextWeekData)
+          forecasts: this.createWeatherCardData(nextWeekData)
         }
       }
     ));
-  }
-
-  private calculateAverageTemperature(nextWeekData: FullWeatherData[]): number {
-    const temperatures = nextWeekData.map((data) => data.temp);
-    const sum = temperatures.reduce((a, b) => a + b, 0);
-    return Math.round(sum / temperatures.length);
   }
 
   private getNextWeekDataRange(nextWeekData: FullWeatherData[]): string {
@@ -57,13 +38,14 @@ export class NextWeekService extends AbstractNextWeekService {
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private createWeatherCardData(nextWeekData: FullWeatherData[]): SmallWeatherCardData[] {
+  private createWeatherCardData(nextWeekData: FullWeatherData[]): WeekdayWeather[] {
     return nextWeekData
       .map((day: FullWeatherData) => {
         return {
           dayOfWeek: this.getDayOfWeek(day.datetime),
-          weatherImgUrl: `${environment.weather_icon_folder}${day.weather.icon}`,
-          temperature: Math.round(day.temp)
+          weatherImg: day.weather.icon,
+          weatherDescription: day.weather.description,
+          temperature: day.temp
         }
       });
   }

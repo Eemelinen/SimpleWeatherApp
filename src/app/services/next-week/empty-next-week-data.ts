@@ -1,10 +1,10 @@
-export const emptyNextWeekData: WeatherNextWeekData = {
+export const emptyNextWeekData: MultiDayWeatherForecast = {
   dateRange: '',
   averageTemperature: 0,
-  weatherCards: [
+  forecasts: [
     {
       dayOfWeek: '',
-      weatherImgUrl: '',
+      weatherImg: '',
       temperature: 0,
     }
   ]

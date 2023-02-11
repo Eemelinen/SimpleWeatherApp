@@ -4,8 +4,9 @@ import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-s
 import { of } from 'rxjs';
 import { mockStoredWeatherData } from '../../../mocks/mock-weather-data';
 import { emptyWeatherData } from '../weather-api/empty-weather-data';
+import {emptyOneDayWeather} from './empty-one-day-weather';
 
-describe('WeatherTodayService', () => {
+describe('OneDayWeatherService', () => {
   let service: OneDayWeatherService;
   let weatherApiServiceSpy: jasmine.SpyObj<AbstractWeatherApiService>;
 
@@ -35,7 +36,8 @@ describe('WeatherTodayService', () => {
     weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(mockStoredWeatherData));
     service.get().subscribe((res) => {
       expect(res).toEqual(expectedResult);
-      expect(res.data.length).toEqual(1);
+      expect(res.city_name).toEqual(mockStoredWeatherData.city_name);
+      expect(res.temperature).toEqual(mockStoredWeatherData.data[0].temp);
     });
   });
 
@@ -45,7 +47,7 @@ describe('WeatherTodayService', () => {
 
     weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(weatherDataCopy));
     service.get().subscribe((res) => {
-      expect(res).toEqual(emptyWeatherData);
+      expect(res).toEqual(emptyOneDayWeather);
     });
   });
 });

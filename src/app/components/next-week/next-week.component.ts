@@ -1,71 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractNextWeekService } from '../../services/next-week/abstract-next-week.service';
-import { combineLatest, map, Observable, of } from 'rxjs';
-import { emptyNextWeekData } from '../../services/next-week/next-week.service';
-import { AverageHumidityService } from '../../services/weather-data-average/average-humidity.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractMultiDayForecastService } from '../../services/next-week/abstract-multi-day-forecast.service';
+import { map, Observable, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
+type MultiDayComponentData = {
+  dateRange: string;
+  forecasts: WeekdayWeather[];
+}
+
+const emptyMultiDayComponentData: MultiDayComponentData = {
+  dateRange: '',
+  forecasts: [],
+}
+
 @Component({
   selector: 'app-next-week',
   templateUrl: './next-week.component.html',
   styleUrls: ['./next-week.component.scss'],
-  providers: [AverageHumidityService],
 })
 export class NextWeekComponent implements OnInit {
-  nextWeekData$: Observable<any> = of(emptyNextWeekData);
-  averageHumidity$: Observable<number> = of(-1);
+  @Input() header: string = 'Next week';
+  forecast$: Observable<MultiDayComponentData> = of(emptyMultiDayComponentData);
 
   constructor(
-    private nextWeekService: AbstractNextWeekService,
-    // Todo: Change to abstract service
-    private averageHumidityService: AverageHumidityService,
+    private multiDayForecast: AbstractMultiDayForecastService,
     ) {
   }
 
   ngOnInit(): void {
-    // this.nextWeekData$ = this.nextWeekService.get();
-    // this.averageHumidity$ = this.averageHumidityService.get();
-
-    this.nextWeekData$ = combineLatest([
-      this.nextWeekService.get(),
-      this.averageHumidityService.get(),
-    ]).pipe(
-        map(([nextWeekData, averageHumidity]) => {
-          console.log({
-            ...nextWeekData,
-            averageHumidity,
+    this.forecast$ = this.multiDayForecast.get().pipe(
+      map((data) => {
+        return {
+          ...data,
+          forecasts: data.forecasts.map((forecast) => {
+            return {
+              ...forecast,
+              temperature: Math.round(forecast.temperature),
+              weatherImg: `${environment.weather_icon_folder}${forecast.weatherImg}.png`,
+            }
           })
-          return {
-            ...nextWeekData,
-            averageHumidity,
-          }
-        })
-      )
-
-      // .subscribe((data) => {
-      // console.log(data);
-    // });
-
-      // .subscribe((data: any) => {
-      // console.log(data)
-    // });
-
-
-    //   .pipe(
-    //   map(([nextWeekData, averageHumidity]) => {
-    //     console.log('test')
-    //     return {
-    //       ...nextWeekData,
-    //       averageHumidity,
-    //     }
-    //   }
-    // ))
-
-    // test.subscribe((data) => {
-    //   console.log(data);
-    // });
-
+        }
+      })
+    );
   }
 
-  getGraphData(dailyData: SmallWeatherCardData[]): number[] {
+  private calculateAverageTemperature(nextWeekData: FullWeatherData[]): number {
+    const temperatures = nextWeekData.map((data) => data.temp);
+    const sum = temperatures.reduce((a, b) => a + b, 0);
+    return Math.round(sum / temperatures.length);
+  }
+
+  getGraphData(dailyData: WeekdayWeather[]): number[] {
     return dailyData.map((data) => data.temperature);
   }
 }

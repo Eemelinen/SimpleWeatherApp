@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NextWeekService } from './next-week.service';
+import { MultiDayForecastService } from './multi-day-forecast.service';
 
 describe('NextWeekService', () => {
-  let service: NextWeekService;
+  let service: MultiDayForecastService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(NextWeekService);
+    service = TestBed.inject(MultiDayForecastService);
   });
 
   it('should be created', () => {

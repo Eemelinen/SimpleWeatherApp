@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./temperature-card.component.scss']
 })
 export class TemperatureCardComponent {
-  @Input() imageUrl: string = '';
+  @Input() imgUrl: string = '';
+  @Input() description: string = '';
   @Input() day: string = '';
   @Input() temperature: number = 0;
 }

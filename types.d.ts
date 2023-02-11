@@ -44,16 +44,16 @@ type OneDayWeather = {
   uv : number;
 }
 
-type SmallWeatherCardData = {
+type WeekdayWeather = {
   dayOfWeek: string,
-  weatherImgUrl: string,
+  weatherImg: string,
+  weatherDescription: string,
   temperature: number
 }
 
-type WeatherNextWeekData = {
+type MultiDayWeatherForecast = {
   dateRange: string;
-  averageTemperature: number;
-  weatherCards: SmallWeatherCardData[]
+  forecasts: WeekdayWeather[]
 }
 
 type OneDayWeatherComponentData = {
