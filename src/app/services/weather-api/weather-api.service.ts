@@ -6,14 +6,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherApiResponse } from './weather-api-response';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { emptyWeatherData } from './empty-weather-data';
-import { WeatherApiData } from './weather-data.model';
+import { StoredWeatherData } from './weather-data.model';
 import { EnvironmentService } from '../environment/environment.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherApiService extends AbstractWeatherApiService {
-  private currentForecast$$ = new BehaviorSubject<WeatherApiData>({city_name: '', country_code: '', data: []});
+  private currentForecast$$ = new BehaviorSubject<StoredWeatherData>({city_name: '', country_code: '', data: []});
   private currentForecast$ = this.currentForecast$$.asObservable();
 
   constructor(
@@ -24,7 +24,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     super();
   }
 
-  getCurrentForecast(): Observable<WeatherApiData> {
+  getCurrentForecast(): Observable<StoredWeatherData> {
     return this.currentForecast$;
   }
 
@@ -54,7 +54,7 @@ export class WeatherApiService extends AbstractWeatherApiService {
     }
 
     try {
-      const parsedData = WeatherApiData.parseData(res.data);
+      const parsedData = StoredWeatherData.parseData(res.data);
       this.currentForecast$$.next({city_name: res.city_name, country_code: res.country_code, data: parsedData});
     } catch(e) {
       this.handleError();

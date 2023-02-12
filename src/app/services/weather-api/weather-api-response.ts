@@ -1,5 +1,5 @@
 export interface WeatherApiResponse {
   "city_name": string,
   "country_code": string,
-  "data": FullWeatherData[]
+  "data": ApiWeatherData[]
 }

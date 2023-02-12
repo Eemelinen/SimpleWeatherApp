@@ -14,7 +14,7 @@ type SimpleFormOutput = {
   textInputValue: string
 };
 
-type FullWeatherData = {
+type ApiWeatherData = {
   datetime: string;
   temp: number;
   uv: number;

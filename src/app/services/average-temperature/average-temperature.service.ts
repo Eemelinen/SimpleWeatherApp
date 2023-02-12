@@ -27,7 +27,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     );
   }
 
-  private createAverageTempValue(forecasts: FullWeatherData[]): WeatherCardData
+  private createAverageTempValue(forecasts: ApiWeatherData[]): WeatherCardData
   {
     const dateRange = this.getDates(forecasts);
     const averageTemp = this.calculateAverageTemperature(forecasts);
@@ -37,13 +37,13 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     };
   }
 
-  private getDates(forecasts: FullWeatherData[]): string {
+  private getDates(forecasts: ApiWeatherData[]): string {
     const dateRange = this.getDateRange(forecasts);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
   }
 
-  private calculateAverageTemperature(forecasts: FullWeatherData[]): number {
-    const total = forecasts.reduce((acc: number, day: FullWeatherData) => acc + day.temp, 0);
+  private calculateAverageTemperature(forecasts: ApiWeatherData[]): number {
+    const total = forecasts.reduce((acc: number, day: ApiWeatherData) => acc + day.temp, 0);
     return Math.round((total / forecasts.length));
   }
 
@@ -55,7 +55,7 @@ export class AverageTemperatureService extends AbstractAverageTemperatureService
     return str && str[0] === '0' ? str.slice(1) : str;
   }
 
-  private getDateRange(forecasts: FullWeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
+  private getDateRange(forecasts: ApiWeatherData[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
     const [firstDateObj, lastDateObj] = [
       forecasts[0].datetime,
       forecasts[forecasts.length - 1].datetime

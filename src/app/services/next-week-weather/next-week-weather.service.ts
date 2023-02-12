@@ -23,10 +23,10 @@ export class NextWeekWeatherService extends AbstractNextWeekWeatherService {
     );
   }
 
-  private createOneWeekForecast(res: FullWeatherData[]): WeatherCardData[] {
+  private createOneWeekForecast(res: ApiWeatherData[]): WeatherCardData[] {
     return res
       .slice(0, 7)
-      .map((day: FullWeatherData) => {
+      .map((day: ApiWeatherData) => {
         return {
           date: this.getDayName(day.datetime),
           temperature: Math.round(day.temp)

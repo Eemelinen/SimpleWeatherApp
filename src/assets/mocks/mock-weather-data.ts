@@ -1,7 +1,7 @@
-import { WeatherApiData } from '../../app/services/weather-api/weather-data.model';
+import { StoredWeatherData } from '../../app/services/weather-api/weather-data.model';
 import { mockWeatherApiResponse } from './mock-weather-api-response';
 
-export const mockStoredWeatherData: WeatherApiData = new WeatherApiData(
+export const mockStoredWeatherData: StoredWeatherData = new StoredWeatherData(
   mockWeatherApiResponse.city_name,
   mockWeatherApiResponse.country_code,
   [

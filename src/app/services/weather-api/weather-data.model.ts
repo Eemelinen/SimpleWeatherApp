@@ -2,13 +2,13 @@
  * Weather api response gets parsed into a common format within application
  * This way for example api can be changed and new results parsed to this model
  */
-export class WeatherApiData {
+export class StoredWeatherData {
   constructor(public city_name: string,
               public country_code: string,
-              public data: FullWeatherData[]) {
+              public data: ApiWeatherData[]) {
   }
 
-  public static parseData(data: FullWeatherData[]): FullWeatherData[] {
+  public static parseData(data: ApiWeatherData[]): ApiWeatherData[] {
     return data.map((data) => {
       return {
         datetime: data.datetime,
@@ -25,7 +25,7 @@ export class WeatherApiData {
     });
   }
 
-  public static isValid(data: WeatherApiData): boolean {
+  public static isValid(data: StoredWeatherData): boolean {
     return !(!data.city_name || !data.country_code || !data.data.length);
 
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
-import { WeatherApiData} from '../weather-api/weather-data.model';
+import { StoredWeatherData} from '../weather-api/weather-data.model';
 import { emptyOneDayForecast } from './empty-one-day-forecast';
 import { AbstractOneDayForecastService } from './abtract-forecast-today.service';
 
@@ -21,8 +21,8 @@ export class OneDayForecastService extends AbstractOneDayForecastService {
    */
   get(daysFromNow: number = 0): Observable<OneDayForecast> {
     return this.apiService.getCurrentForecast().pipe(
-      map((forecast: WeatherApiData) => {
-        if (!WeatherApiData.isValid(forecast) || forecast.data.length < daysFromNow + 1) {
+      map((forecast: StoredWeatherData) => {
+        if (!StoredWeatherData.isValid(forecast) || forecast.data.length < daysFromNow + 1) {
           return emptyOneDayForecast;
         }
 
