@@ -73,7 +73,7 @@ $border-radius: 6px;
 
     li {
       position: relative;
-      background: white;
+      background: var(--background-3);
       padding: 2px;
       cursor: pointer;
       font-weight: 600;
@@ -82,6 +82,15 @@ $border-radius: 6px;
       justify-content: center;
       width: 100%;
 
+      &:first-child {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
 
       &:hover {
         background: fade_out($accent-color, 0.6);
