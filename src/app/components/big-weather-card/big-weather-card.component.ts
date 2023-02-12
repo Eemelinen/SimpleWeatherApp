@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class BigWeatherCardComponent {
   @Input() imgUrl: string = '';
   @Input() temperature: number = 0;
+  @Input() weatherDesc: string = '';
 }
