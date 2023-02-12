@@ -12,16 +12,7 @@ export class DatesToStringService extends AbstractDatesToStringService {
 
   public format(nextWeekData: HasDatetimeInterface[]): string {
     const dateRange = this.getDateRange(nextWeekData);
-    console.log(dateRange);
     return this.formatDateRange(dateRange.firstDateObj, dateRange.lastDateObj);
-  }
-
-  private getMonthName(month: number): string {
-    return months[month];
-  }
-
-  private removeFirstCharIfZero(str: string): string {
-    return str && str[0] === '0' ? str.slice(1) : str;
   }
 
   private getDateRange(forecasts: HasDatetimeInterface[]): { firstDateObj: DateObject; lastDateObj: DateObject } {
@@ -40,12 +31,22 @@ export class DatesToStringService extends AbstractDatesToStringService {
     return { firstDateObj, lastDateObj };
   }
 
+  private getMonthName(month: number): string {
+    return months[month];
+  }
+
+  private removeFirstCharIfZero(str: string): string {
+    return str && str[0] === '0' ? str.slice(1) : str;
+  }
+
+
   private formatDateRange(firstDate: DateObject, lastDate: DateObject): string {
     const firstMonth = this.getMonthName(Number(firstDate.month) - 1);
     const lastMonth = this.getMonthName(Number(lastDate.month) - 1);
 
+
     if (firstDate.year !== lastDate.year) {
-      return `${firstMonth} ${firstDate.day}, ${firstDate.year} - ${lastMonth} ${lastDate.day} ${lastDate.year}`;
+      return `${firstMonth} ${firstDate.day} ${firstDate.year} - ${lastMonth} ${lastDate.day} ${lastDate.year}`;
     }
 
     if (firstDate.month !== lastDate.month) {
