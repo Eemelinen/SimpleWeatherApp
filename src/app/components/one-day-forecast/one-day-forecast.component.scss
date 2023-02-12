@@ -14,7 +14,7 @@
 
   .header {
     font-size: 5rem;
-    letter-spacing: .2rem;
+    letter-spacing: var(--header-letter-spacing);
     color: var(--white-1);
     margin-top: -4rem;
     margin-bottom: -2rem;

@@ -49,6 +49,8 @@ $weather-app-theme: mat.define-light-theme((
   --background-1: rgba(0, 0, 0, 0.2);
   --background-2: rgba(23, 23, 23, 0.2);
   --background-3: rgba(255, 255, 255, 0.7);
+
+  --header-letter-spacing: 0.2rem;
 }
 
 * {

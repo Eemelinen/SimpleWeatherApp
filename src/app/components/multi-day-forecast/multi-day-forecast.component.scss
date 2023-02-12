@@ -17,13 +17,14 @@
   }
 
   .date-range {
-    color: var(--black-1);
+    color: var(--white-2);
   }
 
   .header {
+    font-size: 4rem;
+    letter-spacing: var(--header-letter-spacing);
     color: var(--white-1);
     margin-top: -1.3rem;
-    font-size: 4rem;
     line-height: 1.6;
   }
 
