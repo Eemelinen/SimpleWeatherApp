@@ -4,7 +4,7 @@ import { extraDataUV } from './extra-data-uv';
 import { extraDataWindSpeed } from './extra-data-wind-speed';
 import { formatGraphData } from './format-graph-data';
 
-fdescribe('Shared function', () => {
+describe('Shared function', () => {
   it('calcAvgTemp should return average temperature', () => {
     expect(calcTempAvg([
       { temperature: 11 },

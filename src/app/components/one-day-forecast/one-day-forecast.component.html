@@ -4,10 +4,10 @@
     <span class="header">{{today.city_name}}</span>
     <div class="weather-content">
 
-      <app-horizontal-temperature-card
+      <big-weather-card
         [temperature]="today.temperature"
         [imgUrl]="today.weatherIconUrl">
-      </app-horizontal-temperature-card>
+      </big-weather-card>
 
       <app-extra-data-container>
         <app-extra-data-card *ngFor="let extraData of today.extraData"

@@ -23,7 +23,7 @@ import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-
 import { MultiDayForecastComponent } from './components/multi-day-forecast/multi-day-forecast.component';
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
 import { ExtraDataContainerComponent } from './components/extra-data-container/extra-data-container.component';
-import { HorizontalTemperatureCardComponent } from './components/horizontal-temperature-card/horizontal-temperature-card.component';
+import { BigWeatherCardComponent } from './components/big-weather-card/big-weather-card.component';
 import { OneDayForecastService } from './services/one-day-forecast/one-day-forecast.service';
 import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
 import { MultiDayForecastService } from './services/multi-day-forecast/multi-day-forecast.service';
@@ -58,7 +58,7 @@ const providers = [
     MultiDayForecastComponent,
     GraphContainerComponent,
     ExtraDataContainerComponent,
-    HorizontalTemperatureCardComponent,
+    BigWeatherCardComponent,
   ],
   imports: [
     ReactiveFormsModule,

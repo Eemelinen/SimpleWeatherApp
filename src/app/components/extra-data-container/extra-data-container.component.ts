@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './extra-data-container.component.html',
   styleUrls: ['./extra-data-container.component.scss']
 })
-export class ExtraDataContainerComponent {
-
-}
+export class ExtraDataContainerComponent {}

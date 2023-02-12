@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ExtraDataContainerComponent } from './extra-data-container.component';
 
 describe('ExtraDataContainerComponent', () => {
@@ -19,5 +18,10 @@ describe('ExtraDataContainerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have element with class extra-data-container', () => {
+    const element = fixture.nativeElement;
+    expect(element.querySelector('.extra-data-container')).toBeTruthy();
   });
 });

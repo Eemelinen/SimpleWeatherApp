@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -16,12 +16,13 @@ export class GraphContainerComponent implements OnInit {
   }
 
   createChart() {
+    const labels = this.values.map(() => '');
 
     this.chart = new Chart("lineChart", {
       type: 'line', //this denotes tha type of chart
 
       data: {
-        labels: ['', '', '', '', '', '', ''],
+        labels: labels,
         datasets: [
           {
             label: this.label,

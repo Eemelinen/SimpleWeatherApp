@@ -17,7 +17,8 @@
 
     <div *ngIf="showGraph" class="graph">
       <app-graph-container
-        [values]="weather.graphData">
+        [values]="weather.graphData"
+        [title]="'temperature'">
       </app-graph-container>
     </div>
 

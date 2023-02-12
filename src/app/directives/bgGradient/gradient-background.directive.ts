@@ -96,7 +96,6 @@ export class GradientBackgroundDirective implements OnInit, OnDestroy {
    * Change the endpoint color, which defines rest of the gradient
    */
   public changeEndpointColor(averageTemperature: number): number {
-    console.log('changeEndpointColor', averageTemperature)
     return this.endColorIndex = this.translateTemperatureToColorIndex(averageTemperature);
   }
 
