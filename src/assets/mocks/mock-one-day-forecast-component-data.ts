@@ -1,4 +1,4 @@
-export const mockWeatherTodayData: OneDayForecast = {
+export const mockOneDayForecastComponentData: OneDayForecastComponentData = {
   city_name: 'London',
   temperature: 10,
   weatherDescription: 'Cloudy',
@@ -7,7 +7,8 @@ export const mockWeatherTodayData: OneDayForecast = {
     {
       title: 'WS',
       imgUrl: 'assets/images/windmill.png',
-      value: '10 m/s'
+      value: '10 m/s',
+
     },
     {
       title: 'UV',

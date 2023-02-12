@@ -5,12 +5,16 @@ import { SmallWeatherCardComponent } from '../small-weather-card/small-weather-c
 import { GraphContainerComponent } from '../graph-container/graph-container.component';
 import { ExtraDataCardComponent } from '../extra-data-card/extra-data-card.component';
 import { ExtraDataContainerComponent } from '../extra-data-container/extra-data-container.component';
+import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
 
-describe('NextWeekComponent', () => {
+describe('MultiDayForecastComponent', () => {
   let component: MultiDayForecastComponent;
   let fixture: ComponentFixture<MultiDayForecastComponent>;
+  let oneDayForecastServiceSpy: jasmine.SpyObj<AbstractOneDayForecastService>;
 
   beforeEach(async () => {
+    oneDayForecastServiceSpy = jasmine.createSpyObj('AbstractOneDayForecastService', ['getCurrentForecast']);
+
     await TestBed.configureTestingModule({
       declarations: [
         MultiDayForecastComponent,
@@ -20,6 +24,12 @@ describe('NextWeekComponent', () => {
           ExtraDataCardComponent,
           ExtraDataContainerComponent
         )
+      ],
+      providers: [
+        {
+          provide: AbstractOneDayForecastService,
+          useValue: oneDayForecastServiceSpy
+        }
       ]
     })
     .compileComponents();

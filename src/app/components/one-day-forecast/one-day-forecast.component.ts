@@ -28,7 +28,7 @@ export class OneDayForecastComponent implements OnInit {
       map((data) => {
         return {
           ...data,
-          weatherIconUrl: `${environment.weather_icon_folder}${data.weatherIconUrl}.png`,
+          weatherIconUrl: `${environment.weather_icon_folder}${data.weatherIcon}.png`,
           extraData: [
             extraDataHumidity(data.rh, environment.extra_data_icon_folder),
             extraDataUV(data.uv, environment.extra_data_icon_folder),

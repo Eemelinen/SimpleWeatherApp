@@ -38,7 +38,7 @@ type OneDayForecast = {
   city_name: string;
   temperature: number;
   weatherDescription: string;
-  weatherIconUrl: string;
+  weatherIcon: string;
   rh : number;
   wind_spd : number;
   uv : number;

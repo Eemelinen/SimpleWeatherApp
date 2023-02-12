@@ -30,7 +30,7 @@ export class OneDayForecastService extends AbstractOneDayForecastService {
           city_name: forecast.city_name,
           temperature: forecast.data[0].temp,
           weatherDescription: forecast.data[0].weather.description,
-          weatherIconUrl: forecast.data[0].weather.icon,
+          weatherIcon: forecast.data[0].weather.icon,
           wind_spd: forecast.data[0].wind_spd,
           rh: forecast.data[0].rh,
           uv: forecast.data[0].uv,
