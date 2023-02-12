@@ -27,15 +27,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.countries = this.locationService.getAvailableCountries();
+
     this.subscriptions.push(
-      this.multiDayForecast.get().subscribe((data: MultiDayWeatherForecast) => {
-        this.updateBackgroundGradient(
-          Math.round(calcTempAvg(data.forecasts))
-        );
-      }),
-      this.loadingService.getLoading().subscribe(l => {
-        this.loadingWeatherData = l;
-      })
+      this.multiDayForecast.get().subscribe((data: MultiDayWeatherForecast) => (
+            this.updateBackgroundGradient(Math.round(calcTempAvg(data.forecasts))))),
+      this.loadingService.getLoading().subscribe(l => this.loadingWeatherData = l)
     );
   }
 
