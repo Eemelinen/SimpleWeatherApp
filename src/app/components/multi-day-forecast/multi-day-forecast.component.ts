@@ -3,9 +3,9 @@ import { AbstractMultiDayForecastService } from '../../services/multi-day-foreca
 import { map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { emptyMultiDayComponentData } from './empty-multiday-component-data';
-import { calcAvgTemperature } from '../../shared/calc-avg-temp';
-import { calcTemperatureDiff } from '../../shared/calc-temp-diff';
+import { calcTempDiff } from '../../shared/calc-temp-diff';
 import { formatGraphData } from '../../shared/format-graph-data';
+import { calcTempAvg } from '../../shared/calc-temp-avg';
 
 @Component({
   selector: 'multi-day-forecast',
@@ -33,12 +33,12 @@ export class MultiDayForecastComponent implements OnInit {
             {
               title: 'Avg. Temp',
               imgUrl: `${environment.extra_data_icon_folder}thermometer.png`,
-              value: `${calcAvgTemperature(data.forecasts)}°C`
+              value: `${calcTempAvg(data.forecasts)}°C`
             },
             {
               title: 'Diff. Temp',
               imgUrl: `${environment.extra_data_icon_folder}humidity.png`,
-              value: calcTemperatureDiff(data.forecasts) + '°C'
+              value: calcTempDiff(data.forecasts) + '°C'
             },
           ],
           forecasts: data.forecasts.map((forecast) => {

@@ -4,8 +4,8 @@ import { AbstractLocationService } from './services/location/abstract-location.s
 import { GradientBackgroundDirective } from './directives/bgGradient/gradient-background.directive';
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
-import { calcAvgTemperature } from './shared/calc-avg-temp';
 import { AbstractLoadingService } from './services/loading/abstract-loading-service';
+import { calcTempAvg } from './shared/calc-temp-avg';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import { AbstractLoadingService } from './services/loading/abstract-loading-serv
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild(GradientBackgroundDirective) directive!: GradientBackgroundDirective;
+  @ViewChild(GradientBackgroundDirective) bgDirective!: GradientBackgroundDirective;
   loadingWeatherData = false;
   countries: string[] = [];
   subscriptions: Subscription[] = [];
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.multiDayForecast.get().subscribe((data: MultiDayWeatherForecast) => {
         this.updateBackgroundGradient(
-          Math.round(calcAvgTemperature(data.forecasts))
+          Math.round(calcTempAvg(data.forecasts))
         );
       }),
       this.loadingService.getLoading().subscribe(l => {
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private updateBackgroundGradient(avgTemp: number): void {
     if (avgTemp || avgTemp === 0) {
       try {
-        this.directive.changeEndpointColor(avgTemp);
+        this.bgDirective.changeEndpointColor(avgTemp);
       } catch (e) {
         return;
       }

@@ -1,6 +1,6 @@
 import { HasTemperature } from './has-tempeture.interface';
 
-export const calcTemperatureDiff = (data: HasTemperature[]): number => {
+export const calcTempDiff = (data: HasTemperature[]): number => {
   let temperatures = data.map((data) => data.temperature)
   let minTemperature = Math.min(...temperatures);
   let maxTemperature = Math.max(...temperatures);
