@@ -41,7 +41,7 @@ describe('LocationPickerFormComponent', () => {
 
   it('template should have an image with class weather-icon and alt cloudy', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('img.weather-icon').alt).toEqual('cloudy');
+    expect(compiled.querySelector('img.icon').alt).toEqual('cloudy');
   });
 
   it('should have app-reactive-form inside div with form-container class', () => {
