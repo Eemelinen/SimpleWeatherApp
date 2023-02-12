@@ -3,8 +3,7 @@ import { OneDayForecastService } from './one-day-forecast.service';
 import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-service';
 import { of } from 'rxjs';
 import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
-import { emptyWeatherData } from '../weather-api/empty-weather-data';
-import {emptyOneDayForecast} from './empty-one-day-forecast';
+import { emptyOneDayForecast } from './empty-one-day-forecast';
 
 describe('OneDayForecastService', () => {
   let service: OneDayForecastService;
@@ -46,7 +45,7 @@ describe('OneDayForecastService', () => {
     });
   });
 
-  it('shoud return empty weather data object if the weather data is invalid', () => {
+  it('should return empty weather data object if the weather data is invalid', () => {
     const weatherDataCopy = JSON.parse(JSON.stringify(mockStoredWeatherData));
     weatherDataCopy.data = [];
 

@@ -5,7 +5,7 @@ import { AbstractWeatherApiService } from '../weather-api/abstract-weather-api-s
 import { StoredWeatherData } from '../weather-api/weather-data.model';
 import { emptyMultiDayForecast } from './empty-multi-day-forecast';
 import { DatesToStringService } from '../date-range-formatter/dates-to-string.service';
-import {getWeekday} from '../../shared/get-day-of-the-week';
+import { getWeekday } from '../../shared/get-day-of-the-week';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +29,13 @@ export class MultiDayForecastService extends AbstractMultiDayForecastService {
         const data = forecast.data.slice(startDay, endDay);
         return {
           dateRange: this.datesToString.format(data),
-          forecasts: this.createWeatherCardData(data)
+          forecasts: this.createWeekdayWeatherArray(data)
         }
       }
     ));
   }
 
-  private createWeatherCardData(forecasts: ApiWeatherData[]): WeekdayWeather[] {
+  private createWeekdayWeatherArray(forecasts: ApiWeatherData[]): WeekdayWeather[] {
     return forecasts
       .map((day: ApiWeatherData) => {
         return {
