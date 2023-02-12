@@ -19,7 +19,7 @@ $border-radius: 6px;
     position: relative;
     border-radius: $border-radius;
     height: 4.8rem;
-    border: var(--border-1);
+    border: none;
     background-color: var(--white-3);
     padding: 1.2rem 1.2rem 1.2rem 1.2rem;
     display: flex;
@@ -52,7 +52,7 @@ $border-radius: 6px;
   .dropdown-image {
     width: 2rem;
     border-radius: 3px;
-    border: 1px solid var(--black-2);
+    border: 1px solid var(--black-1);
   }
 
   .dropdown-list {
