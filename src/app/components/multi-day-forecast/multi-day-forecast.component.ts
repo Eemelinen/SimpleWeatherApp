@@ -38,7 +38,7 @@ export class MultiDayForecastComponent implements OnInit {
             },
             {
               title: 'Diff. Temp',
-              imgUrl: `${this.environment.extra_data_icon_folder}humidity.png`,
+              imgUrl: `${this.environment.extra_data_icon_folder}diff.png`,
               value: calcTempDiff(data.forecasts) + '°C'
             },
           ],
