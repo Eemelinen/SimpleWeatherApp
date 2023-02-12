@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractDatesToStringService } from './abstract-dates-to-string.service';
-import { HasDatetimeInterface } from '../../shared/has-datetime.interface';
+import { HasDatetimeInterface } from '../../interfaces/has-datetime.interface';
 
 type DateObject = { year: string; month: string; day: string };
 const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];

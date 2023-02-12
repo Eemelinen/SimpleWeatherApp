@@ -1,4 +1,4 @@
-import { HasTemperature } from './has-tempeture.interface';
+import { HasTemperature } from '../interfaces/has-tempeture.interface';
 
 export const calcTempDiff = (data: HasTemperature[]): number => {
   let temperatures = data.map((data) => data.temperature)

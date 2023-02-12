@@ -1,4 +1,4 @@
-import { HasTemperature } from './has-tempeture.interface';
+import { HasTemperature } from '../interfaces/has-tempeture.interface';
 
 export const calcTempAvg = (data: HasTemperature[]): number => {
   const avgTemperature = data.reduce(

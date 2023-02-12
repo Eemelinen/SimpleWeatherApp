@@ -15,10 +15,6 @@ import { ReactiveFormComponent } from './components/generics/reactive-form/react
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { WeatherApiService } from './services/weather-api/weather-api.service';
 import { SmallWeatherCardComponent } from './components/small-weather-card/small-weather-card.component';
-import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
-import { AverageTemperatureService } from './services/average-temperature/average-temperature.service';
-import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
-import { NextWeekWeatherService } from './services/next-week-weather/next-week-weather.service';
 import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
 import { MultiDayForecastComponent } from './components/multi-day-forecast/multi-day-forecast.component';
 import { GraphContainerComponent } from './components/graph-container/graph-container.component';
@@ -44,8 +40,6 @@ const providers = [
   { provide: AbstractDatesToStringService, useClass: DatesToStringService },
   { provide: AbstractLocationService, useClass: LocationService },
   { provide: AbstractWeatherApiService, useClass: WeatherApiService },
-  { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
-  { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
   { provide: AbstractOneDayForecastService, useClass: OneDayForecastService },
   { provide: AbstractMultiDayForecastService, useClass: MultiDayForecastService },
   { provide: AbstractLoadingService, useClass: LoadingService },
