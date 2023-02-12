@@ -63,7 +63,7 @@ $content-max-width: 60rem;
     .right-side-content {
       width: $content-max-width;
       border-radius: 1.6rem;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: var(--background-1);
       height: 80%;
     }
   }

@@ -27,6 +27,8 @@ export class GraphContainerComponent implements OnInit {
           {
             label: this.label,
             data: this.values,
+            borderColor: "#E87348",
+            tension: 0.4,
           },
         ]
       },

@@ -31,8 +31,25 @@ $weather-app-theme: mat.define-light-theme((
   --black-1: #000000;
   --black-2: #08153E;
 
-  --white-1: #FFFFFF;
-  --white-2: #F8F8F8;
+  --white-1: rgba(255, 255, 255, 1);
+  --white-2: rgba(255, 255, 255, .5);
+  --white-3: rgba(255, 255, 255, .6);
+
+  --border-1: none;
+  //--border-1: 1px solid #08153E;
+  --border-2: 1px solid rgba(8, 21, 62, 0.05);
+
+  --outline-1:  2px solid #B5C7FF;
+
+  --text-color-1: #08153E;
+  --text-color-2: #08153E;
+
+  --shadow-1: 0 2px 10px rgba(8, 21, 62, 0.15);
+  --shadow-2: 0 2px 10px rgba(8, 21, 62, .3);
+
+  --background-1: rgba(0, 0, 0, 0.2);
+  --background-2: rgba(23, 23, 23, 0.2);
+
 }
 
 * {

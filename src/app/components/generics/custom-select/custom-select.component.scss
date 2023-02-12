@@ -3,7 +3,6 @@ $text-color: #444;
 $width: 9.5rem;
 $height: 100%;
 $font-size: 0.85em;
-$background-color: white;
 $border-color: #ddd;
 $border-radius: 6px;
 
@@ -20,10 +19,9 @@ $border-radius: 6px;
     position: relative;
     border-radius: $border-radius;
     height: 4.8rem;
-    border: none;
-    border-top: 1px solid $border-color;
+    border: var(--border-1);
+    background-color: var(--white-3);
     padding: 1.2rem 1.2rem 1.2rem 1.2rem;
-    background-color: $background-color;
     display: flex;
     width: 100%;
     cursor: pointer;
@@ -32,7 +30,7 @@ $border-radius: 6px;
     background-repeat: no-repeat;
 
     &:focus {
-      outline: 2px solid #B5C7FF;
+      outline: var(--outline-1);
     }
   }
 
@@ -60,7 +58,7 @@ $border-radius: 6px;
   .dropdown-list {
     border-radius: $border-radius;
     display: none;
-    background: var(--white-1);
+    background: var(--white-3);
     list-style: none;
     border: 1px solid $accent-color;
     box-shadow: 0 0 15px -1px fade_out($accent-color, 0.6);

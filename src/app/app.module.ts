@@ -15,10 +15,10 @@ import { ReactiveFormComponent } from './components/generics/reactive-form/react
 import { AbstractWeatherApiService } from './services/weather-api/abstract-weather-api-service';
 import { WeatherApiService } from './services/weather-api/weather-api.service';
 import { SmallWeatherCardComponent } from './components/small-weather-card/small-weather-card.component';
-import { ExtraDataCardComponent } from './components/extra-data-card/extra-data-card.component';
+import { ExtraDataCardComponent } from './components/generics/extra-data-card/extra-data-card.component';
 import { MultiDayForecastComponent } from './components/multi-day-forecast/multi-day-forecast.component';
-import { GraphContainerComponent } from './components/graph-container/graph-container.component';
-import { ExtraDataContainerComponent } from './components/extra-data-container/extra-data-container.component';
+import { GraphContainerComponent } from './components/generics/graph-container/graph-container.component';
+import { ExtraDataContainerComponent } from './components/generics/extra-data-container/extra-data-container.component';
 import { BigWeatherCardComponent } from './components/big-weather-card/big-weather-card.component';
 import { OneDayForecastService } from './services/one-day-forecast/one-day-forecast.service';
 import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
