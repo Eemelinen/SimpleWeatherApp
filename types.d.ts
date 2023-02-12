@@ -23,11 +23,6 @@ type ApiWeatherData = {
   weather: weather;
 };
 
-type WeatherCardData = {
-  date: string,
-  temperature: number,
-};
-
 type ExtraData = {
   title: string,
   imgUrl: string,
