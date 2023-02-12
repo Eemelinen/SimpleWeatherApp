@@ -10,13 +10,16 @@ import { OneDayForecastComponent } from './components/one-day-forecast/one-day-f
 import { MultiDayForecastComponent } from './components/multi-day-forecast/multi-day-forecast.component';
 import { mockMultiDayForecast } from '../assets/mocks/mock-multi-day-forecast';
 import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
+import { AbstractLoadingService } from './services/loading/abstract-loading-service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let multiDayForecastServiceSpy: jasmine.SpyObj<AbstractMultiDayForecastService>;
+  let loadingServiceSpy: jasmine.SpyObj<AbstractLoadingService>;
 
   beforeEach(async () => {
+    loadingServiceSpy = jasmine.createSpyObj('AbstractLoadingService', ['getLoading']);
     multiDayForecastServiceSpy = jasmine.createSpyObj('AbstractMultiDayForecastService', ['get']);
 
     await TestBed.configureTestingModule({
@@ -36,11 +39,16 @@ describe('AppComponent', () => {
         {
           provide: AbstractMultiDayForecastService,
           useValue: multiDayForecastServiceSpy
+        },
+        {
+          provide: AbstractLoadingService,
+          useValue: loadingServiceSpy
         }
       ]
     }).compileComponents();
 
     multiDayForecastServiceSpy.get.and.returnValue(of(mockMultiDayForecast));
+    loadingServiceSpy.getLoading.and.returnValue(of(false));
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

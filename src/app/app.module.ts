@@ -1,4 +1,4 @@
-import {ErrorHandler, NgModule} from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
@@ -32,7 +32,7 @@ import { AbstractOneDayForecastService } from './services/one-day-forecast/abtra
 import { AbstractLoadingService } from './services/loading/abstract-loading-service';
 import { LoadingService } from './services/loading/loading-service';
 import { WeatherDataInterceptor } from './interceptors/weather-data.interceptor';
-import {GlobalErrorHandlerService} from './services/error-handling/global-error-handler.service';
+import { GlobalErrorHandlerService } from './services/error-handling/global-error-handler.service';
 
 const providers = [
   { provide: AbstractLocationService, useClass: LocationService },
