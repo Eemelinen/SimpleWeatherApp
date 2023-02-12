@@ -33,15 +33,22 @@ import { AbstractLoadingService } from './services/loading/abstract-loading-serv
 import { LoadingService } from './services/loading/loading-service';
 import { WeatherDataInterceptor } from './interceptors/weather-data.interceptor';
 import { GlobalErrorHandlerService } from './services/error-handling/global-error-handler.service';
+import {
+  AbstractDatesToStringService
+} from './services/date-range-formatter/abstract-dates-to-string.service';
+import {
+  DatesToStringService
+} from './services/date-range-formatter/dates-to-string.service';
 
 const providers = [
+  { provide: AbstractDatesToStringService, useClass: DatesToStringService },
   { provide: AbstractLocationService, useClass: LocationService },
   { provide: AbstractWeatherApiService, useClass: WeatherApiService },
   { provide: AbstractAverageTemperatureService, useClass: AverageTemperatureService },
   { provide: AbstractNextWeekWeatherService, useClass: NextWeekWeatherService },
   { provide: AbstractOneDayForecastService, useClass: OneDayForecastService },
   { provide: AbstractMultiDayForecastService, useClass: MultiDayForecastService },
-  { provide: AbstractLoadingService, useClass: LoadingService }
+  { provide: AbstractLoadingService, useClass: LoadingService },
 ];
 
 @NgModule({

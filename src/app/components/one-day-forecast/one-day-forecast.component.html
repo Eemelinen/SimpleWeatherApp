@@ -7,17 +7,16 @@
       <big-weather-card
         [temperature]="today.temperature"
         [imgUrl]="today.weatherIconUrl"
-        [weatherDesc]="today.weatherDescription"
-      >
+        [weatherDesc]="today.weatherDescription">
       </big-weather-card>
 
-      <app-extra-data-container>
-        <app-extra-data-card *ngFor="let extraData of today.extraData"
+      <extra-data-container>
+        <extra-data-card *ngFor="let extraData of today.extraData"
           [imgUrl]="extraData.imgUrl"
           [title]="extraData.title"
           [data]="extraData.value">
-        </app-extra-data-card>
-      </app-extra-data-container>
+        </extra-data-card>
+      </extra-data-container>
 
     </div>
   </div>

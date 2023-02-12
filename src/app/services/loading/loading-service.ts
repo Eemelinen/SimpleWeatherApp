@@ -13,7 +13,7 @@ export class LoadingService implements AbstractLoadingService {
    * Contains in-progress loading requests
    * as app grows could use loading map to handle multiple loading states based on url etc
    */
-  loadingMap: Map<string, boolean> = new Map<string, boolean>();
+  private loadingMap: Map<string, boolean> = new Map<string, boolean>();
 
   getLoading(): Observable<boolean> {
     return this.loadingWeatherData$;

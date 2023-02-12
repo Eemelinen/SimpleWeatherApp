@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
-  selector: 'app-graph-container',
+  selector: 'graph-container',
   templateUrl: './graph-container.component.html',
   styleUrls: ['./graph-container.component.scss']
 })

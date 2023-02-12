@@ -23,4 +23,11 @@ describe('GlobalErrorHandlerService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should open a snackbar if handleError is called', () => {
+    const snackBar = TestBed.inject(MatSnackBar);
+    const spy = spyOn(snackBar, 'open');
+    service.handleError(new Error('Test error'));
+    expect(spy).toHaveBeenCalledTimes(1);
+  })
 });

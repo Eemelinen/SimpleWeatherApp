@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { emptyOneDayWeather } from './empty-one-day-weather';
 import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
 import { extraDataHumidity } from '../../shared/extra-data-humidity';
@@ -20,7 +19,7 @@ export class OneDayForecastComponent implements OnInit {
 
   constructor(
     private environment: EnvironmentService,
-    private forecast: AbstractOneDayForecastService
+    private forecast: AbstractOneDayForecastService,
   ) {}
 
   ngOnInit(): void {
@@ -28,11 +27,11 @@ export class OneDayForecastComponent implements OnInit {
       map((data) => {
         return {
           ...data,
-          weatherIconUrl: `${environment.weather_icon_folder}${data.weatherIcon}.png`,
+          weatherIconUrl: `${this.environment.weather_icon_folder}${data.weatherIcon}.png`,
           extraData: [
-            extraDataHumidity(data.rh, environment.extra_data_icon_folder),
-            extraDataUV(data.uv, environment.extra_data_icon_folder),
-            extraDataWindSpeed(data.wind_spd, environment.extra_data_icon_folder),
+            extraDataHumidity(data.rh, this.environment.extra_data_icon_folder),
+            extraDataUV(data.uv, this.environment.extra_data_icon_folder),
+            extraDataWindSpeed(data.wind_spd, this.environment.extra_data_icon_folder),
           ]
         }
       })

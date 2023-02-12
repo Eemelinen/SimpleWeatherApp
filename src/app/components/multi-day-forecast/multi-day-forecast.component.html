@@ -16,19 +16,19 @@
     </div>
 
     <div *ngIf="showGraph" class="graph">
-      <app-graph-container
+      <graph-container
         [values]="weather.graphData"
         [title]="'temperature'">
-      </app-graph-container>
+      </graph-container>
     </div>
 
-    <app-extra-data-container *ngIf="showAverages">
-      <app-extra-data-card *ngFor="let avg of weather.averages"
+    <extra-data-container *ngIf="showAverages">
+      <extra-data-card *ngFor="let avg of weather.averages"
         [title]="avg.title"
         [imgUrl]="avg.imgUrl"
         [data]="avg.value">
-      </app-extra-data-card>
-    </app-extra-data-container>
+      </extra-data-card>
+    </extra-data-container>
 
   </div>
 </ng-container>
