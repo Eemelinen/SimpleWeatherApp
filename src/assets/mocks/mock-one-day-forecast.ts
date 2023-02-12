@@ -1,4 +1,4 @@
-export const mockOneDayForecastGet: OneDayForecast = {
+export const mockOneDayForecast: OneDayForecast = {
   city_name: 'Toronto',
   temperature: 9,
   weatherDescription: 'Clear sky',

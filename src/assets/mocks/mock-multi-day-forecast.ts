@@ -1,4 +1,4 @@
-export const mockWeatherNextWeekData: MultiDayWeatherForecast = {
+export const mockMultiDayForecast: MultiDayWeatherForecast = {
   dateRange: 'FEB 13 - 19 2023',
   forecasts: [
     {

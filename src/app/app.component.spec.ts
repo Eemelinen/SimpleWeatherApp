@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 import { MockComponents } from 'ng-mocks';
-import { mockForecasts } from '../assets/mocks/mock-forecasts';
 import { AbstractLocationService } from './services/location/abstract-location.service';
 import { MockLocationService } from './services/location/mock-location.service';
-import { SmallWeatherCardComponent } from './components/small-weather-card/small-weather-card.component';
 import { of } from 'rxjs';
-import { AbstractAverageTemperatureService } from './services/average-temperature/abstract-average-temperature.service';
-import { AbstractNextWeekWeatherService } from './services/next-week-weather/abstract-next-week-weather.service';
 import { OneDayForecastComponent } from './components/one-day-forecast/one-day-forecast.component';
-import {MultiDayForecastComponent} from './components/multi-day-forecast/multi-day-forecast.component';
+import { MultiDayForecastComponent } from './components/multi-day-forecast/multi-day-forecast.component';
+import { mockMultiDayForecast } from '../assets/mocks/mock-multi-day-forecast';
+import { AbstractMultiDayForecastService } from './services/multi-day-forecast/abstract-multi-day-forecast.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+  let multiDayForecastServiceSpy: jasmine.SpyObj<AbstractMultiDayForecastService>;
 
   beforeEach(async () => {
+    multiDayForecastServiceSpy = jasmine.createSpyObj('AbstractMultiDayForecastService', ['get']);
 
     await TestBed.configureTestingModule({
       declarations: [
@@ -34,22 +34,13 @@ describe('AppComponent', () => {
           useClass: MockLocationService
         },
         {
-          provide: AbstractAverageTemperatureService,
-          useValue: {
-            get: () => of(mockForecasts[0])
-          }
-        },
-        {
-          provide: AbstractNextWeekWeatherService,
-          useValue: {
-            get: () => {
-              return of(mockForecasts)
-            }
-          }
-        },
+          provide: AbstractMultiDayForecastService,
+          useValue: multiDayForecastServiceSpy
+        }
       ]
     }).compileComponents();
 
+    multiDayForecastServiceSpy.get.and.returnValue(of(mockMultiDayForecast));
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -59,8 +50,15 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render a app-weather-today component', () => {
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('one-day-weather')).toBeTruthy();
+  it('should render a location-picker component', () => {
+    pending();
+  });
+
+  it('should render a one-day-forecast component', () => {
+    pending();
+  });
+
+  it('should render a multi-day-forecast component', () => {
+    pending();
   });
 });

@@ -5,15 +5,17 @@ import { SmallWeatherCardComponent } from '../small-weather-card/small-weather-c
 import { GraphContainerComponent } from '../graph-container/graph-container.component';
 import { ExtraDataCardComponent } from '../extra-data-card/extra-data-card.component';
 import { ExtraDataContainerComponent } from '../extra-data-container/extra-data-container.component';
-import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
+import { AbstractMultiDayForecastService } from '../../services/multi-day-forecast/abstract-multi-day-forecast.service';
+import { of } from 'rxjs';
+import { mockMultiDayForecast } from '../../../assets/mocks/mock-multi-day-forecast';
 
 describe('MultiDayForecastComponent', () => {
   let component: MultiDayForecastComponent;
   let fixture: ComponentFixture<MultiDayForecastComponent>;
-  let oneDayForecastServiceSpy: jasmine.SpyObj<AbstractOneDayForecastService>;
+  let multiDayForecastServiceSpy: jasmine.SpyObj<AbstractMultiDayForecastService>;
 
   beforeEach(async () => {
-    oneDayForecastServiceSpy = jasmine.createSpyObj('AbstractOneDayForecastService', ['getCurrentForecast']);
+    multiDayForecastServiceSpy = jasmine.createSpyObj('AbstractMultiDayForecastService', ['get']);
 
     await TestBed.configureTestingModule({
       declarations: [
@@ -27,13 +29,14 @@ describe('MultiDayForecastComponent', () => {
       ],
       providers: [
         {
-          provide: AbstractOneDayForecastService,
-          useValue: oneDayForecastServiceSpy
+          provide: AbstractMultiDayForecastService,
+          useValue: multiDayForecastServiceSpy
         }
       ]
     })
     .compileComponents();
 
+    multiDayForecastServiceSpy.get.and.returnValue(of(mockMultiDayForecast));
     fixture = TestBed.createComponent(MultiDayForecastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

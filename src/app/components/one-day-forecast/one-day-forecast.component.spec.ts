@@ -7,20 +7,11 @@ import { ExtraDataCardComponent } from '../extra-data-card/extra-data-card.compo
 import { mockStoredWeatherData } from '../../../assets/mocks/mock-weather-data';
 import { AbstractOneDayForecastService } from '../../services/one-day-forecast/abtract-forecast-today.service';
 import { of } from 'rxjs';
+import { mockOneDayForecast } from '../../../assets/mocks/mock-one-day-forecast';
 
 const currentDayForecast = JSON.parse(JSON.stringify(mockStoredWeatherData));
 const weatherData = currentDayForecast.data[0];
 currentDayForecast.data = [weatherData];
-
-export const mockGetOneDayForecastRes: OneDayForecast = {
-  city_name: 'Toronto',
-  temperature: 9,
-  weatherDescription: 'Clear sky',
-  weatherIcon: 'c01d',
-  wind_spd: 2.57,
-  rh: 93,
-  uv: 1,
-}
 
 describe('OneDayForecast', () => {
   let component: OneDayForecastComponent;
@@ -48,7 +39,7 @@ describe('OneDayForecast', () => {
     })
     .compileComponents();
 
-    oneDayForecastServiceSpy.get.and.returnValue(of(mockGetOneDayForecastRes));
+    oneDayForecastServiceSpy.get.and.returnValue(of(mockOneDayForecast));
     fixture = TestBed.createComponent(OneDayForecastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
