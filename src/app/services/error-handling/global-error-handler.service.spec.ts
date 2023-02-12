@@ -8,6 +8,7 @@ describe('GlobalErrorHandlerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        GlobalErrorHandlerService,
         {
           provide: MatSnackBar,
           useValue: {

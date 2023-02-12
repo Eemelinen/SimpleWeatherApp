@@ -29,15 +29,20 @@ describe('OneDayForecastService', () => {
   });
 
   it('should return a weather data object with only current day data', () => {
-    const expectedResult = JSON.parse(JSON.stringify(mockStoredWeatherData));
-    const weatherData = expectedResult.data[0];
-    expectedResult.data = [weatherData];
+    const expectedResult = {
+      city_name: mockStoredWeatherData.city_name,
+      temperature: mockStoredWeatherData.data[0].temp,
+      weatherDescription: mockStoredWeatherData.data[0].weather.description,
+      weatherIcon: mockStoredWeatherData.data[0].weather.icon,
+      wind_spd: mockStoredWeatherData.data[0].wind_spd,
+      rh: mockStoredWeatherData.data[0].rh,
+      uv: mockStoredWeatherData.data[0].uv,
+    }
 
     weatherApiServiceSpy.getCurrentForecast.and.returnValue(of(mockStoredWeatherData));
     service.get().subscribe((res) => {
       expect(res).toEqual(expectedResult);
       expect(res.city_name).toEqual(mockStoredWeatherData.city_name);
-      expect(res.temperature).toEqual(mockStoredWeatherData.data[0].temp);
     });
   });
 
