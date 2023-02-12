@@ -8,7 +8,7 @@ import Chart from 'chart.js/auto';
 })
 export class GraphContainerComponent implements OnInit {
   @Input() values: number[] = [];
-  @Input() label: string = 'value';
+  @Input() label: string = 'temp';
   public chart!: Chart
 
   ngOnInit(): void {
