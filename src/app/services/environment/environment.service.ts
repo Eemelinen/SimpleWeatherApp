@@ -28,4 +28,8 @@ export class EnvironmentService implements IEnvironment {
   get weather_icon_folder(): string {
     return environment.weather_icon_folder;
   }
+
+  get providers(): any[] {
+    return environment.providers;
+  }
 }

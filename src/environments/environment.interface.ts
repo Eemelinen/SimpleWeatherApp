@@ -4,4 +4,5 @@ export interface IEnvironment {
   forecast_url_start: string;
   weather_icon_folder: string;
   extra_data_icon_folder: string;
+  providers: any[];
 }

@@ -2,43 +2,43 @@ export const mockMultiDayForecast: MultiDayWeatherForecast = {
   dateRange: 'FEB 13 - 19 2023',
   forecasts: [
     {
-      dayOfWeek: 'Thursday',
+      dayOfWeek: 'Thu',
       temperature: 10,
       weatherImg: 'c01d',
       weatherDescription: 'Clear sky'
     },
     {
-      dayOfWeek: 'Friday',
+      dayOfWeek: 'Fri',
       temperature: 11,
       weatherImg: 'c01d',
       weatherDescription: 'Rainy'
     },
     {
-      dayOfWeek: 'Saturday',
+      dayOfWeek: 'Sat',
       temperature: 12,
       weatherImg: 'c01d',
       weatherDescription: 'Clear sky'
     },
     {
-      dayOfWeek: 'Sunday',
+      dayOfWeek: 'Sun',
       temperature: 8,
       weatherImg: 'c01d',
       weatherDescription: 'Cloudy'
     },
     {
-      dayOfWeek: 'Monday',
+      dayOfWeek: 'Mon',
       temperature: 6,
       weatherImg: 'c01d',
       weatherDescription: 'Clear sky'
     },
     {
-      dayOfWeek: 'Tuesday',
+      dayOfWeek: 'Tue',
       temperature: 10,
       weatherImg: 'c01d',
       weatherDescription: 'Clear sky'
     },
     {
-      dayOfWeek: 'Wednesday',
+      dayOfWeek: 'Wed',
       temperature: 15,
       weatherImg: 'c01d',
       weatherDescription: 'Cloudy'

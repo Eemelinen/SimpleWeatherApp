@@ -35,6 +35,7 @@ import {
 import {
   DatesToStringService
 } from './services/date-range-formatter/dates-to-string.service';
+import { environment } from '../environments/environment';
 
 const providers = [
   { provide: AbstractDatesToStringService, useClass: DatesToStringService },
@@ -69,7 +70,10 @@ const providers = [
     MatSnackBarModule,
   ],
   providers: [
-    ...providers,
+    [
+      ...providers,
+      environment.providers,
+    ],
     {
       provide: HTTP_INTERCEPTORS,
       useClass: WeatherDataInterceptor,
