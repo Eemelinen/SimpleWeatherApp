@@ -1,4 +1,4 @@
-# Responsive Weather App with Angular 15
+# Weather App with Angular 15
 This simple weather app was built using Angular and the WeatherBit API. The app is responsive and works on both mobile and desktop.
 
 ![desktop](https://user-images.githubusercontent.com/37372229/220947849-18d87671-f98f-45ff-a270-77c3a7f95a45.png)
