@@ -1,6 +1,8 @@
-# Implementation and instructions
-
+# Weather App with Angular 15
 This simple weather app was built using Angular and the WeatherBit API. The app is responsive and works on both mobile and desktop.
+
+![desktop](https://user-images.githubusercontent.com/37372229/220947849-18d87671-f98f-45ff-a270-77c3a7f95a45.png)
+![mobile](https://user-images.githubusercontent.com/37372229/220947893-e099ade0-41bd-4f95-a4d9-6d4dd156bfd7.png)
 
 ## Features
 * The app displays the current weather conditions for the location selected by the user
@@ -15,11 +17,12 @@ This simple weather app was built using Angular and the WeatherBit API. The app 
 * To run the app you will need to install the dependencies using `npm install` and then run `ng serve` to start the development server. Navigate to `http://localhost:4200/` to view the app.
 * I have included weatherbit apikey (even though it's a bad practice) in the code for ease of testing purposes. If you want to use your own apikey, you can do so by replacing the apikey in the `src/app/environments/environment.ts` file. To get the key register at https://www.weatherbit.io
 
+## Mock mode
+* run application without api key in mock mode with command ng s -c mock
+
 ## Code
-* I have done my best to follow the SOLID principles as well as keep the code DRY.
 * I have used the snackbar from Angular Material library
 * I have used the weatherbit API to fetch the weather data. I have used the free version of the API which allows 1500 calls per day. The API is free for personal use and does not require any registration.
-* I have done my best to make the components and the services as reusable as possible.
 * WeatherApiService handles the API calls and stores the latest fetched data to BehaviorSubject. This way, the data is available to all components that need it.
 * From WeatherApiService the data is passed down to the components trough piping services, such as OneDayForecast and MultiDayForecast services. These do some general data manipulation that would otherwise have to be done in the components.
 
